@@ -3,7 +3,7 @@ import _ from 'lodash';
 import $ from 'jquery';
 
 import Config from "../../config";
-import Template from './template.rhtml'; // template
+import Template from './template.html'; // template
 import './style.scss'; //styles
 
 import preloader from 'preloader';
