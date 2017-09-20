@@ -1,4 +1,4 @@
-import './common/fonts/Montserrat/stylesheet.css'
+import './common/fonts/Questrial/stylesheet.css'
 import './common/styles/_base.scss'
 import $ from 'jquery'
 import Config from "./config"

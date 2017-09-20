@@ -18,7 +18,8 @@ export default function(args) {
         template: _.template(Template),
         initialize: function() {
             self = this;
-            this.getData();
+            self.render();
+           // this.getData();
         },
 
         getData: function() {
@@ -91,7 +92,7 @@ export default function(args) {
 
         render: function(story) {
             var json = {
-                'story': story
+               // 'story': story
             };
 
             console.log(json);

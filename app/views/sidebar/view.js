@@ -20,7 +20,8 @@ export default function() {
 
         initialize: function() {
             self = this;
-            this.getData();
+          //  this.getData();
+          self.render();
         },
 
         getData: function() {
@@ -63,7 +64,7 @@ export default function() {
 
         render: function(info) {
             var json = {
-                info: info
+              //  info: info
             };
 
 
