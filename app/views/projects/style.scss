@@ -1,0 +1,32 @@
+@import '../../common/styles/variables';
+
+.projects-content {
+    overflow-y: scroll;
+    width: 100vw;
+    height: 100vh;    
+    .projects-project {
+        height: 100vh;
+        width: 80vw;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        .projects-project-info {
+            .projects-project-info_client {
+                text-transform: uppercase;
+                margin-bottom: 30px;
+            }
+            .projects-project-info_title {
+                margin-bottom: 30px;
+
+            }
+        }
+        .projects-project-image {
+            width: 45vw;
+            height: 40vw;
+            background-color: $color01;
+            position: relative;
+        }
+    }
+}

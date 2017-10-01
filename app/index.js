@@ -9,7 +9,7 @@ import sidebarView from '../app/views/sidebar/view'
 import footerView from '../app/views/footer/view'
 
 function App() {
-   // headerView();
+    headerView();
    // sidebarView();
   //  footerView();
     Router();

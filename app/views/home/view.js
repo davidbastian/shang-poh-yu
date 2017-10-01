@@ -98,7 +98,7 @@ export default function(args) {
             console.log(json);
             var setTemplate = this.template(json);
             var appendData = this.$el.append(setTemplate)[0];
-            $('main').append(appendData);
+            $('main').html(appendData);
         }
 
     });
