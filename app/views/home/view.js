@@ -10,10 +10,11 @@ import preloader from "preloader";
 
 function requireAll( requireContext ) {
     return requireContext.keys().map( requireContext );
-  }
-var modules = requireAll( require.context("../../common/data/projects", false, /.json$/) );
+}
+var Projects = requireAll( require.context("../../common/data/projects", false, /.json$/) );
 
-console.log(modules);
+console.log(Projects);
+
 export default function(args) {
   var self;
   var View = Backbone.View.extend({
