@@ -6,6 +6,8 @@ import Config from "../../config";
 import Template from './template.html'; // template
 import './style.scss'; //styles
 
+import logo from './logo.svg'
+
 
 export default function() {
     var self;
@@ -27,6 +29,7 @@ export default function() {
 
         render: function() {
             var json = {
+                logo:logo
 
             };
 

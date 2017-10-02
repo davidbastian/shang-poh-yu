@@ -4,7 +4,6 @@ import $ from 'jquery';
 import HomeView from './views/home/view';
 import AboutView from './views/about/view';
 import ContactView from './views/contact/view';
-import ArchiveView from './views/archive/view';
 import ProjectsView from './views/projects/view';
 import SingleView from './views/single/view';
 
@@ -22,7 +21,6 @@ export default function Router() {
             '': 'startHome',
             'contact(/)': 'startContact',
             'about(/)': 'startAbout',
-            'archive(/)': 'startArchive',
             'projects(/)': 'startProjects',
             ':single(/)': 'startSingle'
         },
@@ -43,9 +41,7 @@ export default function Router() {
                 self.startAbout(args[0]);
             }
 
-            if (name === 'startArchive') {
-                self.startArchive(args[0]);
-            }
+
 
             if (name === 'startSingle') {
                 self.startSingle(args[0]);
@@ -71,9 +67,6 @@ export default function Router() {
             AboutView(args);
         },
 
-        startArchive: function(args) {
-            ArchiveView(args);
-        },
 
         startProjects: function(args) {
             ProjectsView(args);

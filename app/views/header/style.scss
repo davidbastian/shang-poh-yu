@@ -12,6 +12,17 @@ header {
             display: flex;
             justify-content: center;
             align-items: center;
+
+            svg {
+                width: 25px;
+                height: 26.32px;
+
+                fill:$color01;
+
+                polygon {
+                    fill:$color01;
+                }
+            }
         }
     }
 }
