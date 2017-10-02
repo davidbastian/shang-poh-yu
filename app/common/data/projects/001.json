@@ -1,0 +1,36 @@
+{
+    "title": "Did you mean MailChimp?",
+    "description": "Introducing MailChimp, One Mispronunciation at a Time",
+    "agency": "Droga5 New York",
+    "client": "MailChimp",
+    "Role": "UX & UI Design",
+    "url": "https://mailchimp.com/did-you-mean/",
+    "blocks": [
+      {
+        "images": [
+          {
+            "type": "full",
+            "src": "commmon/media/images/000.jpg",
+            "alt": "text for seo"
+          },
+          {
+            "type": "half",
+            "src": "commmon/media/images/000.jpg",
+            "alt": "text for seo"
+          },
+          {
+            "type": "half",
+            "src": "commmon/media/images/000.jpg",
+            "alt": "text for seo"
+          }
+        ],
+        "title": "We Did Mean MailChimp.",
+        "paragraphs": [
+          {
+            "paragraph":
+              "MailChimp is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness."
+          }
+        ]
+      }
+    ]
+  }
