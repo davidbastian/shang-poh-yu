@@ -8,8 +8,6 @@ import headerView from '../app/views/header/view'
 
 function App() {
     headerView();
-   // sidebarView();
-  //  footerView();
     Router();
 }
 
