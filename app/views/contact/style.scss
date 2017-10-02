@@ -1,1 +1,23 @@
-.contact {}
+.contact {
+    .contact-content {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; 
+        position: relative;  
+    }
+
+    h3 {
+        margin-top: -90px;
+    }
+
+    .contact-info {
+        position: absolute;
+        bottom: 0;
+        margin-bottom: 90px;
+        text-align: center;
+    }
+}

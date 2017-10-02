@@ -30,7 +30,7 @@ export default function() {
 
             var setTemplate = this.template(json);
             var appendData = this.$el.append(setTemplate)[0];
-            $(document.body).html(appendData)
+            $('main').html(appendData);
         }
 
     });

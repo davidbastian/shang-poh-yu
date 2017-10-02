@@ -3,7 +3,7 @@ import _ from 'lodash';
 import $ from 'jquery';
 
 import Config from "../../config";
-import Template from './template.rhtml'; // template
+import Template from './template.html'; // template
 import './style.scss'; //styles
 
 
@@ -30,7 +30,7 @@ export default function() {
 
             var setTemplate = this.template(json);
             var appendData = this.$el.append(setTemplate)[0];
-            $(document.body).html(appendData)
+            $('main').html(appendData)
         }
 
     });
