@@ -17,18 +17,26 @@
       "images": [
         {
           "type": "full",
-          "src": "commmon/media/images/000.jpg",
-          "alt": "text for seo"
+          "items": [
+            {
+              "src": "commmon/media/images/000.jpg",
+              "alt": "text for seo"
+            }
+          ]
         },
+
         {
           "type": "half",
-          "src": "commmon/media/images/000.jpg",
-          "alt": "text for seo"
-        },
-        {
-          "type": "half",
-          "src": "commmon/media/images/000.jpg",
-          "alt": "text for seo"
+          "items": [
+            {
+              "src": "commmon/media/images/000.jpg",
+              "alt": "text for seo"
+            },
+            {
+              "src": "commmon/media/images/000.jpg",
+              "alt": "text for seo"
+            }
+          ]
         }
       ]
     },
