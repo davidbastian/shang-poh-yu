@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e3e6eebc744d32d32461"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a7ed12384b41237c69cd"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -706,7 +706,7 @@
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(20)(__webpack_require__.s = 20);
+/******/ 	return hotCreateRequire(19)(__webpack_require__.s = 19);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -11011,7 +11011,7 @@ function Config() {
 
   // Set up Backbone appropriately for the environment. Start with AMD.
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(52), __webpack_require__(0), exports], __WEBPACK_AMD_DEFINE_RESULT__ = function(_, $, exports) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(48), __webpack_require__(0), exports], __WEBPACK_AMD_DEFINE_RESULT__ = function(_, $, exports) {
       // Export global even in AMD case in case this script is loaded with
       // others that may still expect a global Backbone.
       root.Backbone = factory(root, exports, _, $);
@@ -12921,6 +12921,135 @@ function Config() {
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var BaseClass = __webpack_require__( 31 );
+
+var Class = function( descriptor ) {
+
+	var rVal = undefined;
+
+	if ( descriptor === undefined ) {
+
+		descriptor = {};
+	}
+
+
+	if( descriptor.initialize ) {
+
+		rVal = descriptor.initialize;
+		delete descriptor.initialize;
+	} else {
+
+		rVal = function() { 
+
+			Array.prototype.splice.apply( arguments, [ 0, 0, this ] );
+
+			Class.parent.apply( undefined, arguments );
+		};
+	}
+
+	if( descriptor.Extends !== undefined ) {
+
+		descriptor.Extends.$$isConstructor = true;
+
+		rVal.prototype = Object.create( descriptor.Extends.prototype );
+		// this will be used to call the parent constructor
+		rVal.$$parentConstructor = descriptor.Extends;
+		delete descriptor.Extends;
+	} else {
+
+		rVal.prototype = Object.create( BaseClass );
+		rVal.$$parentConstructor = function() {};
+	}
+
+	rVal.prototype.$$getters = {};
+	rVal.prototype.$$setters = {};
+
+	for( var i in descriptor ) {
+		if( typeof descriptor[ i ] == 'function' ) {
+			descriptor[ i ].$$name = i;
+			descriptor[ i ].$$owner = rVal.prototype;
+
+			rVal.prototype[ i ] = descriptor[ i ];
+		} else if( descriptor[ i ] && typeof descriptor[ i ] == 'object' && ( descriptor[ i ].get || descriptor[ i ].set ) ) {
+			Object.defineProperty( rVal.prototype, i , descriptor[ i ] );
+
+			if( descriptor[ i ].get ) {
+				rVal.prototype.$$getters[ i ] = descriptor[ i ].get;
+				descriptor[ i ].get.$$name = i;
+				descriptor[ i ].get.$$owner = rVal.prototype;
+			}
+
+			if( descriptor[ i ].set ) {
+				rVal.prototype.$$setters[ i ] = descriptor[ i ].set;
+				descriptor[ i ].set.$$name = i;
+				descriptor[ i ].set.$$owner = rVal.prototype;	
+			}
+		} else {
+			rVal.prototype[ i ] = descriptor[ i ];
+		}
+	}
+
+	// this will be used to check if the caller function is the consructor
+	rVal.$$isConstructor = true;
+
+	// now we'll check interfaces
+	for( var i = 1; i < arguments.length; i++ ) {
+		arguments[ i ].compare( rVal );
+	}
+
+	return rVal;
+};	
+
+Class.parent = function( scope ) {
+
+	var caller = Class.parent.caller;
+
+	arguments = Array.prototype.slice.apply( arguments, [ 1 ] )
+
+	// if the current function calling is the constructor
+	if( caller.$$isConstructor ) {
+		var parentFunction = caller.$$parentConstructor;
+	} else {
+		if( caller.$$name ) {
+			var callerName = caller.$$name;
+			var isGetter = caller.$$owner.$$getters[ callerName ];
+			var isSetter = caller.$$owner.$$setters[ callerName ];
+
+			if( arguments.length == 1 && isSetter ) {
+				var parentFunction = Object.getPrototypeOf( caller.$$owner ).$$setters[ callerName ];
+
+				if( parentFunction === undefined ) {
+					throw 'No setter defined in parent';
+				}
+			} else if( arguments.length == 0 && isGetter ) {
+				var parentFunction = Object.getPrototypeOf( caller.$$owner ).$$getters[ callerName ];
+
+				if( parentFunction === undefined ) {
+					throw 'No getter defined in parent';
+				}
+			} else if( isSetter || isGetter ) {
+				throw 'Incorrect amount of arguments sent to getter or setter';
+			} else {
+				var parentFunction = Object.getPrototypeOf( caller.$$owner )[ callerName ];	
+
+				if( parentFunction === undefined ) {
+					throw 'No parent function defined for ' + callerName;
+				}
+			}
+		} else {
+			throw 'You cannot call parent here';
+		}
+	}
+
+	return parentFunction.apply( scope, arguments );
+};
+
+module.exports = Class;
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -30009,136 +30138,7 @@ function Config() {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(53)(module)))
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var BaseClass = __webpack_require__( 34 );
-
-var Class = function( descriptor ) {
-
-	var rVal = undefined;
-
-	if ( descriptor === undefined ) {
-
-		descriptor = {};
-	}
-
-
-	if( descriptor.initialize ) {
-
-		rVal = descriptor.initialize;
-		delete descriptor.initialize;
-	} else {
-
-		rVal = function() { 
-
-			Array.prototype.splice.apply( arguments, [ 0, 0, this ] );
-
-			Class.parent.apply( undefined, arguments );
-		};
-	}
-
-	if( descriptor.Extends !== undefined ) {
-
-		descriptor.Extends.$$isConstructor = true;
-
-		rVal.prototype = Object.create( descriptor.Extends.prototype );
-		// this will be used to call the parent constructor
-		rVal.$$parentConstructor = descriptor.Extends;
-		delete descriptor.Extends;
-	} else {
-
-		rVal.prototype = Object.create( BaseClass );
-		rVal.$$parentConstructor = function() {};
-	}
-
-	rVal.prototype.$$getters = {};
-	rVal.prototype.$$setters = {};
-
-	for( var i in descriptor ) {
-		if( typeof descriptor[ i ] == 'function' ) {
-			descriptor[ i ].$$name = i;
-			descriptor[ i ].$$owner = rVal.prototype;
-
-			rVal.prototype[ i ] = descriptor[ i ];
-		} else if( descriptor[ i ] && typeof descriptor[ i ] == 'object' && ( descriptor[ i ].get || descriptor[ i ].set ) ) {
-			Object.defineProperty( rVal.prototype, i , descriptor[ i ] );
-
-			if( descriptor[ i ].get ) {
-				rVal.prototype.$$getters[ i ] = descriptor[ i ].get;
-				descriptor[ i ].get.$$name = i;
-				descriptor[ i ].get.$$owner = rVal.prototype;
-			}
-
-			if( descriptor[ i ].set ) {
-				rVal.prototype.$$setters[ i ] = descriptor[ i ].set;
-				descriptor[ i ].set.$$name = i;
-				descriptor[ i ].set.$$owner = rVal.prototype;	
-			}
-		} else {
-			rVal.prototype[ i ] = descriptor[ i ];
-		}
-	}
-
-	// this will be used to check if the caller function is the consructor
-	rVal.$$isConstructor = true;
-
-	// now we'll check interfaces
-	for( var i = 1; i < arguments.length; i++ ) {
-		arguments[ i ].compare( rVal );
-	}
-
-	return rVal;
-};	
-
-Class.parent = function( scope ) {
-
-	var caller = Class.parent.caller;
-
-	arguments = Array.prototype.slice.apply( arguments, [ 1 ] )
-
-	// if the current function calling is the constructor
-	if( caller.$$isConstructor ) {
-		var parentFunction = caller.$$parentConstructor;
-	} else {
-		if( caller.$$name ) {
-			var callerName = caller.$$name;
-			var isGetter = caller.$$owner.$$getters[ callerName ];
-			var isSetter = caller.$$owner.$$setters[ callerName ];
-
-			if( arguments.length == 1 && isSetter ) {
-				var parentFunction = Object.getPrototypeOf( caller.$$owner ).$$setters[ callerName ];
-
-				if( parentFunction === undefined ) {
-					throw 'No setter defined in parent';
-				}
-			} else if( arguments.length == 0 && isGetter ) {
-				var parentFunction = Object.getPrototypeOf( caller.$$owner ).$$getters[ callerName ];
-
-				if( parentFunction === undefined ) {
-					throw 'No getter defined in parent';
-				}
-			} else if( isSetter || isGetter ) {
-				throw 'Incorrect amount of arguments sent to getter or setter';
-			} else {
-				var parentFunction = Object.getPrototypeOf( caller.$$owner )[ callerName ];	
-
-				if( parentFunction === undefined ) {
-					throw 'No parent function defined for ' + callerName;
-				}
-			}
-		} else {
-			throw 'You cannot call parent here';
-		}
-	}
-
-	return parentFunction.apply( scope, arguments );
-};
-
-module.exports = Class;
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(49)(module)))
 
 /***/ }),
 /* 5 */
@@ -30151,9 +30151,9 @@ module.exports = Class;
  *
  * @module preloader
  */
-var Class = __webpack_require__(4);
+var Class = __webpack_require__(3);
 var FileMeta = __webpack_require__(8);
-var stringToArrayBuffer = __webpack_require__(42);
+var stringToArrayBuffer = __webpack_require__(40);
 var getMimeFromURL = __webpack_require__(11);
 var EventEmitter = __webpack_require__(7).EventEmitter;
 
@@ -30816,7 +30816,7 @@ function isUndefined(arg) {
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var parseHTTPHeader = __webpack_require__(41);
+var parseHTTPHeader = __webpack_require__(39);
 
 /**
  * FileMeta is a class which will hold file meta data. Each LoaderBase contains a FileMeta object
@@ -30891,7 +30891,7 @@ module.exports = FileMeta;
  *
  * @module preloader
  */
-var Class = __webpack_require__(4);
+var Class = __webpack_require__(3);
 var LoaderBase = __webpack_require__(5);
 
 /**
@@ -31061,7 +31061,7 @@ var _Backbone = __webpack_require__(2);
 
 var _Backbone2 = _interopRequireDefault(_Backbone);
 
-var _lodash = __webpack_require__(3);
+var _lodash = __webpack_require__(4);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -31069,23 +31069,23 @@ var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _view = __webpack_require__(24);
+var _view = __webpack_require__(22);
 
 var _view2 = _interopRequireDefault(_view);
 
-var _view3 = __webpack_require__(21);
+var _view3 = __webpack_require__(20);
 
 var _view4 = _interopRequireDefault(_view3);
 
-var _view5 = __webpack_require__(23);
+var _view5 = __webpack_require__(21);
 
 var _view6 = _interopRequireDefault(_view5);
 
-var _view7 = __webpack_require__(22);
+var _view7 = __webpack_require__(23);
 
 var _view8 = _interopRequireDefault(_view7);
 
-var _view9 = __webpack_require__(25);
+var _view9 = __webpack_require__(24);
 
 var _view10 = _interopRequireDefault(_view9);
 
@@ -31105,7 +31105,7 @@ function Router() {
             '': 'startHome',
             'contact(/)': 'startContact',
             'about(/)': 'startAbout',
-            'archive(/)': 'startArchive',
+            'projects(/)': 'startProjects',
             ':single(/)': 'startSingle'
         },
 
@@ -31113,6 +31113,7 @@ function Router() {
             // console.log(callback, args, name)
 
             if (name === 'startHome') {
+                console.log(name);
                 self.startHome(args[0]);
             }
 
@@ -31124,12 +31125,13 @@ function Router() {
                 self.startAbout(args[0]);
             }
 
-            if (name === 'startArchive') {
-                self.startArchive(args[0]);
-            }
-
             if (name === 'startSingle') {
                 self.startSingle(args[0]);
+            }
+
+            if (name === 'startProjects') {
+                console.log(name);
+                self.startProjects(args[0]);
             }
 
             return false;
@@ -31147,7 +31149,7 @@ function Router() {
             (0, _view4.default)(args);
         },
 
-        startArchive: function startArchive(args) {
+        startProjects: function startProjects(args) {
             (0, _view8.default)(args);
         },
 
@@ -31164,69 +31166,6 @@ function Router() {
 
 /***/ }),
 /* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-exports.default = function () {
-    var self;
-    var View = _Backbone2.default.View.extend({
-        tagName: 'footer',
-        className: 'footer',
-        template: _lodash2.default.template(_template2.default),
-        initialize: function initialize() {
-            this.setup();
-            this.render();
-        },
-
-        setup: function setup() {},
-
-        render: function render() {
-            var json = {};
-
-            var setTemplate = this.template(json);
-            var appendData = this.$el.append(setTemplate);
-
-            console.log(appendData);
-            appendData.insertAfter((0, _jquery2.default)('main'));
-        }
-
-    });
-
-    new View();
-};
-
-var _Backbone = __webpack_require__(2);
-
-var _Backbone2 = _interopRequireDefault(_Backbone);
-
-var _lodash = __webpack_require__(3);
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _config = __webpack_require__(1);
-
-var _config2 = _interopRequireDefault(_config);
-
-var _template = __webpack_require__(47);
-
-var _template2 = _interopRequireDefault(_template);
-
-__webpack_require__(29);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31253,7 +31192,10 @@ exports.default = function () {
                 setup: function setup() {},
 
                 render: function render() {
-                        var json = {};
+                        var json = {
+                                logo: _logo2.default
+
+                        };
 
                         var setTemplate = this.template(json);
                         var appendData = this.$el.append(setTemplate);
@@ -31271,7 +31213,7 @@ var _Backbone = __webpack_require__(2);
 
 var _Backbone2 = _interopRequireDefault(_Backbone);
 
-var _lodash = __webpack_require__(3);
+var _lodash = __webpack_require__(4);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -31283,141 +31225,63 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _template = __webpack_require__(48);
+var _template = __webpack_require__(44);
 
 var _template2 = _interopRequireDefault(_template);
 
-__webpack_require__(30);
+__webpack_require__(27);
+
+var _logo = __webpack_require__(43);
+
+var _logo2 = _interopRequireDefault(_logo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 17 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-exports.default = function () {
-    var self;
-    var View = _Backbone2.default.View.extend({
-
-        tagName: 'aside',
-        className: 'sidebar',
-
-        template: _lodash2.default.template(_template2.default),
-
-        initialize: function initialize() {
-            self = this;
-            //  this.getData();
-            self.render();
-        },
-
-        getData: function getData() {
-            var data = (0, _config2.default)().live + 'wp/v2/pages';
-
-            var query = _jquery2.default.ajax({
-                dataType: "json",
-                url: data,
-                xhrFields: {
-                    withCredentials: true
-                }
-            });
-
-            _jquery2.default.when(query).done(function (result) {
-                self.setData(result);
-            });
-        },
-
-        setData: function setData(result) {
-            console.log(result);
-            for (var index = 0; index < result.length; index++) {
-                var element = result[index];
-
-                if (element.slug === 'info') {
-                    console.log(element);
-                    var info = {
-                        contact: element.acf.contact,
-                        about: element.acf.about,
-                        iconGallery: _iconGallery2.default
-                    };
-
-                    self.render(info);
-                }
-            }
-        },
-
-        render: function render(info) {
-            var json = {
-                //  info: info
-            };
-
-            var setTemplate = this.template(json);
-            var appendData = this.$el.append(setTemplate);
-
-            appendData.insertBefore((0, _jquery2.default)('main'));
-            // $('body').append(appendData);
-        }
-
-    });
-
-    new View();
-};
-
-var _Backbone = __webpack_require__(2);
-
-var _Backbone2 = _interopRequireDefault(_Backbone);
-
-var _lodash = __webpack_require__(3);
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _config = __webpack_require__(1);
-
-var _config2 = _interopRequireDefault(_config);
-
-var _template = __webpack_require__(50);
-
-var _template2 = _interopRequireDefault(_template);
-
-__webpack_require__(32);
-
-var _iconGallery = __webpack_require__(43);
-
-var _iconGallery2 = _interopRequireDefault(_iconGallery);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 18 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-// removed by extract-text-webpack-plugin
+var map = {
+	"./001.json": 32
+};
+function webpackContext(req) {
+	return __webpack_require__(webpackContextResolve(req));
+};
+function webpackContextResolve(req) {
+	var id = map[req];
+	if(!(id + 1)) // check for number or string
+		throw new Error("Cannot find module '" + req + "'.");
+	return id;
+};
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = 18;
 
 /***/ }),
 /* 19 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(18);
+__webpack_require__(16);
 
-__webpack_require__(19);
+__webpack_require__(17);
 
 var _jquery = __webpack_require__(0);
 
@@ -31431,31 +31295,21 @@ var _route = __webpack_require__(14);
 
 var _route2 = _interopRequireDefault(_route);
 
-var _view = __webpack_require__(16);
+var _view = __webpack_require__(15);
 
 var _view2 = _interopRequireDefault(_view);
-
-var _view3 = __webpack_require__(17);
-
-var _view4 = _interopRequireDefault(_view3);
-
-var _view5 = __webpack_require__(15);
-
-var _view6 = _interopRequireDefault(_view5);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function App() {
     (0, _view2.default)();
-    (0, _view4.default)();
-    (0, _view6.default)();
     (0, _route2.default)();
 }
 
 App();
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31495,7 +31349,7 @@ var _Backbone = __webpack_require__(2);
 
 var _Backbone2 = _interopRequireDefault(_Backbone);
 
-var _lodash = __webpack_require__(3);
+var _lodash = __webpack_require__(4);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -31507,78 +31361,16 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _template = __webpack_require__(44);
+var _template = __webpack_require__(41);
 
 var _template2 = _interopRequireDefault(_template);
 
-__webpack_require__(26);
+__webpack_require__(25);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-exports.default = function () {
-    var self;
-    var View = _Backbone2.default.View.extend({
-        tagName: 'section',
-        className: 'archive',
-
-        template: _lodash2.default.template(_template2.default),
-        initialize: function initialize() {
-            this.setup();
-            this.render();
-        },
-
-        setup: function setup() {},
-
-        render: function render() {
-            var json = {};
-
-            var setTemplate = this.template(json);
-            var appendData = this.$el.append(setTemplate)[0];
-            (0, _jquery2.default)(document.body).html(appendData);
-        }
-
-    });
-
-    new View();
-};
-
-var _Backbone = __webpack_require__(2);
-
-var _Backbone2 = _interopRequireDefault(_Backbone);
-
-var _lodash = __webpack_require__(3);
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _config = __webpack_require__(1);
-
-var _config2 = _interopRequireDefault(_config);
-
-var _template = __webpack_require__(45);
-
-var _template2 = _interopRequireDefault(_template);
-
-__webpack_require__(27);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 23 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31607,7 +31399,7 @@ exports.default = function () {
 
             var setTemplate = this.template(json);
             var appendData = this.$el.append(setTemplate)[0];
-            (0, _jquery2.default)(document.body).html(appendData);
+            (0, _jquery2.default)('main').html(appendData);
         }
 
     });
@@ -31619,7 +31411,147 @@ var _Backbone = __webpack_require__(2);
 
 var _Backbone2 = _interopRequireDefault(_Backbone);
 
-var _lodash = __webpack_require__(3);
+var _lodash = __webpack_require__(4);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _config = __webpack_require__(1);
+
+var _config2 = _interopRequireDefault(_config);
+
+var _template = __webpack_require__(42);
+
+var _template2 = _interopRequireDefault(_template);
+
+__webpack_require__(26);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (args) {
+    var self;
+    var View = _Backbone2.default.View.extend({
+        tagName: "section",
+        className: "home",
+
+        template: _lodash2.default.template(_template2.default),
+        initialize: function initialize() {
+            self = this;
+            self.render();
+        },
+
+        loader: function loader() {},
+
+        setup: function setup(story) {
+            self.render(story);
+        },
+
+        render: function render(story) {
+            var json = {};
+
+            console.log(json);
+            var setTemplate = this.template(json);
+            var appendData = this.$el.append(setTemplate)[0];
+            (0, _jquery2.default)("main").html(appendData);
+        }
+    });
+    new View();
+};
+
+var _Backbone = __webpack_require__(2);
+
+var _Backbone2 = _interopRequireDefault(_Backbone);
+
+var _lodash = __webpack_require__(4);
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
+var _jquery = __webpack_require__(0);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+var _config = __webpack_require__(1);
+
+var _config2 = _interopRequireDefault(_config);
+
+var _template = __webpack_require__(45);
+
+var _template2 = _interopRequireDefault(_template);
+
+__webpack_require__(28);
+
+var _preloader = __webpack_require__(33);
+
+var _preloader2 = _interopRequireDefault(_preloader);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// template
+function requireAll(requireContext) {
+    return requireContext.keys().map(requireContext);
+} //styles
+
+var Projects = requireAll(__webpack_require__(18));
+
+console.log(Projects);
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function () {
+    var self;
+    var View = _Backbone2.default.View.extend({
+        tagName: 'section',
+        className: 'projects',
+
+        template: _lodash2.default.template(_template2.default),
+        initialize: function initialize() {
+            this.setup();
+            this.render();
+        },
+
+        setup: function setup() {},
+
+        render: function render() {
+            var json = {};
+
+            var setTemplate = this.template(json);
+            var appendData = this.$el.append(setTemplate)[0];
+            (0, _jquery2.default)('main').html(appendData);
+        }
+
+    });
+
+    new View();
+};
+
+var _Backbone = __webpack_require__(2);
+
+var _Backbone2 = _interopRequireDefault(_Backbone);
+
+var _lodash = __webpack_require__(4);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -31635,143 +31567,12 @@ var _template = __webpack_require__(46);
 
 var _template2 = _interopRequireDefault(_template);
 
-__webpack_require__(28);
+__webpack_require__(29);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-exports.default = function (args) {
-    var self;
-    var View = _Backbone2.default.View.extend({
-
-        tagName: 'section',
-        className: 'home',
-
-        template: _lodash2.default.template(_template2.default),
-        initialize: function initialize() {
-            self = this;
-            self.render();
-            // this.getData();
-        },
-
-        getData: function getData() {
-            var data = (0, _config2.default)().live + 'wp/v2/clients';
-
-            var query = _jquery2.default.ajax({
-                dataType: "json",
-                url: data,
-                xhrFields: {
-                    withCredentials: true
-                }
-            });
-
-            _jquery2.default.when(query).done(function (result) {
-                self.setData(result);
-            });
-        },
-
-        setData: function setData(result) {
-            console.log(result);
-            var story = {
-                'title': result[0].acf.title,
-                'description': result[0].acf.description,
-                'moments': result[0].acf.moments
-            };
-            var moments = result[0].acf.moments;
-            var images = [];
-
-            for (var index = 0; index < moments.length; index++) {
-                var gallery = moments[index].gallery;
-                for (var j = 0; j < gallery.length; j++) {
-                    var item = gallery[j];
-                    var img = item.url;
-                    images.push(img);
-                }
-            }
-
-            var loader = (0, _preloader2.default)({
-                // xhrImages: false
-            });
-
-            var counter = 0;
-            var maxLength = images.length;
-
-            for (var i = 0; i < maxLength; i++) {
-                var url = images[i];
-                loader.addImage(url, {
-                    onComplete: function onComplete() {
-                        counter = counter + 1;
-                        var percent = counter * 100 / maxLength;
-                        console.log(counter, maxLength, percent + '%');
-                        if (counter === maxLength) {
-                            self.setup(story);
-                        }
-                    }
-                });
-            }
-
-            loader.load();
-        },
-
-        setup: function setup(story) {
-            self.render(story);
-        },
-
-        render: function render(story) {
-            var json = {
-                // 'story': story
-            };
-
-            console.log(json);
-            var setTemplate = this.template(json);
-            var appendData = this.$el.append(setTemplate)[0];
-            (0, _jquery2.default)('main').append(appendData);
-        }
-
-    });
-    new View();
-};
-
-var _Backbone = __webpack_require__(2);
-
-var _Backbone2 = _interopRequireDefault(_Backbone);
-
-var _lodash = __webpack_require__(3);
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var _jquery = __webpack_require__(0);
-
-var _jquery2 = _interopRequireDefault(_jquery);
-
-var _config = __webpack_require__(1);
-
-var _config2 = _interopRequireDefault(_config);
-
-var _template = __webpack_require__(49);
-
-var _template2 = _interopRequireDefault(_template);
-
-__webpack_require__(31);
-
-var _preloader = __webpack_require__(35);
-
-var _preloader2 = _interopRequireDefault(_preloader);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31806,7 +31607,7 @@ exports.default = function (args) {
             console.log(json);
             var setTemplate = this.template(json);
             var appendData = this.$el.append(setTemplate)[0];
-            (0, _jquery2.default)(document.body).html(appendData);
+            (0, _jquery2.default)('main').html(appendData);
         }
 
     });
@@ -31817,7 +31618,7 @@ var _Backbone = __webpack_require__(2);
 
 var _Backbone2 = _interopRequireDefault(_Backbone);
 
-var _lodash = __webpack_require__(3);
+var _lodash = __webpack_require__(4);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -31829,13 +31630,19 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _template = __webpack_require__(51);
+var _template = __webpack_require__(47);
 
 var _template2 = _interopRequireDefault(_template);
 
-__webpack_require__(33);
+__webpack_require__(30);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 26 */
@@ -31869,24 +31676,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 /* 31 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 34 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -31931,14 +31720,20 @@ module.exports = {
 };
 
 /***/ }),
-/* 35 */
+/* 32 */
+/***/ (function(module, exports) {
+
+module.exports = {"title":"Did you mean MailChimp?","description":"Introducing MailChimp, One Mispronunciation at a Time","agency":"Droga5 New York","client":"MailChimp","role":"UX & UI Design","url":"https://mailchimp.com/did-you-mean/","awards":[{"type":"fwa","title":"FWA of the Day"},{"type":"awwwards","title":"Site of the Day"}],"blocks":[{"title":"We Did Mean MailChimp.","paragraphs":[{"paragraph":"MailChimp is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness."}],"images":[{"type":"full","items":[{"src":"commmon/media/images/000.jpg","alt":"text for seo"}]},{"type":"half","items":[{"src":"commmon/media/images/000.jpg","alt":"text for seo"},{"src":"commmon/media/images/000.jpg","alt":"text for seo"}]}]},{}]}
+
+/***/ }),
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(36);
+module.exports = __webpack_require__(34);
 
 
 /***/ }),
-/* 36 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -31948,14 +31743,14 @@ module.exports = __webpack_require__(36);
  *
  */
 
-var Class = __webpack_require__(4);
+var Class = __webpack_require__(3);
 var EventEmitter = __webpack_require__(7).EventEmitter;
 var getExtension = __webpack_require__(10);
-var LoaderImage = __webpack_require__(38);
-var LoaderText = __webpack_require__(40);
-var LoaderJSON = __webpack_require__(39);
+var LoaderImage = __webpack_require__(36);
+var LoaderText = __webpack_require__(38);
+var LoaderJSON = __webpack_require__(37);
 var LoaderVideo = __webpack_require__(9);
-var LoaderAudio = __webpack_require__(37);
+var LoaderAudio = __webpack_require__(35);
 
 /**
 *
@@ -32350,7 +32145,7 @@ module.exports = Preloader;
 
 
 /***/ }),
-/* 37 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -32358,7 +32153,7 @@ module.exports = Preloader;
  *
  * @module preloader
  */
-var Class = __webpack_require__(4);
+var Class = __webpack_require__(3);
 var LoaderBase = __webpack_require__(5);
 var LoaderVideo = __webpack_require__(9);
 
@@ -32381,7 +32176,7 @@ module.exports = LoaderAudio;
 
 
 /***/ }),
-/* 38 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* global Blob, Image, ArrayBuffer, FileReader */
@@ -32391,7 +32186,7 @@ module.exports = LoaderAudio;
  *
  * @module preloader
  */
-var Class = __webpack_require__(4);
+var Class = __webpack_require__(3);
 var LoaderBase = __webpack_require__(5);
 var FileMeta = __webpack_require__(8);
 var getMimeFromURL = __webpack_require__(11);
@@ -32503,7 +32298,7 @@ module.exports = LoaderImage;
 
 
 /***/ }),
-/* 39 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -32511,7 +32306,7 @@ module.exports = LoaderImage;
  *
  * @module preloader
  */
-var Class = __webpack_require__(4);
+var Class = __webpack_require__(3);
 var LoaderBase = __webpack_require__(5);
 
 /**
@@ -32533,7 +32328,7 @@ module.exports = LoaderJSON;
 
 
 /***/ }),
-/* 40 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -32541,7 +32336,7 @@ module.exports = LoaderJSON;
  *
  * @module preloader
  */
-var Class = __webpack_require__(4);
+var Class = __webpack_require__(3);
 var LoaderBase = __webpack_require__(5);
 
 /**
@@ -32562,7 +32357,7 @@ module.exports = LoaderText;
 
 
 /***/ }),
-/* 41 */
+/* 39 */
 /***/ (function(module, exports) {
 
 /**
@@ -32594,7 +32389,7 @@ module.exports = function (headerString) {
 
 
 /***/ }),
-/* 42 */
+/* 40 */
 /***/ (function(module, exports) {
 
 /**
@@ -32617,61 +32412,49 @@ module.exports = function (string) {
 
 
 /***/ }),
-/* 43 */
-/***/ (function(module, exports) {
-
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\"\r\n     version=\"1.1\" \r\n     xmlns:xlink=\"http://www.w3.org/1999/xlink\" \r\n     preserveAspectRatio=\"none\" \r\n     x=\"0px\" \r\n     y=\"0px\" \r\n     width=\"23px\" \r\n     height=\"22px\" \r\n     viewBox=\"0 0 23 22\">\r\n\r\n        <path   fill=\"#ffffff\"\r\n                stroke=\"none\" \r\n                d=\"\r\n        M 13.5 9.55\r\n        L 9.8 9.55 9.8 13.25 13.5 13.25 13.5 9.55\r\n        M 3.7 22.85\r\n        L 3.7 19.15 0 19.15 0 22.85 3.7 22.85\r\n        M 9.8 19.15\r\n        L 9.8 22.85 13.5 22.85 13.5 19.15 9.8 19.15\r\n        M 3.7 0\r\n        L 0 0 0 3.7 3.7 3.7 3.7 0\r\n        M 3.7 9.55\r\n        L 0 9.55 0 13.25 3.7 13.25 3.7 9.55\r\n        M 13.5 3.7\r\n        L 13.5 0 9.8 0 9.8 3.7 13.5 3.7\r\n        M 23.35 13.25\r\n        L 23.35 9.55 19.65 9.55 19.65 13.25 23.35 13.25\r\n        M 23.35 22.85\r\n        L 23.35 19.15 19.65 19.15 19.65 22.85 23.35 22.85\r\n        M 23.35 3.7\r\n        L 23.35 0 19.65 0 19.65 3.7 23.35 3.7 Z\" />\r\n</svg>\r\n"
-
-/***/ }),
-/* 44 */
+/* 41 */
 /***/ (function(module, exports) {
 
 module.exports = "<h1>About</h1>\r\n\r\n"
 
 /***/ }),
+/* 42 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"contact-content\">\r\n    <h3>Let's Chat, say hello</h3>\r\n    <div class=\"contact-info\">\r\n        <a href=\"mailto:shang.p.yu@gmail.com\"><h6>shang.p.yu@gmail.com</h6></a>\r\n        <a href=\"phone:+641155626\"><h6>+641155626</h6></a>\r\n    </div>\r\n</div>\r\n"
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports) {
+
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 421.19\"><title>Asset 1</title><g id=\"Layer_2\" data-name=\"Layer 2\"><g id=\"Layer_1-2\" data-name=\"Layer 1\"><polygon points=\"200 0 0 72.79 20.61 80.29 200 15 400 87.79 400 72.79 200 0\"/><polygon points=\"379.39 91.79 352.61 101.54 200 46 63.19 95.79 83.8 103.29 200 61 400 133.79 400 118.79 373.21 109.04 400 99.29 379.39 91.79\"/><polygon points=\"200 406.19 0 333.39 0 348.39 200 421.19 400 348.39 379.39 340.89 200 406.19\"/><polygon points=\"20.61 329.39 47.3 319.68 200 375.26 200 375.26 336.9 325.43 316.3 317.93 200 360.26 200 360.26 0 287.46 0 302.46 26.69 312.18 0 321.89 20.61 329.39\"/><polygon points=\"20.61 283.46 47.48 273.68 89.97 289.15 63.1 298.93 83.7 306.43 110.58 296.65 200 329.19 200 329.19 273.62 302.4 253.02 294.9 200 314.19 200 314.19 0 241.4 0 256.4 26.87 266.18 0 275.96 20.61 283.46\"/><polygon points=\"379.39 137.79 352.61 147.54 310.02 132.04 336.81 122.29 316.2 114.79 289.42 124.54 200 92 126.38 118.79 146.99 126.29 200 107 400 179.79 400 164.79 373.21 155.04 400 145.29 379.39 137.79\"/><polygon points=\"379.39 248.9 352.52 258.68 283.69 233.63 310.56 223.85 289.95 216.35 263.08 226.13 220.5 210.63 247.37 200.85 226.76 193.35 200 203.09 200 203.09 0 130.29 0 145.29 26.79 155.04 0 164.79 20.61 172.29 47.4 162.54 116.23 187.6 89.44 197.35 110.05 204.85 136.83 195.1 179.5 210.63 152.72 220.38 173.32 227.88 200 218.17 200 218.17 400 290.96 400 275.96 373.13 266.18 400 256.4 379.39 248.9\"/><polygon points=\"379.39 294.96 352.7 304.68 310.03 289.15 336.72 279.43 316.12 271.93 289.42 281.65 220.59 256.59 247.28 246.88 226.68 239.38 200 249.09 200 249.09 0 176.29 0 191.29 53.04 210.6 0 229.9 20.61 237.4 73.64 218.1 116.31 233.63 63.28 252.93 83.88 260.43 136.92 241.13 179.41 256.59 126.38 275.9 146.98 283.4 200 264.1 400 336.89 400 321.89 373.31 312.18 400 302.46 379.39 294.96\"/><polygon points=\"379.39 183.79 326.36 203.1 283.77 187.6 336.81 168.29 316.2 160.79 263.17 180.1 220.58 164.6 273.62 145.29 253.01 137.79 200 157.09 200 157.09 0 84.29 0 99.29 26.79 109.04 0 118.79 20.61 126.29 47.4 116.54 89.98 132.04 63.19 141.79 83.8 149.29 110.59 139.54 179.42 164.6 152.63 174.35 173.24 181.85 200 172.11 200 172.11 400 244.9 400 229.9 346.96 210.6 400 191.29 379.39 183.79\"/></g></g></svg>"
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"header-content\">\n    <a href=\"\" class=\"logo\">\n        <%= logo %>\n    </a>\n</div>\n"
+
+/***/ }),
 /* 45 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Archive</h1>\r\n\r\n"
+module.exports = "<div class=\"home-content\">\r\n    <div class=\"home-intro\">\r\n        <h4>I’m Shang-Poh Yu, <br> Creative Problem Solver, <br> Interactive Designer.</h4>\r\n        <p>( but you’re welcome to call me Shang )</p>\r\n        <nav>\r\n            <ul>\r\n                <li><a href=\"#/projects\">see projects</a></li>\r\n                <li><a href=\"#\">about</a></li>\r\n                <li><a href=\"#/contact\">contact</a></li>\r\n            </ul>\r\n        </nav>\r\n    </div>\r\n\r\n    <div class=\"home-hello\">\r\n        <div class=\"col\">\r\n            <div>H</div>\r\n            <div>L</div>\r\n            <div>O</div>\r\n        </div>\r\n\r\n        <div class=\"col\">\r\n            <div>L</div>\r\n            <div>E</div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 /* 46 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Contact</h1>\r\n\r\n"
+module.exports = "<div class=\"projects-content\">\r\n\r\n    <div class=\"projects-project\">\r\n        <div class=\"projects-project-info\">\r\n            <h6 class=\"projects-project-info_client\">\r\n                MailChimp\r\n            </h6>\r\n\r\n            <h3 class=\"projects-project-info_title\">\r\n                Did you mean <br> mailchimp?\r\n            </h3>\r\n            <a href=\"#/single\" class=\"btn\">\r\n                <div class=\"btn-line\"></div>\r\n                <div class=\"btn-text\">see this case</div>\r\n            </a>\r\n\r\n        </div>\r\n        <div class=\"projects-project-image\">\r\n\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"projects-project\">\r\n        <div class=\"projects-project-info\">\r\n            <h6 class=\"projects-project-info_client\">\r\n                Ford Motor Company\r\n            </h6>\r\n\r\n            <h3 class=\"projects-project-info_title\">\r\n                Pocket <br> Mustang\r\n            </h3>\r\n            <a href=\"#/single\" class=\"btn\">\r\n                <div class=\"btn-line\"></div>\r\n                <div class=\"btn-text\">see this case</div>\r\n            </a>\r\n\r\n        </div>\r\n        <div class=\"projects-project-image\">\r\n\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"projects-project\">\r\n        <div class=\"projects-project-info\">\r\n            <h6 class=\"projects-project-info_client\">\r\n                Bombardier Recreational Products\r\n            </h6>\r\n\r\n            <h3 class=\"projects-project-info_title\">\r\n                Evinrude <br> E-TEC G2\r\n            </h3>\r\n            <a href=\"#/single\" class=\"btn\">\r\n                <div class=\"btn-line\"></div>\r\n                <div class=\"btn-text\">see this case</div>\r\n            </a>\r\n\r\n        </div>\r\n        <div class=\"projects-project-image\">\r\n\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"projects-archive\">\r\n        <h3 class=\"projects-archive_title\">\r\n            the <br> archive\r\n        </h3>\r\n\r\n        <div class=\"projects-archive_thumnails\">\r\n            <div class=\"projects-archive_thumnails-item\">\r\n                <div></div>\r\n            </div>\r\n            <div class=\"projects-archive_thumnails-item\">\r\n                <div></div>\r\n            </div>\r\n            <div class=\"projects-archive_thumnails-item\">\r\n                <div></div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n</div>"
 
 /***/ }),
 /* 47 */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>footer</h1>\r\n"
+module.exports = "<div class=\"single-content\">\r\n    <div class=\"single-content_video\">\r\n        <div class=\"single-content_video-media\"></div>\r\n    </div>\r\n\r\n    <div class=\"single-content_section\">\r\n        <div class=\"single-content_section-title\">\r\n            <h3>Evinrude E-TEC G2</h3>\r\n        </div>\r\n        <div class=\"single-content_intro\">\r\n            <div class=\"single-content_intro-info\">\r\n                <div class=\"single-content_intro-info-item\">\r\n                    <h6>Agency</h6>\r\n                    <p>\r\n                        Resn\r\n                    </p>\r\n                </div>\r\n\r\n                <div class=\"single-content_intro-info-item\">\r\n                    <h6>Role</h6>\r\n                    <p>\r\n                        Interactive Designer\r\n                        <%= args %>\r\n                    </p>\r\n                </div>\r\n\r\n                <div class=\"single-content_intro-info-item\">\r\n                    <a href=\"www.google.cl\" class=\"btn\" target=\"_blank\">\r\n                        <div class=\"btn-line\"></div>\r\n                        <div class=\"btn-text\">\r\n                            launch site\r\n                        </div>\r\n                    </a>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"single-content_intro-desc\">\r\n                <h4>We introduce you to the world’s most advanced outboard engine, the Evinrude E-TEC G2, and give you the tools\r\n                    to design your own.</h4>\r\n                <p>Choose Your E-TEC makes the Evinrude E-TEC G2 come to life. Learn all about the engine and explore its breakthrough\r\n                    features. Then, design your own with the simple and intuitive Customizer.</p>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"single-content_blocks\">\r\n            <div class=\"single-content_block\">\r\n\r\n                <div class=\"single-content_block-media full\">\r\n \r\n                        <div class=\"single-content_block-media-item\">\r\n                            <div></div>\r\n                        </div>\r\n    \r\n                </div>\r\n\r\n                <div class=\"single-content_block-info\">\r\n                    <div class=\"single-content_lock-info-content\">\r\n                        <h4>Frame Loading</h4>\r\n                        <p>Choose Your E-TEC makes the Evinrude E-TEC G2 come to life. Learn all about the engine and explore\r\n                            its breakthrough features. Then, design your own with the simple and intuitive Customizer.</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"single-content_block\">\r\n                    <div class=\"single-content_block-media half\">\r\n \r\n                        <div class=\"single-content_block-media-item\">\r\n                            <div></div>\r\n                        </div>\r\n    \r\n                        <div class=\"single-content_block-media-item\">\r\n                            <div></div>\r\n                        </div>\r\n\r\n                        <div class=\"single-content_block-media-item\">\r\n                                <div></div>\r\n                            </div>\r\n        \r\n                            <div class=\"single-content_block-media-item\">\r\n                                <div></div>\r\n                            </div>\r\n\r\n                    </div>\r\n\r\n                </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 /* 48 */
-/***/ (function(module, exports) {
-
-module.exports = "<h1>HEADER</h1>\r\n"
-
-/***/ }),
-/* 49 */
-/***/ (function(module, exports) {
-
-module.exports = "<p>home</p>\r\n"
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports) {
-
-module.exports = "<h1>sidebar</h1>\r\n\r\n\r\n\r\n\r\n\r\n"
-
-/***/ }),
-/* 51 */
-/***/ (function(module, exports) {
-
-module.exports = " <h1>Single - <%= args %></h1>\r\n\r\n"
-
-/***/ }),
-/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -34226,7 +34009,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscor
 
 
 /***/ }),
-/* 53 */
+/* 49 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {

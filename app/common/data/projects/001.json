@@ -5,6 +5,16 @@
   "client": "MailChimp",
   "role": "UX & UI Design",
   "url": "https://mailchimp.com/did-you-mean/",
+  "awards":[
+    {
+      "type": "fwa",
+      "title":"FWA of the Day"
+    },
+    {
+      "type": "awwwards",
+      "title":"Site of the Day"
+    }
+  ],
   "blocks": [
     {
       "title": "We Did Mean MailChimp.",
