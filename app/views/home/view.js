@@ -8,13 +8,6 @@ import "./style.scss"; //styles
 
 import preloader from "preloader";
 
-function requireAll( requireContext ) {
-    return requireContext.keys().map( requireContext );
-}
-var Projects = requireAll( require.context("../../common/data/projects", false, /.json$/) );
-
-console.log(Projects);
-
 export default function(args) {
   var self;
   var View = Backbone.View.extend({
@@ -24,19 +17,20 @@ export default function(args) {
     template: _.template(Template),
     initialize: function() {
       self = this;
-      self.render();
+      self.loader();
     },
 
     loader:function(){
-
+      self.render(Config().copydeck);
     },
 
     setup: function(story) {
       self.render(story);
     },
 
-    render: function(story) {
+    render: function(copydeck) {
       var json = {
+        info: copydeck.info
       };
 
       console.log(json);

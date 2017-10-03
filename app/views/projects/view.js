@@ -15,17 +15,26 @@ export default function() {
 
         template: _.template(Template),
         initialize: function() {
-            this.setup();
-            this.render();
+            self = this;
+            self.loader();
         },
 
-        setup: function() {
+        loader: function() {
+            self.render(Config().copydeck.projects);
 
         },
 
-        render: function() {
+        render: function(copydeck) {
             var json = {
-
+                projects: copydeck,
+                permalink:function(val){
+                    var removeTag = val.replace(/<\/?[^>]+(>|$)/g, " ");
+                    var spaces = removeTag.replace(/\s+/g, '-').toLowerCase();
+                    var special = spaces.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
+                    var slug = special.toLowerCase();
+                    
+                    return slug
+                },
             };
 
             var setTemplate = this.template(json);

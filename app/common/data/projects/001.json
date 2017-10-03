@@ -1,17 +1,22 @@
 {
-  "title": "Did you mean MailChimp?",
+  "title": "Did you mean <br> MailChimp?",
+  "introduction":"",
   "description": "Introducing MailChimp, One Mispronunciation at a Time",
   "agency": "Droga5 New York",
   "client": "MailChimp",
   "role": "UX & UI Design",
   "url": "https://mailchimp.com/did-you-mean/",
+  "cover": {
+    "image": "common/media/images/001/001.jpg",
+    "video": "common/media/001/fwa.mp4"
+  },
   "awards":[
     {
-      "type": "fwa",
+      "image": "common/media/awards/fwa.jpg",
       "title":"FWA of the Day"
     },
     {
-      "type": "awwwards",
+      "image": "common/media/awards/awwwards.jpg",
       "title":"Site of the Day"
     }
   ],
@@ -27,9 +32,9 @@
       "images": [
         {
           "type": "full",
-          "items": [
+          "images": [
             {
-              "src": "commmon/media/images/000.jpg",
+              "image": "commmon/media/images/000.jpg",
               "alt": "text for seo"
             }
           ]
@@ -37,19 +42,18 @@
 
         {
           "type": "half",
-          "items": [
+          "images": [
             {
-              "src": "commmon/media/images/000.jpg",
+              "image": "commmon/media/images/000.jpg",
               "alt": "text for seo"
             },
             {
-              "src": "commmon/media/images/000.jpg",
+              "image": "commmon/media/images/000.jpg",
               "alt": "text for seo"
             }
           ]
         }
       ]
-    },
-    {}
+    }
   ]
 }
