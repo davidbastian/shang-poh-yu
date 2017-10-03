@@ -41,8 +41,6 @@ export default function Router() {
                 self.startAbout(args[0]);
             }
 
-
-
             if (name === 'startSingle') {
                 self.startSingle(args[0]);
             }
@@ -66,7 +64,6 @@ export default function Router() {
         startAbout: function(args) {
             AboutView(args);
         },
-
 
         startProjects: function(args) {
             ProjectsView(args);

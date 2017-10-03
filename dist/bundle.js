@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a7ed12384b41237c69cd"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "82a273e05c134d4d2a93"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -10980,12 +10980,28 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = Config;
+
+var _info = __webpack_require__(32);
+
+var _info2 = _interopRequireDefault(_info);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function requireAll(requireContext) {
+    return requireContext.keys().map(requireContext);
+}
+var Projects = requireAll(__webpack_require__(18));
+
 function Config() {
     var config = {
         'staging': '',
         'local': '',
-        'live': '',
-        'placeholder': ''
+        'live': Projects,
+        'placeholder': '',
+        'copydeck': {
+            projects: Projects,
+            info: _info2.default
+        }
     };
 
     return config;
@@ -11011,7 +11027,7 @@ function Config() {
 
   // Set up Backbone appropriately for the environment. Start with AMD.
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(48), __webpack_require__(0), exports], __WEBPACK_AMD_DEFINE_RESULT__ = function(_, $, exports) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(49), __webpack_require__(0), exports], __WEBPACK_AMD_DEFINE_RESULT__ = function(_, $, exports) {
       // Export global even in AMD case in case this script is loaded with
       // others that may still expect a global Backbone.
       root.Backbone = factory(root, exports, _, $);
@@ -30138,7 +30154,7 @@ module.exports = Class;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(49)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(50)(module)))
 
 /***/ }),
 /* 5 */
@@ -30153,7 +30169,7 @@ module.exports = Class;
  */
 var Class = __webpack_require__(3);
 var FileMeta = __webpack_require__(8);
-var stringToArrayBuffer = __webpack_require__(40);
+var stringToArrayBuffer = __webpack_require__(41);
 var getMimeFromURL = __webpack_require__(11);
 var EventEmitter = __webpack_require__(7).EventEmitter;
 
@@ -30816,7 +30832,7 @@ function isUndefined(arg) {
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var parseHTTPHeader = __webpack_require__(39);
+var parseHTTPHeader = __webpack_require__(40);
 
 /**
  * FileMeta is a class which will hold file meta data. Each LoaderBase contains a FileMeta object
@@ -31225,13 +31241,13 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _template = __webpack_require__(44);
+var _template = __webpack_require__(45);
 
 var _template2 = _interopRequireDefault(_template);
 
 __webpack_require__(27);
 
-var _logo = __webpack_require__(43);
+var _logo = __webpack_require__(44);
 
 var _logo2 = _interopRequireDefault(_logo);
 
@@ -31254,7 +31270,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./001.json": 32
+	"./001.json": 33
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -31337,7 +31353,7 @@ exports.default = function () {
 
             var setTemplate = this.template(json);
             var appendData = this.$el.append(setTemplate)[0];
-            (0, _jquery2.default)(document.body).html(appendData);
+            (0, _jquery2.default)('main').html(appendData);
         }
 
     });
@@ -31361,7 +31377,7 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _template = __webpack_require__(41);
+var _template = __webpack_require__(42);
 
 var _template2 = _interopRequireDefault(_template);
 
@@ -31423,7 +31439,7 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _template = __webpack_require__(42);
+var _template = __webpack_require__(43);
 
 var _template2 = _interopRequireDefault(_template);
 
@@ -31439,37 +31455,41 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 exports.default = function (args) {
-    var self;
-    var View = _Backbone2.default.View.extend({
-        tagName: "section",
-        className: "home",
+  var self;
+  var View = _Backbone2.default.View.extend({
+    tagName: "section",
+    className: "home",
 
-        template: _lodash2.default.template(_template2.default),
-        initialize: function initialize() {
-            self = this;
-            self.render();
-        },
+    template: _lodash2.default.template(_template2.default),
+    initialize: function initialize() {
+      self = this;
+      self.loader();
+    },
 
-        loader: function loader() {},
+    loader: function loader() {
+      self.render((0, _config2.default)().copydeck);
+    },
 
-        setup: function setup(story) {
-            self.render(story);
-        },
+    setup: function setup(story) {
+      self.render(story);
+    },
 
-        render: function render(story) {
-            var json = {};
+    render: function render(copydeck) {
+      var json = {
+        info: copydeck.info
+      };
 
-            console.log(json);
-            var setTemplate = this.template(json);
-            var appendData = this.$el.append(setTemplate)[0];
-            (0, _jquery2.default)("main").html(appendData);
-        }
-    });
-    new View();
+      console.log(json);
+      var setTemplate = this.template(json);
+      var appendData = this.$el.append(setTemplate)[0];
+      (0, _jquery2.default)("main").html(appendData);
+    }
+  });
+  new View();
 };
 
 var _Backbone = __webpack_require__(2);
@@ -31488,26 +31508,17 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _template = __webpack_require__(45);
+var _template = __webpack_require__(46);
 
 var _template2 = _interopRequireDefault(_template);
 
 __webpack_require__(28);
 
-var _preloader = __webpack_require__(33);
+var _preloader = __webpack_require__(34);
 
 var _preloader2 = _interopRequireDefault(_preloader);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// template
-function requireAll(requireContext) {
-    return requireContext.keys().map(requireContext);
-} //styles
-
-var Projects = requireAll(__webpack_require__(18));
-
-console.log(Projects);
 
 /***/ }),
 /* 23 */
@@ -31528,14 +31539,26 @@ exports.default = function () {
 
         template: _lodash2.default.template(_template2.default),
         initialize: function initialize() {
-            this.setup();
-            this.render();
+            self = this;
+            self.loader();
         },
 
-        setup: function setup() {},
+        loader: function loader() {
+            self.render((0, _config2.default)().copydeck.projects);
+        },
 
-        render: function render() {
-            var json = {};
+        render: function render(copydeck) {
+            var json = {
+                projects: copydeck,
+                permalink: function permalink(val) {
+                    var removeTag = val.replace(/<\/?[^>]+(>|$)/g, " ");
+                    var spaces = removeTag.replace(/\s+/g, '-').toLowerCase();
+                    var special = spaces.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
+                    var slug = special.toLowerCase();
+
+                    return slug;
+                }
+            };
 
             var setTemplate = this.template(json);
             var appendData = this.$el.append(setTemplate)[0];
@@ -31563,7 +31586,7 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _template = __webpack_require__(46);
+var _template = __webpack_require__(47);
 
 var _template2 = _interopRequireDefault(_template);
 
@@ -31594,15 +31617,40 @@ exports.default = function (args) {
         initialize: function initialize() {
             self = this;
             self.args = args;
+
+            self.loader();
             this.setup();
-            this.render();
+        },
+
+        loader: function loader() {
+            self.getCurrent((0, _config2.default)().copydeck.projects);
+        },
+
+        permalink: function permalink(val) {
+            var removeTag = val.replace(/<\/?[^>]+(>|$)/g, " ");
+            var spaces = removeTag.replace(/\s+/g, '-').toLowerCase();
+            var special = spaces.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
+            var slug = special.toLowerCase();
+
+            return slug;
+        },
+
+        getCurrent: function getCurrent(projects) {
+            for (var i = 0; i < projects.length; i++) {
+                var project = projects[i];
+                var title = project.title;
+                if (self.permalink(title) === self.args) {
+                    self.render(project);
+                    console.log(project);
+                }
+            }
         },
 
         setup: function setup() {},
 
-        render: function render() {
+        render: function render(project) {
             var json = {
-                args: self.args
+                project: project
             };
             console.log(json);
             var setTemplate = this.template(json);
@@ -31630,7 +31678,7 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _template = __webpack_require__(47);
+var _template = __webpack_require__(48);
 
 var _template2 = _interopRequireDefault(_template);
 
@@ -31723,17 +31771,23 @@ module.exports = {
 /* 32 */
 /***/ (function(module, exports) {
 
-module.exports = {"title":"Did you mean MailChimp?","description":"Introducing MailChimp, One Mispronunciation at a Time","agency":"Droga5 New York","client":"MailChimp","role":"UX & UI Design","url":"https://mailchimp.com/did-you-mean/","awards":[{"type":"fwa","title":"FWA of the Day"},{"type":"awwwards","title":"Site of the Day"}],"blocks":[{"title":"We Did Mean MailChimp.","paragraphs":[{"paragraph":"MailChimp is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness."}],"images":[{"type":"full","items":[{"src":"commmon/media/images/000.jpg","alt":"text for seo"}]},{"type":"half","items":[{"src":"commmon/media/images/000.jpg","alt":"text for seo"},{"src":"commmon/media/images/000.jpg","alt":"text for seo"}]}]},{}]}
+module.exports = {"email":"shang.p.yu@gmail.com","phone":"+64 115 5626","intro":"I’m Shang-Poh Yu, <br> Creative Problem Solver, <br> Interactive Designer.","quote":"( but you’re welcome to call me Shang )"}
 
 /***/ }),
 /* 33 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-module.exports = __webpack_require__(34);
-
+module.exports = {"title":"Did you mean <br> MailChimp?","description":"MailChimp is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness.","introduction":"Introducing MailChimp,<br> One Mispronunciation at a Time.","agency":"Droga5 New York","client":"MailChimp","role":"UX & UI Design","url":"https://mailchimp.com/did-you-mean/","cover":{"image":"common/media/images/001/001.jpg","video":"common/media/001/fwa.mp4"},"awards":[{"image":"common/media/awards/fwa.jpg","title":"FWA of the Day"},{"image":"common/media/awards/awwwards.jpg","title":"Site of the Day"}],"blocks":[{"title":"Inspiration and Ideation","paragraphs":[{"paragraph":"The campaign was inspired by a 13-year-old girl who mispronounced MailChimp as “MailKimp”, on the podcast ‘Serial’. We took that idea and pushed in new and unexpected directions, turning MailChimp into KaleLimp, JailBlimp, SnailPrimp and many others. The process was highly collaborative, with both Droga5 and Resn bringing ideas to the table. We chose our nine favourites and began a covert operation to insert them into wildly disparate areas of popular culture—and having a lot of fun doing so!"}],"images":[{"type":"full","images":[{"image":"commmon/media/images/000.jpg","alt":"text for seo"}]},{"type":"half","images":[{"image":"commmon/media/images/000.jpg","alt":"text for seo"},{"image":"commmon/media/images/000.jpg","alt":"text for seo"}]}]},{"title":"The experiences","paragraphs":[{"paragraph":"These are two of the interactive experiences I worked on most in the campaign. Was a great time just being trusted and let loose to make some fun play things. Love when you're pleasantly surprised by the moment when things come to life and they're more fun than they were in your head! WhaleSynth was a captivating digital whale noise synthesizer - was so good Brian Eno even tweeted about it. NailChamp started as a joke of having nail artists compete -turns out they were a thing and it the competition got serious! "},{"paragraph":"We created promotional sites for two products that you could actually buy, FailChips (because everyone knows the broken chips at the bottom of the bag are the tastiest) and SnailPrimp (a beauty treatment made from the secretions of real snails). We made the MaleCrimp Tumblr site (another one I worked on), which kicked off an unexpected fashion trend. And, finally, we built websites for three surreal mood films, MailShrimp, KaleLimp and JailBlimp, by Riff Raff Films."}],"images":[{"type":"full","images":[{"image":"commmon/media/images/000.jpg","alt":"text for seo"}]},{"type":"half","images":[{"image":"commmon/media/images/000.jpg","alt":"text for seo"},{"image":"commmon/media/images/000.jpg","alt":"text for seo"}]}]},{"title":"Connecting the dots...","paragraphs":[{"paragraph":"When the campaign launched, we kept the connection to MailChimp secret. Initially, we wanted people to enjoy the websites for what they were. The concept was that people would independently find one or two pieces of the campaign and, when their interest was piqued, they would discover the link to MailChimp. The public response was overwhelmingly positive, from across the cultural spectrum. For us, it was exciting to watch people connect the dots and find their way to MailChimp, in surprising ways. For MailChimp, a brand built on playfulness and creativity, it demonstrated that these qualities are, indeed, good for business."}],"images":[{"type":"full","images":[{"image":"commmon/media/images/000.jpg","alt":"text for seo"}]},{"type":"half","images":[{"image":"commmon/media/images/000.jpg","alt":"text for seo"},{"image":"commmon/media/images/000.jpg","alt":"text for seo"}]}]}]}
 
 /***/ }),
 /* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(35);
+
+
+/***/ }),
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -31746,11 +31800,11 @@ module.exports = __webpack_require__(34);
 var Class = __webpack_require__(3);
 var EventEmitter = __webpack_require__(7).EventEmitter;
 var getExtension = __webpack_require__(10);
-var LoaderImage = __webpack_require__(36);
-var LoaderText = __webpack_require__(38);
-var LoaderJSON = __webpack_require__(37);
+var LoaderImage = __webpack_require__(37);
+var LoaderText = __webpack_require__(39);
+var LoaderJSON = __webpack_require__(38);
 var LoaderVideo = __webpack_require__(9);
-var LoaderAudio = __webpack_require__(35);
+var LoaderAudio = __webpack_require__(36);
 
 /**
 *
@@ -32145,7 +32199,7 @@ module.exports = Preloader;
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -32176,7 +32230,7 @@ module.exports = LoaderAudio;
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* global Blob, Image, ArrayBuffer, FileReader */
@@ -32298,7 +32352,7 @@ module.exports = LoaderImage;
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -32328,7 +32382,7 @@ module.exports = LoaderJSON;
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -32357,7 +32411,7 @@ module.exports = LoaderText;
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports) {
 
 /**
@@ -32389,7 +32443,7 @@ module.exports = function (headerString) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports) {
 
 /**
@@ -32412,49 +32466,49 @@ module.exports = function (string) {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports) {
 
 module.exports = "<h1>About</h1>\r\n\r\n"
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"contact-content\">\r\n    <h3>Let's Chat, say hello</h3>\r\n    <div class=\"contact-info\">\r\n        <a href=\"mailto:shang.p.yu@gmail.com\"><h6>shang.p.yu@gmail.com</h6></a>\r\n        <a href=\"phone:+641155626\"><h6>+641155626</h6></a>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports) {
 
 module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 421.19\"><title>Asset 1</title><g id=\"Layer_2\" data-name=\"Layer 2\"><g id=\"Layer_1-2\" data-name=\"Layer 1\"><polygon points=\"200 0 0 72.79 20.61 80.29 200 15 400 87.79 400 72.79 200 0\"/><polygon points=\"379.39 91.79 352.61 101.54 200 46 63.19 95.79 83.8 103.29 200 61 400 133.79 400 118.79 373.21 109.04 400 99.29 379.39 91.79\"/><polygon points=\"200 406.19 0 333.39 0 348.39 200 421.19 400 348.39 379.39 340.89 200 406.19\"/><polygon points=\"20.61 329.39 47.3 319.68 200 375.26 200 375.26 336.9 325.43 316.3 317.93 200 360.26 200 360.26 0 287.46 0 302.46 26.69 312.18 0 321.89 20.61 329.39\"/><polygon points=\"20.61 283.46 47.48 273.68 89.97 289.15 63.1 298.93 83.7 306.43 110.58 296.65 200 329.19 200 329.19 273.62 302.4 253.02 294.9 200 314.19 200 314.19 0 241.4 0 256.4 26.87 266.18 0 275.96 20.61 283.46\"/><polygon points=\"379.39 137.79 352.61 147.54 310.02 132.04 336.81 122.29 316.2 114.79 289.42 124.54 200 92 126.38 118.79 146.99 126.29 200 107 400 179.79 400 164.79 373.21 155.04 400 145.29 379.39 137.79\"/><polygon points=\"379.39 248.9 352.52 258.68 283.69 233.63 310.56 223.85 289.95 216.35 263.08 226.13 220.5 210.63 247.37 200.85 226.76 193.35 200 203.09 200 203.09 0 130.29 0 145.29 26.79 155.04 0 164.79 20.61 172.29 47.4 162.54 116.23 187.6 89.44 197.35 110.05 204.85 136.83 195.1 179.5 210.63 152.72 220.38 173.32 227.88 200 218.17 200 218.17 400 290.96 400 275.96 373.13 266.18 400 256.4 379.39 248.9\"/><polygon points=\"379.39 294.96 352.7 304.68 310.03 289.15 336.72 279.43 316.12 271.93 289.42 281.65 220.59 256.59 247.28 246.88 226.68 239.38 200 249.09 200 249.09 0 176.29 0 191.29 53.04 210.6 0 229.9 20.61 237.4 73.64 218.1 116.31 233.63 63.28 252.93 83.88 260.43 136.92 241.13 179.41 256.59 126.38 275.9 146.98 283.4 200 264.1 400 336.89 400 321.89 373.31 312.18 400 302.46 379.39 294.96\"/><polygon points=\"379.39 183.79 326.36 203.1 283.77 187.6 336.81 168.29 316.2 160.79 263.17 180.1 220.58 164.6 273.62 145.29 253.01 137.79 200 157.09 200 157.09 0 84.29 0 99.29 26.79 109.04 0 118.79 20.61 126.29 47.4 116.54 89.98 132.04 63.19 141.79 83.8 149.29 110.59 139.54 179.42 164.6 152.63 174.35 173.24 181.85 200 172.11 200 172.11 400 244.9 400 229.9 346.96 210.6 400 191.29 379.39 183.79\"/></g></g></svg>"
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"header-content\">\n    <a href=\"\" class=\"logo\">\n        <%= logo %>\n    </a>\n</div>\n"
 
 /***/ }),
-/* 45 */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"home-content\">\r\n    <div class=\"home-intro\">\r\n        <h4>I’m Shang-Poh Yu, <br> Creative Problem Solver, <br> Interactive Designer.</h4>\r\n        <p>( but you’re welcome to call me Shang )</p>\r\n        <nav>\r\n            <ul>\r\n                <li><a href=\"#/projects\">see projects</a></li>\r\n                <li><a href=\"#\">about</a></li>\r\n                <li><a href=\"#/contact\">contact</a></li>\r\n            </ul>\r\n        </nav>\r\n    </div>\r\n\r\n    <div class=\"home-hello\">\r\n        <div class=\"col\">\r\n            <div>H</div>\r\n            <div>L</div>\r\n            <div>O</div>\r\n        </div>\r\n\r\n        <div class=\"col\">\r\n            <div>L</div>\r\n            <div>E</div>\r\n        </div>\r\n    </div>\r\n</div>"
-
-/***/ }),
 /* 46 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"projects-content\">\r\n\r\n    <div class=\"projects-project\">\r\n        <div class=\"projects-project-info\">\r\n            <h6 class=\"projects-project-info_client\">\r\n                MailChimp\r\n            </h6>\r\n\r\n            <h3 class=\"projects-project-info_title\">\r\n                Did you mean <br> mailchimp?\r\n            </h3>\r\n            <a href=\"#/single\" class=\"btn\">\r\n                <div class=\"btn-line\"></div>\r\n                <div class=\"btn-text\">see this case</div>\r\n            </a>\r\n\r\n        </div>\r\n        <div class=\"projects-project-image\">\r\n\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"projects-project\">\r\n        <div class=\"projects-project-info\">\r\n            <h6 class=\"projects-project-info_client\">\r\n                Ford Motor Company\r\n            </h6>\r\n\r\n            <h3 class=\"projects-project-info_title\">\r\n                Pocket <br> Mustang\r\n            </h3>\r\n            <a href=\"#/single\" class=\"btn\">\r\n                <div class=\"btn-line\"></div>\r\n                <div class=\"btn-text\">see this case</div>\r\n            </a>\r\n\r\n        </div>\r\n        <div class=\"projects-project-image\">\r\n\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"projects-project\">\r\n        <div class=\"projects-project-info\">\r\n            <h6 class=\"projects-project-info_client\">\r\n                Bombardier Recreational Products\r\n            </h6>\r\n\r\n            <h3 class=\"projects-project-info_title\">\r\n                Evinrude <br> E-TEC G2\r\n            </h3>\r\n            <a href=\"#/single\" class=\"btn\">\r\n                <div class=\"btn-line\"></div>\r\n                <div class=\"btn-text\">see this case</div>\r\n            </a>\r\n\r\n        </div>\r\n        <div class=\"projects-project-image\">\r\n\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"projects-archive\">\r\n        <h3 class=\"projects-archive_title\">\r\n            the <br> archive\r\n        </h3>\r\n\r\n        <div class=\"projects-archive_thumnails\">\r\n            <div class=\"projects-archive_thumnails-item\">\r\n                <div></div>\r\n            </div>\r\n            <div class=\"projects-archive_thumnails-item\">\r\n                <div></div>\r\n            </div>\r\n            <div class=\"projects-archive_thumnails-item\">\r\n                <div></div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n</div>"
+module.exports = "<div class=\"home-content\">\r\n    <div class=\"home-intro\">\r\n            \r\n        <h4><%= info.intro %></h4>\r\n        <p><%= info.quote %></p>\r\n        <nav>\r\n            <ul>\r\n                <li><a href=\"#/projects\">see projects</a></li>\r\n                <li><a href=\"#/about\">about</a></li>\r\n                <li><a href=\"#/contact\">contact</a></li>\r\n            </ul>\r\n        </nav>\r\n    </div>\r\n\r\n    <div class=\"home-hello\">\r\n        <div class=\"col\">\r\n            <div>H</div>\r\n            <div>L</div>\r\n            <div>O</div>\r\n        </div>\r\n\r\n        <div class=\"col\">\r\n            <div>L</div>\r\n            <div>E</div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 /* 47 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"single-content\">\r\n    <div class=\"single-content_video\">\r\n        <div class=\"single-content_video-media\"></div>\r\n    </div>\r\n\r\n    <div class=\"single-content_section\">\r\n        <div class=\"single-content_section-title\">\r\n            <h3>Evinrude E-TEC G2</h3>\r\n        </div>\r\n        <div class=\"single-content_intro\">\r\n            <div class=\"single-content_intro-info\">\r\n                <div class=\"single-content_intro-info-item\">\r\n                    <h6>Agency</h6>\r\n                    <p>\r\n                        Resn\r\n                    </p>\r\n                </div>\r\n\r\n                <div class=\"single-content_intro-info-item\">\r\n                    <h6>Role</h6>\r\n                    <p>\r\n                        Interactive Designer\r\n                        <%= args %>\r\n                    </p>\r\n                </div>\r\n\r\n                <div class=\"single-content_intro-info-item\">\r\n                    <a href=\"www.google.cl\" class=\"btn\" target=\"_blank\">\r\n                        <div class=\"btn-line\"></div>\r\n                        <div class=\"btn-text\">\r\n                            launch site\r\n                        </div>\r\n                    </a>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"single-content_intro-desc\">\r\n                <h4>We introduce you to the world’s most advanced outboard engine, the Evinrude E-TEC G2, and give you the tools\r\n                    to design your own.</h4>\r\n                <p>Choose Your E-TEC makes the Evinrude E-TEC G2 come to life. Learn all about the engine and explore its breakthrough\r\n                    features. Then, design your own with the simple and intuitive Customizer.</p>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"single-content_blocks\">\r\n            <div class=\"single-content_block\">\r\n\r\n                <div class=\"single-content_block-media full\">\r\n \r\n                        <div class=\"single-content_block-media-item\">\r\n                            <div></div>\r\n                        </div>\r\n    \r\n                </div>\r\n\r\n                <div class=\"single-content_block-info\">\r\n                    <div class=\"single-content_lock-info-content\">\r\n                        <h4>Frame Loading</h4>\r\n                        <p>Choose Your E-TEC makes the Evinrude E-TEC G2 come to life. Learn all about the engine and explore\r\n                            its breakthrough features. Then, design your own with the simple and intuitive Customizer.</p>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"single-content_block\">\r\n                    <div class=\"single-content_block-media half\">\r\n \r\n                        <div class=\"single-content_block-media-item\">\r\n                            <div></div>\r\n                        </div>\r\n    \r\n                        <div class=\"single-content_block-media-item\">\r\n                            <div></div>\r\n                        </div>\r\n\r\n                        <div class=\"single-content_block-media-item\">\r\n                                <div></div>\r\n                            </div>\r\n        \r\n                            <div class=\"single-content_block-media-item\">\r\n                                <div></div>\r\n                            </div>\r\n\r\n                    </div>\r\n\r\n                </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "\r\n\r\n<div class=\"projects-content\">\r\n\r\n    <% for(var i=0; i<projects.length; i++) {%>\r\n\r\n        <a href=\"#/<%= permalink(projects[i].title) %>\" class=\"projects-project\">\r\n            <div class=\"projects-project-info\">\r\n                <h6 class=\"projects-project-info_client\">\r\n                        <%= projects[i].client %>\r\n                </h6>\r\n\r\n                <h3 class=\"projects-project-info_title\">\r\n                        <%= projects[i].title %>\r\n                </h3>\r\n                <div class=\"btn\">\r\n                    <div class=\"btn-line\"></div>\r\n                    <div class=\"btn-text\">see this case</div>\r\n                </div>\r\n\r\n            </div>\r\n            <div class=\"projects-project-image\">\r\n\r\n            </div>\r\n        </a>\r\n    <% } %>\r\n\r\n\r\n\r\n            <div class=\"projects-archive\">\r\n                <h3 class=\"projects-archive_title\">\r\n                    the <br> archive\r\n                </h3>\r\n\r\n                <div class=\"projects-archive_thumnails\">\r\n                    <div class=\"projects-archive_thumnails-item\">\r\n                        <div></div>\r\n                    </div>\r\n                    <div class=\"projects-archive_thumnails-item\">\r\n                        <div></div>\r\n                    </div>\r\n                    <div class=\"projects-archive_thumnails-item\">\r\n                        <div></div>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n</div>"
 
 /***/ }),
 /* 48 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"single-content\">\r\n    <div class=\"single-content_video\">\r\n        <div class=\"single-content_video-media\"></div>\r\n    </div>\r\n\r\n    <div class=\"single-content_section\">\r\n        <div class=\"single-content_section-title\">\r\n            <h3> <%= project.title %></h3>\r\n        </div>\r\n        <div class=\"single-content_intro\">\r\n            <div class=\"single-content_intro-info\">\r\n                <div class=\"single-content_intro-info-item\">\r\n                    <h6>Agency</h6>\r\n                    <p>\r\n                            <%= project.agency %>\r\n                    </p>\r\n                </div>\r\n\r\n                <div class=\"single-content_intro-info-item\">\r\n                    <h6>Role</h6>\r\n                    <p>\r\n                            <%= project.role %>\r\n                    </p>\r\n                </div>\r\n\r\n                <div class=\"single-content_intro-info-item\">\r\n                    <a href=\" <%= project.url %>\" class=\"btn\" target=\"_blank\">\r\n                        <div class=\"btn-line\"></div>\r\n                        <div class=\"btn-text\">\r\n                            launch site\r\n                        </div>\r\n                    </a>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"single-content_intro-desc\">\r\n                <h4> <%= project.introduction %></h4>\r\n                <p> <%= project.description %></p>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"single-content_blocks\">\r\n                <% for(var i=0; i<project.blocks.length; i++) {%>\r\n                        <div class=\"single-content_block\">\r\n                                \r\n                            <div class=\"single-content_block-media full\">\r\n                \r\n                                    <div class=\"single-content_block-media-item\">\r\n                                        <div></div>\r\n                                    </div>\r\n                \r\n                            </div>\r\n            \r\n                            <div class=\"single-content_block-info\">\r\n                                <div class=\"single-content_lock-info-content\">\r\n                                    <h4><%=project.blocks[i].title%></h4>\r\n                                    <% for(var j=0; j<project.blocks[i].paragraphs.length; j++) {%>\r\n                                        <p><%=project.blocks[i].paragraphs[j].paragraph%></p>\r\n                                    <% } %>\r\n                                 </div>\r\n                            </div>\r\n                        </div>\r\n                                \r\n                <% } %>\r\n       \r\n        </div>\r\n    </div>\r\n</div>"
+
+/***/ }),
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -34009,7 +34063,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscor
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {

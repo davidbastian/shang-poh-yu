@@ -64,7 +64,7 @@ module.exports = {
     plugins: [
         new webpack.LoaderOptionsPlugin({ options: { postcss: [autoprefixer] } }),
         new ExtractTextPlugin('style.css'),
-       // new webpack.optimize.UglifyJsPlugin(),
+       //new webpack.optimize.UglifyJsPlugin(),
         new webpack.HotModuleReplacementPlugin(),
 
         new CopyWebpackPlugin([
