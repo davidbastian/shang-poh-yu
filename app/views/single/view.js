@@ -21,9 +21,8 @@ export default function(args) {
             self.args = args;
 
             self.loader();
-
             this.setup();
-            this.render();
+
         },
 
         loader:function(){

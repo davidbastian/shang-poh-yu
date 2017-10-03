@@ -78,6 +78,13 @@
           h4 {
             margin-bottom: 30px;
           }
+          p {
+            margin-bottom: 30px;
+
+            &:last-child {
+              margin-bottom: 0px;
+            }
+          }
           h4,
           p {
             padding-right: 8px;

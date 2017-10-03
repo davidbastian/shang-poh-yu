@@ -1,6 +1,7 @@
 {
   "title": "Did you mean <br> MailChimp?",
-  "description":"MailChimp is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness.",
+  "description":
+    "MailChimp is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness.",
   "introduction": "Introducing MailChimp,<br> One Mispronunciation at a Time.",
   "agency": "Droga5 New York",
   "client": "MailChimp",
@@ -10,24 +11,92 @@
     "image": "common/media/images/001/001.jpg",
     "video": "common/media/001/fwa.mp4"
   },
-  "awards":[
+  "awards": [
     {
       "image": "common/media/awards/fwa.jpg",
-      "title":"FWA of the Day"
+      "title": "FWA of the Day"
     },
     {
       "image": "common/media/awards/awwwards.jpg",
-      "title":"Site of the Day"
+      "title": "Site of the Day"
     }
   ],
   "blocks": [
     {
-      "title": "We Did Mean MailChimp.",
+      "title": "Inspiration and Ideation",
       "paragraphs": [
         {
           "paragraph":
-            "MailChimp is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness."
+            "The campaign was inspired by a 13-year-old girl who mispronounced MailChimp as “MailKimp”, on the podcast ‘Serial’. We took that idea and pushed in new and unexpected directions, turning MailChimp into KaleLimp, JailBlimp, SnailPrimp and many others. The process was highly collaborative, with both Droga5 and Resn bringing ideas to the table. We chose our nine favourites and began a covert operation to insert them into wildly disparate areas of popular culture—and having a lot of fun doing so!"
         }
+      ],
+      "images": [
+        {
+          "type": "full",
+          "images": [
+            {
+              "image": "commmon/media/images/000.jpg",
+              "alt": "text for seo"
+            }
+          ]
+        },
+
+        {
+          "type": "half",
+          "images": [
+            {
+              "image": "commmon/media/images/000.jpg",
+              "alt": "text for seo"
+            },
+            {
+              "image": "commmon/media/images/000.jpg",
+              "alt": "text for seo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "The experiences",
+      "paragraphs": [
+        {
+          "paragraph": "These are two of the interactive experiences I worked on most in the campaign. Was a great time just being trusted and let loose to make some fun play things. Love when you're pleasantly surprised by the moment when things come to life and they're more fun than they were in your head! WhaleSynth was a captivating digital whale noise synthesizer - was so good Brian Eno even tweeted about it. NailChamp started as a joke of having nail artists compete -turns out they were a thing and it the competition got serious! "
+        },
+        {
+          "paragraph": "We created promotional sites for two products that you could actually buy, FailChips (because everyone knows the broken chips at the bottom of the bag are the tastiest) and SnailPrimp (a beauty treatment made from the secretions of real snails). We made the MaleCrimp Tumblr site (another one I worked on), which kicked off an unexpected fashion trend. And, finally, we built websites for three surreal mood films, MailShrimp, KaleLimp and JailBlimp, by Riff Raff Films."
+        }
+      ],
+      "images": [
+        {
+          "type": "full",
+          "images": [
+            {
+              "image": "commmon/media/images/000.jpg",
+              "alt": "text for seo"
+            }
+          ]
+        },
+
+        {
+          "type": "half",
+          "images": [
+            {
+              "image": "commmon/media/images/000.jpg",
+              "alt": "text for seo"
+            },
+            {
+              "image": "commmon/media/images/000.jpg",
+              "alt": "text for seo"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Connecting the dots...",
+      "paragraphs": [
+        {
+          "paragraph":"When the campaign launched, we kept the connection to MailChimp secret. Initially, we wanted people to enjoy the websites for what they were. The concept was that people would independently find one or two pieces of the campaign and, when their interest was piqued, they would discover the link to MailChimp. The public response was overwhelmingly positive, from across the cultural spectrum. For us, it was exciting to watch people connect the dots and find their way to MailChimp, in surprising ways. For MailChimp, a brand built on playfulness and creativity, it demonstrated that these qualities are, indeed, good for business."}
       ],
       "images": [
         {
