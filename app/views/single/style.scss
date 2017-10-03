@@ -65,148 +65,74 @@
       }
     }
 
-    .single-content_block-media-item {
-      position: relative;
-      width: 50%;
-      border-top: 0px;
-      border-bottom: 16px  solid transparent;
-      box-sizing: border-box;
-
-      div {
-        background-color: $color01;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-      }
-      &:before {
-        padding-top: 56.25%;
-        content: "";
-        display: block;
-      }
-
-      &.full {
-        width: 100%;
-        border: 0px;
-        border-bottom: 16px  solid transparent;
-
-      }
-
-      &.half {
-        
-        
-       
-        &:nth-child(odd) {
-          border-right: 0;
-          border-left: 8px solid transparent;
-        }
-
-        &:nth-child(even) {
-          border-left: 0;
-          border-right: 8px solid transparent;
-        }
-      }
-    }
-
     .single-content_block {
       margin-top: 90px;
-    }
+      .single-content_block-info {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 90px;
 
-    .single-content_block-media {
-      display: flex;
-      flex-wrap: wrap;
-    }
-
-    /*.single-content_grid {
-      margin-top: 60px;
-      .single-content_grid-media {
-          display: flex;
-          flex-wrap: wrap;
-
-          single-content_block-media-item
-
-
-        .single-content_grid-media-item {
-          
+        .single-content_lock-info-content {
           width: 40vw;
-          position: relative;
-          border: 16px solid transparent;
-          box-sizing: border-box;
-          &:nth-child(even){
-              border-right: 0;
-              border-left: 8px solid transparent;
-          }
 
-          &:nth-child(odd){
-            border-left: 0;
-            border-right: 8px solid transparent;
+          h4 {
+            margin-bottom: 30px;
+          }
+          h4,
+          p {
+            padding-right: 8px;
+          }
+        }
+      }
+
+      .single-content_block-media {
+        display: flex;
+        flex-wrap: wrap;
+
+        &.half {
+          .single-content_block-media-item {
+            &:nth-child(even) {
+              border-right: 0;
+              border-left: 6px solid transparent;
+            }
+
+            &:nth-child(odd) {
+              border-left: 0;
+              border-right: 6px solid transparent;
+            }
+          }
         }
 
+        &.full {
+          .single-content_block-media-item {
+            width: 100%;
+            border: 0px;
+            border-bottom: 12px solid transparent;
+          }
+        }
+
+        .single-content_block-media-item {
+          position: relative;
+          width: 50%;
+          border-top: 0px;
+          border-bottom: 12px solid transparent;
+          box-sizing: border-box;
 
           div {
             background-color: $color01;
             position: absolute;
             width: 100%;
             height: 100%;
-            left: 0;
             top: 0;
-
+            left: 0;
           }
-
-          &.single-content_grid-media-item-main {
-              width: 80vw;
-              border: 0;
-          }
-
           &:before {
             padding-top: 56.25%;
             content: "";
-
             display: block;
           }
         }
       }
-
-      .single-content_grid-info {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 60px;
-        h4 {
-            margin-bottom: 30px;
-        }
-
-        h4,p {
-            padding-left: 8px;
-        }
-        .single-content_grid-info-content {
-          max-width: 40vw;
-        }
-      }
     }
-
-    .single-content_grid-awards {
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 60px;
-
-        .single-content_grid-award-content {
-            width: 40vw;
-        }
-
-        .single-content_grid-awards-logos {
-            display: flex;
-            
-        }
-
-        h4 {
-            margin-bottom: 30px;
-        }
-
-        h4,p {
-            padding-left: 8px;
-        }
-        
-    }*/
   }
 }
