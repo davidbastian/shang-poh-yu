@@ -5,27 +5,26 @@
 
     <div class="single-content_section">
         <div class="single-content_section-title">
-            <h3>Evinrude E-TEC G2</h3>
+            <h3> <%= project.title %></h3>
         </div>
         <div class="single-content_intro">
             <div class="single-content_intro-info">
                 <div class="single-content_intro-info-item">
                     <h6>Agency</h6>
                     <p>
-                        Resn
+                            <%= project.agency %>
                     </p>
                 </div>
 
                 <div class="single-content_intro-info-item">
                     <h6>Role</h6>
                     <p>
-                        Interactive Designer
-                        <%= args %>
+                            <%= project.role %>
                     </p>
                 </div>
 
                 <div class="single-content_intro-info-item">
-                    <a href="www.google.cl" class="btn" target="_blank">
+                    <a href=" <%= project.url %>" class="btn" target="_blank">
                         <div class="btn-line"></div>
                         <div class="btn-text">
                             launch site
@@ -35,10 +34,8 @@
             </div>
 
             <div class="single-content_intro-desc">
-                <h4>We introduce you to the world’s most advanced outboard engine, the Evinrude E-TEC G2, and give you the tools
-                    to design your own.</h4>
-                <p>Choose Your E-TEC makes the Evinrude E-TEC G2 come to life. Learn all about the engine and explore its breakthrough
-                    features. Then, design your own with the simple and intuitive Customizer.</p>
+                <h4> <%= project.introduction %></h4>
+                <p> <%= project.description %></p>
             </div>
         </div>
 
