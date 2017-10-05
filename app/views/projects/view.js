@@ -7,7 +7,7 @@ import Template from './template.html'; // template
 import './style.scss'; //styles
 
 
-export default function() {
+export default function(home) {
     var self;
     var View = Backbone.View.extend({
         tagName: 'section',
@@ -17,11 +17,11 @@ export default function() {
         initialize: function() {
             self = this;
             self.loader();
+            //console.log(home);
         },
 
         loader: function() {
             self.render(Config().copydeck.projects);
-
         },
 
         render: function(copydeck) {
@@ -39,7 +39,10 @@ export default function() {
 
             var setTemplate = this.template(json);
             var appendData = this.$el.append(setTemplate)[0];
-            $('main').html(appendData)
+
+            console.log(appendData);
+           // $('main').html(appendData)
+           $(appendData).insertAfter(home.find('.home-content'));
         }
 
     });

@@ -4,13 +4,10 @@ import $ from 'jquery';
 import HomeView from './views/home/view';
 import AboutView from './views/about/view';
 import ContactView from './views/contact/view';
-import ProjectsView from './views/projects/view';
 import SingleView from './views/single/view';
 
 export default function Router() {
-
     var self;
-
     var Router = Backbone.Router.extend({
 
         initialize: function() {
@@ -21,7 +18,6 @@ export default function Router() {
             '': 'startHome',
             'contact(/)': 'startContact',
             'about(/)': 'startAbout',
-            'projects(/)': 'startProjects',
             ':single(/)': 'startSingle'
         },
 
@@ -45,11 +41,6 @@ export default function Router() {
                 self.startSingle(args[0]);
             }
 
-            if (name === 'startProjects') {
-                console.log(name);
-                self.startProjects(args[0]);
-            }
-
             return false;
         },
 
@@ -63,10 +54,6 @@ export default function Router() {
 
         startAbout: function(args) {
             AboutView(args);
-        },
-
-        startProjects: function(args) {
-            ProjectsView(args);
         },
 
         startSingle: function(args) {

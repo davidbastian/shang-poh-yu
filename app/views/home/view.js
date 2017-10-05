@@ -6,7 +6,7 @@ import Config from "../../config";
 import Template from "./template.html"; // template
 import "./style.scss"; //styles
 
-import preloader from "preloader";
+import ProjectsView from '../projects/view';
 
 export default function(args) {
   var self;
@@ -37,6 +37,7 @@ export default function(args) {
       var setTemplate = this.template(json);
       var appendData = this.$el.append(setTemplate)[0];
       $("main").html(appendData);
+      ProjectsView(self.$el);
     }
   });
   new View();
