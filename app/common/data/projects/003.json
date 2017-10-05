@@ -1,28 +1,24 @@
 {
   "title": "Did you mean <br> MailChimp?",
   "description":
-    "We Did Mean MailChimp. MailChimp  is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness.",
+    "Shang is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness.",
   "introduction": "Introducing MailChimp,<br> One Mispronunciation at a Time.",
   "agency": "Droga5 New York",
   "client": "MailChimp",
   "role": "UX & UI Design",
   "url": "https://mailchimp.com/did-you-mean/",
   "cover": {
-    "image": "common/media/images/001/Mailchimp-3.jpg",
-    "video": "common/media/001/mc-sizzle.mp4"
+    "image": "common/media/images/001/001.jpg",
+    "video": "common/media/001/fwa.mp4"
   },
   "awards": [
     {
-      "image": "common/media/awards/cannes.png",
-      "title": "4x Cannes Lions"
+      "image": "common/media/awards/fwa.jpg",
+      "title": "FWA of the Day"
     },
     {
-      "image": "common/media/awards/fwa.png",
-      "title": "3x FWA of the Day"
-    },
-    {
-      "image": "common/media/awards/awwwards.png",
-      "title": "2x Awwwards of the day"
+      "image": "common/media/awards/awwwards.jpg",
+      "title": "Site of the Day"
     }
   ],
   "blocks": [
@@ -39,7 +35,7 @@
           "type": "full",
           "images": [
             {
-              "image": "commmon/media/images/MailChimp-01.jpg",
+              "image": "commmon/media/images/000.jpg",
               "alt": "text for seo"
             }
           ]
@@ -49,11 +45,11 @@
           "type": "half",
           "images": [
             {
-              "image": "commmon/media/images/MailChimp-02.jpg",
+              "image": "commmon/media/images/000.jpg",
               "alt": "text for seo"
             },
             {
-              "image": "commmon/media/images/MailChimp-03.jpg",
+              "image": "commmon/media/images/000.jpg",
               "alt": "text for seo"
             }
           ]
@@ -61,7 +57,7 @@
       ]
     },
     {
-      "title": "The Experiences",
+      "title": "The experiences",
       "paragraphs": [
         {
           "paragraph": "These are two of the interactive experiences I worked on most in the campaign. Was a great time just being trusted and let loose to make some fun play things. Love when you're pleasantly surprised by the moment when things come to life and they're more fun than they were in your head! WhaleSynth was a captivating digital whale noise synthesizer - was so good Brian Eno even tweeted about it. NailChamp started as a joke of having nail artists compete -turns out they were a thing and it the competition got serious! "
@@ -70,13 +66,12 @@
           "paragraph": "We created promotional sites for two products that you could actually buy, FailChips (because everyone knows the broken chips at the bottom of the bag are the tastiest) and SnailPrimp (a beauty treatment made from the secretions of real snails). We made the MaleCrimp Tumblr site (another one I worked on), which kicked off an unexpected fashion trend. And, finally, we built websites for three surreal mood films, MailShrimp, KaleLimp and JailBlimp, by Riff Raff Films."
         }
       ],
-
       "images": [
         {
           "type": "full",
           "images": [
             {
-              "image": "commmon/media/images/MailChimp-04.jpg",
+              "image": "commmon/media/images/000.jpg",
               "alt": "text for seo"
             }
           ]
@@ -86,11 +81,11 @@
           "type": "half",
           "images": [
             {
-              "image": "commmon/media/images/MailChimp-05_whale-still.jpg",
+              "image": "commmon/media/images/000.jpg",
               "alt": "text for seo"
             },
             {
-              "image": "commmon/media/images/WhaleSynth-1.gif",
+              "image": "commmon/media/images/000.jpg",
               "alt": "text for seo"
             }
           ]
@@ -108,7 +103,7 @@
           "type": "full",
           "images": [
             {
-              "image": "commmon/media/images/MailChimp-09.jpg",
+              "image": "commmon/media/images/000.jpg",
               "alt": "text for seo"
             }
           ]
@@ -118,19 +113,11 @@
           "type": "half",
           "images": [
             {
-              "image": "commmon/media/images/JailBlimp-1.jpg",
+              "image": "commmon/media/images/000.jpg",
               "alt": "text for seo"
             },
             {
-              "image": "commmon/media/images/Kalelimp-2.jpg",
-              "alt": "text for seo"
-            },
-            {
-              "image": "commmon/media/images/FailChips-2.jpg",
-              "alt": "text for seo"
-            },
-            {
-              "image": "commmon/media/images/MailShrimp-2.jpg",
+              "image": "commmon/media/images/000.jpg",
               "alt": "text for seo"
             }
           ]

@@ -1,27 +1,65 @@
 {
-  "title": "Evinrude <br> E-TEC G2 Engine",
+  "title": "Pocket Mustang",
   "description":
-    "Shang is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness.",
-  "introduction": "Introducing MailChimp,<br> One Mispronunciation at a Time.",
-  "agency": "Camicheal",
-  "client": "Evinrude",
+    "The iconic Ford Mustang has been a legend in the automotive world for over 50 years. Yet, in China, it is still a relative newcomer, first hitting the streets in 2015. When it launched, demand to test-drive Mustang was strong, but Ford hit a bottleneck. Enthusiasts were waiting up to three months to take one for a spin. GTB Shanghai partnered with Resn to let people feel the excitement of test-driving a Mustang right now. No waiting lists. No limitations. Just pure exhilaration. To achieve this, we put a miniature Mustang right inside your pocket.",
+  "introduction": "Unleash your inner Mustang, anywhere.",
+  "agency": "GTB Shanghai",
+  "client": "Ford Motor Company",
   "role": "UX & UI Design",
-  "url": "https://mailchimp.com/did-you-mean/",
+  "url": "http://pocketmustang.ford.co.nz/en/",
   "cover": {
-    "image": "common/media/images/001/etec.jpg",
-    "video": "common/media/images/001/777356625.mp4"
+    "image": "common/media/images/001/Mustang-Cover.jpg",
+    "video": "common/media/images/001/Pocket Mustang.mp4"
   },
   "awards": [
     {
-      "image": "common/media/awards/fwa.jpg",
+      "image": "common/media/awards/fwa.png",
       "title": "FWA of the Day"
     },
     {
-      "image": "common/media/awards/awwwards.jpg",
+      "image": "common/media/awards/awwwards.png",
       "title": "Site of the Day"
     }
   ],
   "blocks": [
+    {
+      "title": "A Journey of Discovery",
+      "paragraphs": [
+        {
+          "paragraph":
+            "At the beginning of the project, GTB came to Resn with a technical feasibility query. Could we create a mobile browser-based experience that reconstructs a smartphone’s movement in space? We responded with a proof of concept prototype that generated a map of a virtual race track, in real-time, by using data from a phone’s gyroscope and accelerometer. This discovery-led phase included detailed technical prototyping, animatic storyboards and animation previs. Our solution demonstrated that we could create an experience that captured the exhilaration of driving a real Mustang."
+        },
+        {
+          "paragraph":
+            "A Ford Mustang is built for performance and Pocket Mustang is no different. During the development phase, we refined our motion analysis system to achieve the highest level of sensitivity and accuracy possible. Eventually, our system could recognize over 300 different phone movements. We also brought in the Resn AI Video Editor (RAVE), for Pocket Mustang’s final reveal. We optimized RAVE to automatically select the best shots and angles for rhythm and timing. To bring customizable elements into the video, we used our interactive content platform, Cake. Cake features a dynamic rendering process that can bring an audience deeper into a story, by adding extra layers of interaction and personalized content."
+        }
+      ],
+      "images": [
+        {
+          "type": "full",
+          "images": [
+            {
+              "image": "commmon/media/images/000.jpg",
+              "alt": "text for seo"
+            }
+          ]
+        },
+
+        {
+          "type": "half",
+          "images": [
+            {
+              "image": "commmon/media/images/000.jpg",
+              "alt": "text for seo"
+            },
+            {
+              "image": "commmon/media/images/000.jpg",
+              "alt": "text for seo"
+            }
+          ]
+        }
+      ]
+    },
     {
       "title": "Inspiration and Ideation",
       "paragraphs": [
@@ -55,74 +93,7 @@
           ]
         }
       ]
-    },
-    {
-      "title": "The experiences",
-      "paragraphs": [
-        {
-          "paragraph": "These are two of the interactive experiences I worked on most in the campaign. Was a great time just being trusted and let loose to make some fun play things. Love when you're pleasantly surprised by the moment when things come to life and they're more fun than they were in your head! WhaleSynth was a captivating digital whale noise synthesizer - was so good Brian Eno even tweeted about it. NailChamp started as a joke of having nail artists compete -turns out they were a thing and it the competition got serious! "
-        },
-        {
-          "paragraph": "We created promotional sites for two products that you could actually buy, FailChips (because everyone knows the broken chips at the bottom of the bag are the tastiest) and SnailPrimp (a beauty treatment made from the secretions of real snails). We made the MaleCrimp Tumblr site (another one I worked on), which kicked off an unexpected fashion trend. And, finally, we built websites for three surreal mood films, MailShrimp, KaleLimp and JailBlimp, by Riff Raff Films."
-        }
-      ],
-      "images": [
-        {
-          "type": "full",
-          "images": [
-            {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            }
-          ]
-        },
-
-        {
-          "type": "half",
-          "images": [
-            {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            },
-            {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Connecting the dots...",
-      "paragraphs": [
-        {
-          "paragraph":"When the campaign launched, we kept the connection to MailChimp secret. Initially, we wanted people to enjoy the websites for what they were. The concept was that people would independently find one or two pieces of the campaign and, when their interest was piqued, they would discover the link to MailChimp. The public response was overwhelmingly positive, from across the cultural spectrum. For us, it was exciting to watch people connect the dots and find their way to MailChimp, in surprising ways. For MailChimp, a brand built on playfulness and creativity, it demonstrated that these qualities are, indeed, good for business."}
-      ],
-      "images": [
-        {
-          "type": "full",
-          "images": [
-            {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            }
-          ]
-        },
-
-        {
-          "type": "half",
-          "images": [
-            {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            },
-            {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            }
-          ]
-        }
-      ]
     }
+    
   ]
 }
