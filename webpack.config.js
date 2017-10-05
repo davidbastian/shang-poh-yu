@@ -3,7 +3,8 @@ var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var ip = require('ip');
+var ip = require('ip'); 
+
 
 module.exports = {
     entry: './app/index.js',
