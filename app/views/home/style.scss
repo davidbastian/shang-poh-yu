@@ -1,15 +1,16 @@
 @import '../../common/styles/variables';
 
 .home {
+  overflow-y: scroll;
+  height: 100vh;
+  overflow-x: hidden;
   .home-content {
-    //display: flex;
-    position: absolute;
     width: 100%;
     height: 100%;
     left: 0;
     top: 0;
     overflow: hidden;
-    // justify-content: space-between;
+    position: relative;
 
     .home-intro {
       max-width: 80vw;
