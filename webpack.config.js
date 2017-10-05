@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var ip = require('ip');
 
 module.exports = {
     entry: './app/index.js',
@@ -13,8 +14,9 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, "dist"),
         //compress: true,
-        hot: true,
-        port: 9999
+        
+        port: 9999,
+        host: ip.address()
     },
     module: {
         rules: [{

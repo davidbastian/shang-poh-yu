@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "webpack-dev-server --inline --host 0.0.0.0 --content-base ./dist",
+    "start": "webpack-dev-server --open",
     "optimize": ""
   },
   "keywords": [],
@@ -29,6 +29,7 @@
     "image-webpack-loader": "^3.3.1",
     "imports-loader": "^0.7.1",
     "jquery": "^3.2.1",
+    "ip": "^1.1.5",
     "json-loader": "^0.5.4",
     "lodash": "^4.17.4",
     "modernizr-detectizr": "0.0.2",
