@@ -1,128 +1,216 @@
 {
-  "title": "Did you mean <br> MailChimp?",
-  "description":
-    "Shang is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness.",
-  "introduction": "Introducing MailChimp,<br> One Mispronunciation at a Time.",
-  "agency": "Droga5 New York",
-  "client": "MailChimp",
-  "role": "UX & UI Design",
-  "url": "https://mailchimp.com/did-you-mean/",
+  "title": "The <br> Archive",
+ //"description":
+ //   "",
+  "introduction": "Below are a few other projects I’ve had fun working on. <br> Some are digital, some are not.",
+  //"agency": "Droga5 New York",
+  //"client": "MailChimp",
+ // "role": "UX & UI Design",
+ // "url": "https://mailchimp.com/did-you-mean/",
   "cover": {
-    "image": "common/media/images/001/001.jpg",
-    "video": "common/media/001/fwa.mp4"
-  },
-  "awards": [
-    {
-      "image": "common/media/awards/fwa.jpg",
-      "title": "FWA of the Day"
-    },
-    {
-      "image": "common/media/awards/awwwards.jpg",
-      "title": "Site of the Day"
-    }
-  ],
+    "image": "common/media/images/004//001.jpg",
+    
+}
+  ,
   "blocks": [
     {
-      "title": "Inspiration and Ideation",
+      "title": "The McWhopper",
+      "introduction": "September 21st is the International Day of Peace. To raise awareness of Peace Day, Burger King made an unprecedented proposal to arch-rivals McDonald’s: join forces and create the McWhopper.",
+       "agency": "Y&R, New Zealand",
+  "client": "Burger King",
+  "role": "UX Design",
+ // "url": "https://mailchimp.com/did-you-mean/",
       "paragraphs": [
         {
           "paragraph":
-            "The campaign was inspired by a 13-year-old girl who mispronounced MailChimp as “MailKimp”, on the podcast ‘Serial’. We took that idea and pushed in new and unexpected directions, turning MailChimp into KaleLimp, JailBlimp, SnailPrimp and many others. The process was highly collaborative, with both Droga5 and Resn bringing ideas to the table. We chose our nine favourites and began a covert operation to insert them into wildly disparate areas of popular culture—and having a lot of fun doing so!"
+            "Resn teamed up with Y&R New Zealand to create McWhopper.com. The custom Tumblr experience was an open letter from Burger King to McDonald's, detailing every aspect of the Peace Day plan, from the co-branded designs to the recipe for the McWhopper itself."
+        },
+        {
+          "paragraph":
+            "A synthesis of the restaurants’ signature burgers, the McWhopper combined the the best of the mouth-watering Whopper and the iconic Big Mac. The campaign hinged on the public wanting this burger, so we had to make it look as delicious as possible."
+        },
+        {
+          "paragraph":
+            "With over 2 billion web impressions and over 700,000 users on the website in the first 48 hours, the response exceeded all expectations. McWhopper was a huge win for Burger King and for Peace Day."
         }
       ],
       "images": [
         {
-          "type": "full",
-          "images": [
-            {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            }
-          ]
-        },
-
-        {
           "type": "half",
           "images": [
             {
-              "image": "commmon/media/images/000.jpg",
+              "image": "commmon/media/images/004/mcwhopper-1.jpg",
               "alt": "text for seo"
             },
             {
-              "image": "commmon/media/images/000.jpg",
+              "image": "commmon/media/images/004/mcwhopper-2.jpg",
               "alt": "text for seo"
             }
           ]
         }
       ]
     },
-    {
-      "title": "The experiences",
-      "paragraphs": [
-        {
-          "paragraph": "These are two of the interactive experiences I worked on most in the campaign. Was a great time just being trusted and let loose to make some fun play things. Love when you're pleasantly surprised by the moment when things come to life and they're more fun than they were in your head! WhaleSynth was a captivating digital whale noise synthesizer - was so good Brian Eno even tweeted about it. NailChamp started as a joke of having nail artists compete -turns out they were a thing and it the competition got serious! "
-        },
-        {
-          "paragraph": "We created promotional sites for two products that you could actually buy, FailChips (because everyone knows the broken chips at the bottom of the bag are the tastiest) and SnailPrimp (a beauty treatment made from the secretions of real snails). We made the MaleCrimp Tumblr site (another one I worked on), which kicked off an unexpected fashion trend. And, finally, we built websites for three surreal mood films, MailShrimp, KaleLimp and JailBlimp, by Riff Raff Films."
-        }
-      ],
-      "images": [
-        {
-          "type": "full",
-          "images": [
-            {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            }
-          ]
-        },
 
-        {
-          "type": "half",
-          "images": [
-            {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            },
-            {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "title": "Connecting the dots...",
-      "paragraphs": [
-        {
-          "paragraph":"When the campaign launched, we kept the connection to MailChimp secret. Initially, we wanted people to enjoy the websites for what they were. The concept was that people would independently find one or two pieces of the campaign and, when their interest was piqued, they would discover the link to MailChimp. The public response was overwhelmingly positive, from across the cultural spectrum. For us, it was exciting to watch people connect the dots and find their way to MailChimp, in surprising ways. For MailChimp, a brand built on playfulness and creativity, it demonstrated that these qualities are, indeed, good for business."}
-      ],
-      "images": [
-        {
-          "type": "full",
-          "images": [
-            {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            }
-          ]
-        },
+    [
+      {
+        "title": "Tiffany & Co.",
+        "introduction": "The challenge was to create a dazzling interactive web experience and gift guide for the Tiffany & Co. Holiday 2015 campaign.",
+         "agency": "Psyop ",
+    "client": "Tiffany & Co.",
+    "role": "UX Design",
+   // "url": "http://international.tiffany.com/Holiday/Default.aspx?hppromo=THPC864",
+        "paragraphs": [
+          {
+            "paragraph":
+              "We created a winter diorama, using iconic New York landmarks, referencing a digital video by Psyop. The five diorama scenes each incorporate a different shopping category from the Holiday Gift Guide. Products from the Gift Guide are placed within each scene and serve as unique points for user interaction."
+          },
+        ],
+        "images": [
+          {
+            "type": "half",
+            "images": [
+              {
+                "image": "commmon/media/images/004/Tiff-1.jpg",
+                "alt": "text for seo"
+              },
+              {
+                "image": "commmon/media/images/004/Tiff-2.jpg",
+                "alt": "text for seo"
+              }
+            ]
+          }
+        ]
+      },
 
-        {
-          "type": "half",
-          "images": [
+         [
             {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
+              "title": "Toyota BTTF",
+              "introduction": "Timed with the Back to the Future date of October 21st, Toyota asked us to create a teaser site to celebrate and pay homage to the classic film. ",
+               "agency": "Droga5 New York ",
+          "client": "Toyota",
+          "role": "UX & UI Design",
+         // "url": "http://toyota-bttf.resn.co.nz/outatime/",
+              "paragraphs": [
+                {
+                  "paragraph":
+                    "We recreated the dashboard to be as fun, realistic and interactive as possible. Was all in aid of showing off Toyota Mirai's Fueled by the Future campaign."
+                },
+                {
+                  "paragraph":
+                    "My role in the project was as a UX and UI designer. A Droga5 and Resn team-up project. Unfortunately we didn't get to meet Doc and Marty..."
+                },
+              ],
+              "images": [
+                {
+                  "type": "half",
+                  "images": [
+                    {
+                      "image": "commmon/media/images/004/bttf-1.jpg",
+                      "alt": "text for seo"
+                    },
+                    {
+                      "image": "commmon/media/images/004/bttf-2.jpg",
+                      "alt": "text for seo"
+                    }
+                  ]
+                }
+              ]
             },
-            {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
+            
+            [
+              {
+                "title": "Resn Labs China",
+                "introduction": "Resn Labs China is a walk-in portfolio that showcases Resn’s exhibition and installation services for major brands in China.",
+                 //"agency": "Resn",
+            "client": "Resn",
+            "role": "Spatial, UX & UI Design",
+           // "url": "http://toyota-bttf.resn.co.nz/outatime/",
+                "paragraphs": [
+                  {
+                    "paragraph":
+                      "The five interactive experiences are based on a past Resn projects, bridge the gap between the digital and physical worlds. The Exhibition Control System (which I designed) provides seamless integration and cross device communication to ensure the entire space can be controlled by a single individual."
+                  },
+                  {
+                    "paragraph":
+                      "Every aspect of Resn Labs China, from the creative concept and software development to the spatial design and build, was undertaken by Resn and the talented build team."
+                  },
+                ],
+                "images": [
+                  {
+                    "type": "half",
+                    "images": [
+                      {
+                        "image": "commmon/media/images/004/Labs-1.jpg",
+                        "alt": "text for seo"
+                      },
+                      {
+                        "image": "commmon/media/images/004/Labs-2.jpg",
+                        "alt": "text for seo"
+                      }
+                    ]
+                  }
+                ]
+              },
+
+              [
+                {
+                  "title": "Muso",
+                  "introduction": "Muso has been created to be a comprehensive and dedicated tool to help you learn and love music. I saw that there was a huge gap in the market an opportunity to create an app which music students need.",
+                   //"agency": "Resn",
+              "client": "Personal Project",
+              "role": "Designer & Founder",
+             // "url": "http://toyota-bttf.resn.co.nz/outatime/",
+                  "paragraphs": [
+                    {
+                      "paragraph":
+                        "The way students are learning is changing, yet how music is being taught has not. I felt that there was a huge opportunity to create a tool that was optimised for music students. A tool which promotes passion and a deeper understanding of what they do. A tool which includes a wider range of material and interactive tutorials to explain concepts which were previously too difficult to understand from reading a piece of paper. But having a tutor with you, a good tutor always available at your finger tips would be a game changer."
+                    }
+                ],
+                  "images": [
+                    {
+                      "type": "half",
+                      "images": [
+                        {
+                          "image": "commmon/media/images/004/muso-1.jpg",
+                          "alt": "text for seo"
+                        },
+                        {
+                          "image": "commmon/media/images/004/muso-2.jpg",
+                          "alt": "text for seo"
+                        }
+                      ]
+                    }
+                  ]
+                },
+
+                [
+                  {
+                    "title": "WheyCartel",
+                    "introduction": "WHEYCARTEL supplies athletes with the purest whey protein isolate in the world. Sourced and manufactured with grass fed whey protein from free range cows - we ship it direct to your door.",
+                     //"agency": "Resn",
+                "client": "Personal Project",
+                "role": "Designer & Co-Founder",
+                "url": "http://wheycartel.com/",
+                    "paragraphs": [
+                      {
+                        "paragraph":
+                          "WheyCartel is a company I help start. It started from us asking questions about what protein suppliments contain and what we were actually putting into our bodies. After some research we found that many other people had the same concerns. We worked with Fonterra to create a pure protein which was as pure as you can get. Something versatile, healthy and flavourless. We sold using a subscription model so that our customers would always have fresh protein delivered when they needed it."
+                      }
+                  ],
+                    "images": [
+                      {
+                        "type": "half",
+                        "images": [
+                          {
+                            "image": "commmon/media/images/004/cartel-1.jpg",
+                            "alt": "text for seo"
+                          },
+                          {
+                            "image": "commmon/media/images/004/cartel-2.jpg",
+                            "alt": "text for seo"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+    

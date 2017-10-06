@@ -39,7 +39,7 @@
           "type": "full",
           "images": [
             {
-              "image": "commmon/media/images/MailChimp-01.jpg",
+              "image": "commmon/media/images/001/MailChimp-01.jpg",
               "alt": "text for seo"
             }
           ]
@@ -49,11 +49,11 @@
           "type": "half",
           "images": [
             {
-              "image": "commmon/media/images/MailChimp-02.jpg",
+              "image": "commmon/media/images/001/MailChimp-02.jpg",
               "alt": "text for seo"
             },
             {
-              "image": "commmon/media/images/MailChimp-03.jpg",
+              "image": "commmon/media/images/001/MailChimp-03.jpg",
               "alt": "text for seo"
             }
           ]
@@ -76,7 +76,7 @@
           "type": "full",
           "images": [
             {
-              "image": "commmon/media/images/MailChimp-04.jpg",
+              "image": "commmon/media/images/001/MailChimp-04.jpg",
               "alt": "text for seo"
             }
           ]
@@ -86,11 +86,11 @@
           "type": "half",
           "images": [
             {
-              "image": "commmon/media/images/MailChimp-05_whale-still.jpg",
+              "image": "commmon/media/images/001/MailChimp-05_whale-still.jpg",
               "alt": "text for seo"
             },
             {
-              "image": "commmon/media/images/WhaleSynth-1.gif",
+              "image": "commmon/media/images/001/WhaleSynth-1.gif",
               "alt": "text for seo"
             }
           ]
@@ -108,7 +108,7 @@
           "type": "full",
           "images": [
             {
-              "image": "commmon/media/images/MailChimp-09.jpg",
+              "image": "commmon/media/images/001/MailChimp-09.jpg",
               "alt": "text for seo"
             }
           ]
@@ -118,19 +118,19 @@
           "type": "half",
           "images": [
             {
-              "image": "commmon/media/images/JailBlimp-1.jpg",
+              "image": "commmon/media/images/001/JailBlimp-1.jpg",
               "alt": "text for seo"
             },
             {
-              "image": "commmon/media/images/Kalelimp-2.jpg",
+              "image": "commmon/media/images/001/Kalelimp-2.jpg",
               "alt": "text for seo"
             },
             {
-              "image": "commmon/media/images/FailChips-2.jpg",
+              "image": "commmon/media/images/001/FailChips-2.jpg",
               "alt": "text for seo"
             },
             {
-              "image": "commmon/media/images/MailShrimp-2.jpg",
+              "image": "commmon/media/images/001/MailShrimp-2.jpg",
               "alt": "text for seo"
             }
           ]

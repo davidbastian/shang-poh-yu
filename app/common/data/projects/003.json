@@ -1,33 +1,33 @@
 {
-  "title": "Did you mean <br> MailChimp?",
+  "title": "Evinrude E-TEC <br> Engine Customiser",
   "description":
-    "Shang is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness.",
-  "introduction": "Introducing MailChimp,<br> One Mispronunciation at a Time.",
-  "agency": "Droga5 New York",
-  "client": "MailChimp",
+    "Choose Your E-TEC makes the Evinrude E-TEC G2 come to life. Learn all about the engine and explore its breakthrough features. Then, design your own with the simple and intuitive Customizer.",
+  "introduction": "We introduce you to the world’s most advanced outboard engine, the Evinrude E-TEC G2, and give you the tools to design your own.",
+  "agency": "Cramer-Krasselt",
+  "client": "Bombardier Recreational Products",
   "role": "UX & UI Design",
-  "url": "https://mailchimp.com/did-you-mean/",
+  "url": "http://www.chooseyouretec.com/en-us/",
   "cover": {
-    "image": "common/media/images/001/001.jpg",
-    "video": "common/media/001/fwa.mp4"
+    "image": "common/media/images/003/etec.jpg",
+    "video": "common/media/001/etec-vid.mp4"
   },
   "awards": [
     {
-      "image": "common/media/awards/fwa.jpg",
+      "image": "common/media/awards/fwa.png",
       "title": "FWA of the Day"
     },
     {
-      "image": "common/media/awards/awwwards.jpg",
-      "title": "Site of the Day"
+      "image": "common/media/awards/fwa.png",
+      "title": "Mobile Site of the Day"
     }
   ],
   "blocks": [
     {
-      "title": "Inspiration and Ideation",
+      "title": "Customizer Tool",
       "paragraphs": [
         {
           "paragraph":
-            "The campaign was inspired by a 13-year-old girl who mispronounced MailChimp as “MailKimp”, on the podcast ‘Serial’. We took that idea and pushed in new and unexpected directions, turning MailChimp into KaleLimp, JailBlimp, SnailPrimp and many others. The process was highly collaborative, with both Droga5 and Resn bringing ideas to the table. We chose our nine favourites and began a covert operation to insert them into wildly disparate areas of popular culture—and having a lot of fun doing so!"
+            "Customize an E-TEC G2 by selecting its horsepower and designing its color scheme. Rotate the engine for a complete 360° view of the final result. Once you’ve perfected the design, you can download a dynamic PDF of your engine’s specifications and share it on social media."
         }
       ],
       "images": [
@@ -35,7 +35,7 @@
           "type": "full",
           "images": [
             {
-              "image": "commmon/media/images/000.jpg",
+              "image": "commmon/media/images/003/etec01.jpg",
               "alt": "text for seo"
             }
           ]
@@ -45,11 +45,11 @@
           "type": "half",
           "images": [
             {
-              "image": "commmon/media/images/000.jpg",
+              "image": "commmon/media/images/003/etec02.jpg",
               "alt": "text for seo"
             },
             {
-              "image": "commmon/media/images/000.jpg",
+              "image": "commmon/media/images/003/etec03.jpg",
               "alt": "text for seo"
             }
           ]
@@ -57,13 +57,10 @@
       ]
     },
     {
-      "title": "The experiences",
+      "title": "The E-TEC Journey",
       "paragraphs": [
         {
-          "paragraph": "These are two of the interactive experiences I worked on most in the campaign. Was a great time just being trusted and let loose to make some fun play things. Love when you're pleasantly surprised by the moment when things come to life and they're more fun than they were in your head! WhaleSynth was a captivating digital whale noise synthesizer - was so good Brian Eno even tweeted about it. NailChamp started as a joke of having nail artists compete -turns out they were a thing and it the competition got serious! "
-        },
-        {
-          "paragraph": "We created promotional sites for two products that you could actually buy, FailChips (because everyone knows the broken chips at the bottom of the bag are the tastiest) and SnailPrimp (a beauty treatment made from the secretions of real snails). We made the MaleCrimp Tumblr site (another one I worked on), which kicked off an unexpected fashion trend. And, finally, we built websites for three surreal mood films, MailShrimp, KaleLimp and JailBlimp, by Riff Raff Films."
+          "paragraph": "Dynamic camera movements take you through an animated sequence that shows the full extent of the engine, inside and out. So as you journey through the site, the engine moves with you, revealing new angles and layers that show-off its breakthrough design."
         }
       ],
       "images": [
@@ -71,58 +68,82 @@
           "type": "full",
           "images": [
             {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            }
-          ]
-        },
-
-        {
-          "type": "half",
-          "images": [
-            {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            },
-            {
-              "image": "commmon/media/images/000.jpg",
+              "image": "commmon/media/images/003/etec04.jpg",
               "alt": "text for seo"
             }
           ]
         }
       ]
     },
+
     {
-      "title": "Connecting the dots...",
+      "title": "Frame Loading",
       "paragraphs": [
         {
-          "paragraph":"When the campaign launched, we kept the connection to MailChimp secret. Initially, we wanted people to enjoy the websites for what they were. The concept was that people would independently find one or two pieces of the campaign and, when their interest was piqued, they would discover the link to MailChimp. The public response was overwhelmingly positive, from across the cultural spectrum. For us, it was exciting to watch people connect the dots and find their way to MailChimp, in surprising ways. For MailChimp, a brand built on playfulness and creativity, it demonstrated that these qualities are, indeed, good for business."}
+          "paragraph":"With 264 frames in the About sequence, our challenge was to provide a high-quality experience with minimal wait time. Before we let users in, we load the first frame in high-resolution and half the other frames in medium-resolution. Afterward, we continue to improve the frame quality in the background."}
       ],
       "images": [
         {
           "type": "full",
           "images": [
             {
-              "image": "commmon/media/images/000.jpg",
+              "image": "commmon/media/images/003/etec05.jpg",
               "alt": "text for seo"
             }
           ]
         },
 
         {
-          "type": "half",
-          "images": [
+          "title": "Round Two",
+          "paragraphs": [
             {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            },
-            {
-              "image": "commmon/media/images/000.jpg",
-              "alt": "text for seo"
-            }
-          ]
-        }
-      ]
-    }
+              "paragraph":"The site and experience was so popular, Bombardier Recreational Products reapproached us to design nine subsites - one for each of their OEMs. With this we integrated the ability to customise your boat colour and match it to your custom engine colour. This presented a few challenges and meant we had to add a few things and do some thinking about the design."}
+          ],      
+         "images": [
+          {
+            "type": "half",
+            "images": [
+              {
+                "image": "commmon/media/images/003/etec06.jpg",
+                "alt": "text for seo"
+              },
+              {
+                "image": "commmon/media/images/003/etec07.jpg",
+                "alt": "text for seo"
+              },
+              
+              {
+                "type": "full",
+                "images": [
+                  {
+                    "image": "commmon/media/images/003/etec08.jpg",
+                    "alt": "text for seo"
+                  }
+                ]
+              }
+            ],      
+            "images": [
+              {
+                "type": "full",
+                "images": [
+                  {
+                    "image": "commmon/media/images/003/etec09.jpg",
+                    "alt": "text for seo"
+                  },
+
+                  {
+                    "type": "half",
+                    "images": [
+                      {
+                        "image": "commmon/media/images/003/etec10.jpg",
+                        "alt": "text for seo"
+                      },
+                      {
+                        "image": "commmon/media/images/003/etec11.jpg",
+                        "alt": "text for seo"
+                      },
+          
+        ]
+      }
   ]
 }
