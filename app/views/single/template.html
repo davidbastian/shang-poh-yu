@@ -59,13 +59,11 @@
                                         <div style="background-image:url(<%= project.blocks[i].images[j].images[k].image %>)"></div>
                                     </div>
                                     <% } %>
-
                             </div>
 
                             <% } %>
 
                                 <%  if (project.blocks[i].images[j].type === 'half') {%>
-
                                     <div class="single-content_block-media half">
 
                                         <% for(var k=0; k<project.blocks[i].images[j].images.length; k++) {%>
@@ -82,21 +80,28 @@
 
                                         <% } %>
 
+                                            <% if(project.blocks[i].paragraphs) {%>
+
+                                                <div class="single-content_block-info">
+                                                    <div class="single-content_lock-info-content">
+                                                        <% if(project.blocks[i].title) {%>
+                                                            <h4>
+                                                                <%=project.blocks[i].title%>
+                                                            </h4>
+                                                            <% } %>
+
+                                                                <% if(project.blocks[i].paragraphs) {%>
+                                                                    <% for(var j=0; j<project.blocks[i].paragraphs.length; j++) {%>
+                                                                        <p>
+                                                                            <%=project.blocks[i].paragraphs[j].paragraph%>
+                                                                        </p>
+                                                                        <% } %>
+                                                                            <% } %>
 
 
-
-                                            <div class="single-content_block-info">
-                                                <div class="single-content_lock-info-content">
-                                                    <h4>
-                                                        <%=project.blocks[i].title%>
-                                                    </h4>
-                                                    <% for(var j=0; j<project.blocks[i].paragraphs.length; j++) {%>
-                                                        <p>
-                                                            <%=project.blocks[i].paragraphs[j].paragraph%>
-                                                        </p>
-                                                        <% } %>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                                <% } %>
                 </div>
 
                 <% } %>

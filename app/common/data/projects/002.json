@@ -1,0 +1,142 @@
+{
+    "title": "Pocket<br> Mustang",
+    "description": "We worked with GBT Shanghai to give users the feeling of being a kid again, by using their phones like a toy Mustang.",
+    "introduction": "Unleash your inner Mustang, anywhere.",
+    "agency": "GTB Shanghai",
+    "client": "Ford Motor Company",
+    "role": "UX & UI Design",
+    "url": "http://pocketmustang.ford.co.nz/en/",
+    "cover": {
+        "image": "common/media/images/001/Mailchimp-3.jpg",
+        "video": "common/media/001/mc-sizzle.mp4"
+    },
+    "awards": [{
+            "image": "common/media/awards/cannes.png",
+            "title": "4x Cannes Lions"
+        },
+        {
+            "image": "common/media/awards/fwa.png",
+            "title": "3x FWA of the Day"
+        },
+        {
+            "image": "common/media/awards/awwwards.png",
+            "title": "2x Awwwards of the day"
+        }
+    ],
+    "blocks": [{
+            "title": "A New Road for a Legendary Car",
+            "paragraphs": [{
+                "paragraph": "The iconic Ford Mustang has been a legend in the automotive world for over 50 years. Yet, in China, it is still a relative newcomer, first hitting the streets in 2015. When it launched, demand to test-drive Mustang was strong, but Ford hit a bottleneck. Enthusiasts were waiting up to three months to take one for a spin. GTB Shanghai partnered with Resn to let people feel the excitement of test-driving a Mustang right now. No waiting lists. No limitations. Just pure exhilaration. To achieve this, we put a miniature Mustang right inside your pocket."
+            }],
+            "images": [{
+                    "type": "full",
+                    "images": [{
+                        "image": "common/media/images/002/Mustang-1.jpg",
+                        "alt": "text for seo"
+                    }]
+                },
+
+                {
+                    "type": "half",
+                    "images": [{
+                            "image": "common/media/images/002/15MUSTGT.jpg",
+                            "alt": "text for seo"
+                        },
+                        {
+                            "image": "common/media/images/002/gif-still-1.jpg",
+                            "alt": "text for seo"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "A Journey of Discovery",
+            "paragraphs": [{
+                    "paragraph": "At the beginning of the project, GTB came to Resn with a technical feasibility query. Could we create a mobile browser-based experience that reconstructs a smartphone’s movement in space? We responded with a proof of concept prototype that generated a map of a virtual race track, in real-time, by using data from a phone’s gyroscope and accelerometer. This discovery-led phase included detailed technical prototyping, animatic storyboards and animation previs. Our solution demonstrated that we could create an experience that captured the exhilaration of driving a real Mustang."
+                },
+                {
+                    "paragraph": "A Ford Mustang is built for performance and Pocket Mustang is no different. During the development phase, we refined our motion analysis system to achieve the highest level of sensitivity and accuracy possible. Eventually, our system could recognize over 300 different phone movements. We also brought in the Resn AI Video Editor (RAVE), for Pocket Mustang’s final reveal. We optimized RAVE to automatically select the best shots and angles for rhythm and timing. To bring customizable elements into the video, we used our interactive content platform, Cake. Cake features a dynamic rendering process that can bring an audience deeper into a story, by adding extra layers of interaction and personalized content."
+                }
+            ],
+
+            "images": [{
+                "type": "full",
+                "images": [{
+                    "image": "common/media/images/002/Group-1.jpg",
+                    "alt": "text for seo"
+                }]
+            }]
+        },
+        {
+            "title": "Go With The Flow",
+            "paragraphs": [{
+                "paragraph": "The UX gives deep consideration to the flow. The simple instructions are easy to follow and quick to learn. A color selector lets you choose between five different colors of Mustang, with simple swipe gestures. The customization elements ensure your user experience is unique, from the maneuvers you execute, right through to rendering your name on the driver’s helmet in the video with Cake. Every design decision reinforced our goal of creating an experience that was easy to understand, simple to use and, above all, fun to play."
+            }],
+            "images": [
+
+                {
+                    "type": "half",
+                    "images": [{
+                            "image": "common/media/images/002/Group-2.jpg",
+                            "alt": "text for seo"
+                        },
+                        {
+                            "image": "common/media/images/002/Mustang-06.jpg",
+                            "alt": "text for seo"
+                        },
+                        {
+                            "image": "common/media/images/002/Layer-231111-copy-3.jpg",
+                            "alt": "text for seo"
+                        },
+                        {
+                            "image": "common/media/images/002/Drive-05.jpg",
+                            "alt": "text for seo"
+                        }
+                    ]
+                }
+            ]
+        }, {
+            "title": "Crossing the Finish Line",
+            "paragraphs": [{
+                    "paragraph": "After you record your moves, we give you a little souvenir of your test-drive: a high-octane, shareable video of a real Mustang replicating your every hairpin turn and tire squeal. To do this, we spent two days in the Arizona desert filming World Champion drifter Vaughn Gittin Jr. performing every trick in the book. Using this footage, we analyse your maneuvers and RAVE cuts together a video of your test drive in seconds. Now you can share your expert drifting skills with the world."
+                },
+                {
+                    "paragraph": "With Pocket Mustang, we achieved our goal of allowing anyone to experience the exhilaration of driving a Ford Mustang.We created a world - first interactive experience with a customizable / sharable outcome while simultaneously raising awareness and creating positive sentiment for the Mustang brand.We rolled out customised and localised versions of Pocket Mustang to four markets in Asia Pacific: China, Taiwan, India and New Zealand.In every market, Pocket Mustang exceeded reach and impact targets and contributed to Mustang’ s growth in market share.Experience Pocket Mustang for yourself by visiting http: //pocketmustang.ford.co.nz/en/ on your mobile browser."
+                }
+            ],
+            "images": [
+
+                {
+                    "type": "full",
+                    "images": [{
+                            "image": "common/media/images/002/Group-3.jpg",
+                            "alt": "text for seo"
+                        }
+
+                    ]
+                }
+            ]
+        }, {
+
+            "images": [{
+                "type": "half",
+                "images": [{
+                        "image": "common/media/images/002/pm01.jpg",
+                        "alt": "text for seo"
+                    },
+                    {
+                        "image": "common/media/images/002/pm02.jpg",
+                        "alt": "text for seo"
+                    }
+                ]
+            }, {
+                "type": "full",
+                "images": [{
+                    "image": "common/media/images/002/pm03.jpg",
+                    "alt": "text for seo"
+                }]
+            }]
+        }
+    ]
+}
