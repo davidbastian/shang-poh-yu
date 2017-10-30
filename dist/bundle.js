@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "82a273e05c134d4d2a93"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4364f173747ee8ec2c56"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -706,7 +706,7 @@
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire(19)(__webpack_require__.s = 19);
+/******/ 	return hotCreateRequire(10)(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10981,7 +10981,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Config;
 
-var _info = __webpack_require__(32);
+var _info = __webpack_require__(22);
 
 var _info2 = _interopRequireDefault(_info);
 
@@ -10990,7 +10990,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function requireAll(requireContext) {
     return requireContext.keys().map(requireContext);
 }
-var Projects = requireAll(__webpack_require__(18));
+var Projects = requireAll(__webpack_require__(9));
 
 function Config() {
     var config = {
@@ -11027,7 +11027,7 @@ function Config() {
 
   // Set up Backbone appropriately for the environment. Start with AMD.
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(49), __webpack_require__(0), exports], __WEBPACK_AMD_DEFINE_RESULT__ = function(_, $, exports) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(31), __webpack_require__(0), exports], __WEBPACK_AMD_DEFINE_RESULT__ = function(_, $, exports) {
       // Export global even in AMD case in case this script is loaded with
       // others that may still expect a global Backbone.
       root.Backbone = factory(root, exports, _, $);
@@ -12933,139 +12933,10 @@ function Config() {
   return Backbone;
 });
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var BaseClass = __webpack_require__( 31 );
-
-var Class = function( descriptor ) {
-
-	var rVal = undefined;
-
-	if ( descriptor === undefined ) {
-
-		descriptor = {};
-	}
-
-
-	if( descriptor.initialize ) {
-
-		rVal = descriptor.initialize;
-		delete descriptor.initialize;
-	} else {
-
-		rVal = function() { 
-
-			Array.prototype.splice.apply( arguments, [ 0, 0, this ] );
-
-			Class.parent.apply( undefined, arguments );
-		};
-	}
-
-	if( descriptor.Extends !== undefined ) {
-
-		descriptor.Extends.$$isConstructor = true;
-
-		rVal.prototype = Object.create( descriptor.Extends.prototype );
-		// this will be used to call the parent constructor
-		rVal.$$parentConstructor = descriptor.Extends;
-		delete descriptor.Extends;
-	} else {
-
-		rVal.prototype = Object.create( BaseClass );
-		rVal.$$parentConstructor = function() {};
-	}
-
-	rVal.prototype.$$getters = {};
-	rVal.prototype.$$setters = {};
-
-	for( var i in descriptor ) {
-		if( typeof descriptor[ i ] == 'function' ) {
-			descriptor[ i ].$$name = i;
-			descriptor[ i ].$$owner = rVal.prototype;
-
-			rVal.prototype[ i ] = descriptor[ i ];
-		} else if( descriptor[ i ] && typeof descriptor[ i ] == 'object' && ( descriptor[ i ].get || descriptor[ i ].set ) ) {
-			Object.defineProperty( rVal.prototype, i , descriptor[ i ] );
-
-			if( descriptor[ i ].get ) {
-				rVal.prototype.$$getters[ i ] = descriptor[ i ].get;
-				descriptor[ i ].get.$$name = i;
-				descriptor[ i ].get.$$owner = rVal.prototype;
-			}
-
-			if( descriptor[ i ].set ) {
-				rVal.prototype.$$setters[ i ] = descriptor[ i ].set;
-				descriptor[ i ].set.$$name = i;
-				descriptor[ i ].set.$$owner = rVal.prototype;	
-			}
-		} else {
-			rVal.prototype[ i ] = descriptor[ i ];
-		}
-	}
-
-	// this will be used to check if the caller function is the consructor
-	rVal.$$isConstructor = true;
-
-	// now we'll check interfaces
-	for( var i = 1; i < arguments.length; i++ ) {
-		arguments[ i ].compare( rVal );
-	}
-
-	return rVal;
-};	
-
-Class.parent = function( scope ) {
-
-	var caller = Class.parent.caller;
-
-	arguments = Array.prototype.slice.apply( arguments, [ 1 ] )
-
-	// if the current function calling is the constructor
-	if( caller.$$isConstructor ) {
-		var parentFunction = caller.$$parentConstructor;
-	} else {
-		if( caller.$$name ) {
-			var callerName = caller.$$name;
-			var isGetter = caller.$$owner.$$getters[ callerName ];
-			var isSetter = caller.$$owner.$$setters[ callerName ];
-
-			if( arguments.length == 1 && isSetter ) {
-				var parentFunction = Object.getPrototypeOf( caller.$$owner ).$$setters[ callerName ];
-
-				if( parentFunction === undefined ) {
-					throw 'No setter defined in parent';
-				}
-			} else if( arguments.length == 0 && isGetter ) {
-				var parentFunction = Object.getPrototypeOf( caller.$$owner ).$$getters[ callerName ];
-
-				if( parentFunction === undefined ) {
-					throw 'No getter defined in parent';
-				}
-			} else if( isSetter || isGetter ) {
-				throw 'Incorrect amount of arguments sent to getter or setter';
-			} else {
-				var parentFunction = Object.getPrototypeOf( caller.$$owner )[ callerName ];	
-
-				if( parentFunction === undefined ) {
-					throw 'No parent function defined for ' + callerName;
-				}
-			}
-		} else {
-			throw 'You cannot call parent here';
-		}
-	}
-
-	return parentFunction.apply( scope, arguments );
-};
-
-module.exports = Class;
-
-/***/ }),
-/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -30154,888 +30025,10 @@ module.exports = Class;
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(50)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(32)(module)))
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* global XMLHttpRequest, ArrayBuffer, Blob */
-
-/**
- * This module will contain everything related to preloading.
- *
- * @module preloader
- */
-var Class = __webpack_require__(3);
-var FileMeta = __webpack_require__(8);
-var stringToArrayBuffer = __webpack_require__(41);
-var getMimeFromURL = __webpack_require__(11);
-var EventEmitter = __webpack_require__(7).EventEmitter;
-
-var LoaderBase = new Class({
-  Extends: EventEmitter,
-  /**
-   * LoaderBase is the base class for all Preloader's. It wraps XHR nicely with Signal's as it's event system
-   * also it should be able to handle working with: text, JSON, ArrayBuffer, Blob, and Document data out of the
-   * box. (data XHR2 is able to handle)
-   *
-   * @class LoaderBase
-   * @constructor
-   */
-  initialize: function (loadType, options) {
-    Class.parent(this);
-    this.options = options;
-    if (this.options.onComplete) this.on('complete', this.options.onComplete);
-    if (this.options.onProgress) this.on('progress', this.options.onProgress);
-    this.xhr = null;
-    this.content = null;
-    this.url = null;
-    this.loadType = loadType || LoaderBase.typeText;
-    this.loadTypeSet = false;
-    this.fileMeta = null;
-
-    this._onStateChange = this._onStateChange.bind(this);
-    this._onProgress = this._onProgress.bind(this);
-    this._dispatchProgress = this._dispatchProgress.bind(this);
-    this._dispatchComplete = this._dispatchComplete.bind(this);
-  },
-
-  /**
-   * Call this method to find out if we can load data using XHR. This maybe useful for an Image loader for instance
-   * if XHR can't be used then we can load the content using Image instead.
-   *
-   * @method canLoadUsingXHR
-   * @return {[type]} [description]
-   */
-  canLoadUsingXHR: function () {
-    return typeof XMLHttpRequest !== 'undefined';
-  },
-
-  canLoadType: function (type) {
-    var tempXHR = new XMLHttpRequest();
-
-    // need to open for ff so it doesn't fail
-    tempXHR.open('GET', 'someFakeURL', true);
-
-    return checkAndSetType(tempXHR, type);
-  },
-
-  /**
-   * The load function should be called to start preloading data.
-   *
-   *
-   * The first parameter passed to the load function is the url to the data to be loaded.
-   * It should be noted that mimetype for binary Blob data is read from
-   * the file extension. EG. jpg will use the mimetype "image/jpeg".
-   *
-   *
-   * @method load
-   * @param  {String} url This is the url to the data to be loaded
-   */
-  load: function (url) {
-    this.url = url;
-
-    if (this.canLoadUsingXHR()) {
-      this.xhr = new XMLHttpRequest();
-      this.xhr.open('GET', url, true);
-
-      this.xhr.onreadystatechange = this._onStateChange;
-      this.xhr.onprogress !== undefined && (this.xhr.onprogress = this._onProgress);
-
-      if (this.loadType !== LoaderBase.typeText) {
-        if (!checkIfGoodValue.call(this)) {
-          console.warn('Attempting to use incompatible load type ' + this.loadType + '. Switching it to ' + LoaderBase.typeText);
-          this.loadType = LoaderBase.typeText;
-        }
-
-        try {
-          this.loadTypeSet = checkResponseTypeSupport.call(this) && checkAndSetType(this.xhr, this.loadType);
-        } catch (e) {
-          this.loadTypeSet = false;
-        }
-
-        if (!this.loadTypeSet && (this.loadType === LoaderBase.typeBlob || this.loadType === LoaderBase.typeArraybuffer)) {
-          this.xhr.overrideMimeType('text/plain; charset=x-user-defined');
-        }
-      }
-
-      this.xhr.send();
-    }
-  },
-
-  /**
-   * Call this function to stop loading the asset which is currently being loaded.
-   *
-   * @method stopLoad
-   */
-  stopLoad: function () {
-    this.xhr.abort();
-  },
-
-  /**
-   * When this function is called it will simply dispatch onStart. It maybe useful for classes
-   * which extend LoaderBase to override this function.
-   *
-   * @method _dispatchStart
-   * @protected
-   */
-  _dispatchStart: function () {
-    this.emit('start');
-  },
-
-  /**
-   * When this function is called it will simply dispatch onProgress. It maybe useful for classes
-   * which extend LoaderBase to override this function.
-   *
-   * @method _dispatchProgress
-   * @protected
-   * @param {Number} value This is a value between 0-1 which is the percentage of the files load
-   */
-  _dispatchProgress: function (value) {
-    this.emit('progress', value);
-  },
-
-  /**
-   * When this function is called it will simply dispatch onComplete. It maybe useful for classes
-   * which extend LoaderBase to override this function.
-   *
-   * @method _dispatchComplete
-   * @protected
-   */
-  _dispatchComplete: function () {
-    this.emit('complete', this.content);
-  },
-
-  /**
-   * When this function is called it will simply dispatch onError. It maybe useful for classes
-   * which extend LoaderBase to override this function.
-   *
-   * @method _dispatchError
-   * @protected
-   * @param {String} msg The error message we'll be dispatching
-   */
-  _dispatchError: function (msg) {
-    this.emit('error', msg);
-  },
-
-  /**
-   * This callback will be called when the XHR progresses in its load.
-   *
-   * @method _onProgress
-   * @protected
-   * @param  {XMLHttpRequestProgressEvent} ev This event contains data for the progress of the load
-   */
-  _onProgress: function (ev) {
-    var loaded = ev.loaded || ev.position;
-    var totalSize = ev.total || ev.totalSize;
-
-    if (totalSize) {
-      this._dispatchProgress(loaded / totalSize);
-    } else {
-      this._dispatchProgress(0);
-    }
-  },
-
-  /**
-   * This function is called whenever the readyState of the XHR object changes.
-   *
-   *   this.xhr.readyState == 2 //send() has been called, and headers and status are available
-   *   this.xhr.readyState == 3 //Downloading; responseText holds partial data.
-   *   this.xhr.readyState == 4 //Done
-   *
-   * You should also handle HTTP error status codes:
-   *
-   *   this.xhr.status == 404 //file doesn't exist
-   *
-   * @method _onStateChange
-   * @protected
-   */
-  _onStateChange: function () {
-    if (this.xhr.readyState > 1) {
-      var status;
-      var waiting = false;
-      // Fix error in IE8 where status isn't available until readyState=4
-      try { status = this.xhr.status; } catch (e) { waiting = true; }
-
-      if (status === 200) {
-        switch (this.xhr.readyState) {
-
-          // send() has been called, and headers and status are available
-          case 2:
-
-            this.fileMeta = new FileMeta(this.xhr.getAllResponseHeaders());
-
-            this._dispatchStart();
-            break;
-
-          // Downloading; responseText holds partial data.
-          case 3:
-
-            // todo progress could be calculated here if onprogress does not exist on XHR
-            // this.onProgress.dispatch();
-            break;
-
-          // Done
-          case 4:
-
-            this._parseContent();
-
-            this._dispatchComplete();
-            break;
-        }
-      } else if (!waiting) {
-        this.xhr.onreadystatechange = undefined;
-        this._dispatchError(this.xhr.status);
-      }
-    }
-  },
-
-  /**
-   * This function will grab the response from the content loaded and parse it out
-   *
-   * @method _parseContent
-   * @protected
-   */
-  _parseContent: function () {
-    if (this.loadTypeSet || this.loadType === LoaderBase.typeText) {
-      this.content = this.xhr.response || this.xhr.responseText;
-    } else {
-      switch (this.loadType) {
-
-        case LoaderBase.typeArraybuffer:
-
-          if (ArrayBuffer) {
-            this.content = stringToArrayBuffer(this.xhr.response);
-          } else {
-            throw new Error('This browser does not support ArrayBuffer');
-          }
-          break;
-
-        case LoaderBase.typeBlob:
-        case LoaderBase.typeVideo:
-        case LoaderBase.typeAudio:
-
-          if (Blob) {
-            if (!this.fileMeta) {
-              this.fileMeta = new FileMeta();
-            }
-
-            if (this.fileMeta.mime === null) {
-              this.fileMeta.mime = getMimeFromURL(this.url);
-            }
-
-            this.content = new Blob([ stringToArrayBuffer(this.xhr.response) ], { type: this.fileMeta.mime });
-          } else {
-            throw new Error('This browser does not support Blob');
-          }
-          break;
-
-        case LoaderBase.typeJSON:
-
-          this.content = JSON.parse(this.xhr.response);
-          break;
-
-        case LoaderBase.typeDocument:
-
-          // this needs some work pretty sure there's a better way to handle this
-          this.content = this.xhr.response;
-          break;
-
-      }
-    }
-  }
-});
-
-function checkIfGoodValue () {
-  return this.loadType === LoaderBase.typeText ||
-     this.loadType === LoaderBase.typeArraybuffer ||
-     this.loadType === LoaderBase.typeBlob ||
-     this.loadType === LoaderBase.typeJSON ||
-     this.loadType === LoaderBase.typeDocument ||
-     this.loadType === LoaderBase.typeVideo ||
-     this.loadType === LoaderBase.typeAudio;
-}
-
-function checkResponseTypeSupport () {
-  return this.xhr.responseType !== undefined;
-}
-
-function checkAndSetType (xhr, loadType) {
-  if (loadType === LoaderBase.typeVideo || loadType === LoaderBase.typeAudio) {
-    loadType = LoaderBase.typeBlob;
-  }
-
-  xhr.responseType = loadType;
-
-  return xhr.responseType === loadType;
-}
-
-LoaderBase.typeText = 'text';
-LoaderBase.typeArraybuffer = 'arraybuffer';
-LoaderBase.typeBlob = 'blob';
-LoaderBase.typeJSON = 'json';
-LoaderBase.typeDocument = 'document';
-LoaderBase.typeVideo = 'video';
-LoaderBase.typeAudio = 'audio';
-
-module.exports = LoaderBase;
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-(function() {
-
-  function base64MimeType(encoded) {
-    var result = null;
-
-    if (typeof encoded !== 'string') {
-      return result;
-    }
-
-    var mime = encoded.match(/data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,.*/);
-
-    if (mime && mime.length) {
-      result = mime[1];
-    }
-
-    return result;
-  }
-
-  if (true) {
-    if (typeof module !== 'undefined' && module.exports) {
-      exports = module.exports = base64MimeType;
-    }
-    exports.base64MimeType = base64MimeType;
-  } else if (typeof define === 'function' && define.amd) {
-    define([], function() {
-      return base64MimeType;
-    });
-  } else {
-    this.base64MimeType = base64MimeType;
-  }
-
-}).call(this);
-
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-function EventEmitter() {
-  this._events = this._events || {};
-  this._maxListeners = this._maxListeners || undefined;
-}
-module.exports = EventEmitter;
-
-// Backwards-compat with node 0.10.x
-EventEmitter.EventEmitter = EventEmitter;
-
-EventEmitter.prototype._events = undefined;
-EventEmitter.prototype._maxListeners = undefined;
-
-// By default EventEmitters will print a warning if more than 10 listeners are
-// added to it. This is a useful default which helps finding memory leaks.
-EventEmitter.defaultMaxListeners = 10;
-
-// Obviously not all Emitters should be limited to 10. This function allows
-// that to be increased. Set to zero for unlimited.
-EventEmitter.prototype.setMaxListeners = function(n) {
-  if (!isNumber(n) || n < 0 || isNaN(n))
-    throw TypeError('n must be a positive number');
-  this._maxListeners = n;
-  return this;
-};
-
-EventEmitter.prototype.emit = function(type) {
-  var er, handler, len, args, i, listeners;
-
-  if (!this._events)
-    this._events = {};
-
-  // If there is no 'error' event listener then throw.
-  if (type === 'error') {
-    if (!this._events.error ||
-        (isObject(this._events.error) && !this._events.error.length)) {
-      er = arguments[1];
-      if (er instanceof Error) {
-        throw er; // Unhandled 'error' event
-      } else {
-        // At least give some kind of context to the user
-        var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
-        err.context = er;
-        throw err;
-      }
-    }
-  }
-
-  handler = this._events[type];
-
-  if (isUndefined(handler))
-    return false;
-
-  if (isFunction(handler)) {
-    switch (arguments.length) {
-      // fast cases
-      case 1:
-        handler.call(this);
-        break;
-      case 2:
-        handler.call(this, arguments[1]);
-        break;
-      case 3:
-        handler.call(this, arguments[1], arguments[2]);
-        break;
-      // slower
-      default:
-        args = Array.prototype.slice.call(arguments, 1);
-        handler.apply(this, args);
-    }
-  } else if (isObject(handler)) {
-    args = Array.prototype.slice.call(arguments, 1);
-    listeners = handler.slice();
-    len = listeners.length;
-    for (i = 0; i < len; i++)
-      listeners[i].apply(this, args);
-  }
-
-  return true;
-};
-
-EventEmitter.prototype.addListener = function(type, listener) {
-  var m;
-
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
-
-  if (!this._events)
-    this._events = {};
-
-  // To avoid recursion in the case that type === "newListener"! Before
-  // adding it to the listeners, first emit "newListener".
-  if (this._events.newListener)
-    this.emit('newListener', type,
-              isFunction(listener.listener) ?
-              listener.listener : listener);
-
-  if (!this._events[type])
-    // Optimize the case of one listener. Don't need the extra array object.
-    this._events[type] = listener;
-  else if (isObject(this._events[type]))
-    // If we've already got an array, just append.
-    this._events[type].push(listener);
-  else
-    // Adding the second element, need to change to array.
-    this._events[type] = [this._events[type], listener];
-
-  // Check for listener leak
-  if (isObject(this._events[type]) && !this._events[type].warned) {
-    if (!isUndefined(this._maxListeners)) {
-      m = this._maxListeners;
-    } else {
-      m = EventEmitter.defaultMaxListeners;
-    }
-
-    if (m && m > 0 && this._events[type].length > m) {
-      this._events[type].warned = true;
-      console.error('(node) warning: possible EventEmitter memory ' +
-                    'leak detected. %d listeners added. ' +
-                    'Use emitter.setMaxListeners() to increase limit.',
-                    this._events[type].length);
-      if (typeof console.trace === 'function') {
-        // not supported in IE 10
-        console.trace();
-      }
-    }
-  }
-
-  return this;
-};
-
-EventEmitter.prototype.on = EventEmitter.prototype.addListener;
-
-EventEmitter.prototype.once = function(type, listener) {
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
-
-  var fired = false;
-
-  function g() {
-    this.removeListener(type, g);
-
-    if (!fired) {
-      fired = true;
-      listener.apply(this, arguments);
-    }
-  }
-
-  g.listener = listener;
-  this.on(type, g);
-
-  return this;
-};
-
-// emits a 'removeListener' event iff the listener was removed
-EventEmitter.prototype.removeListener = function(type, listener) {
-  var list, position, length, i;
-
-  if (!isFunction(listener))
-    throw TypeError('listener must be a function');
-
-  if (!this._events || !this._events[type])
-    return this;
-
-  list = this._events[type];
-  length = list.length;
-  position = -1;
-
-  if (list === listener ||
-      (isFunction(list.listener) && list.listener === listener)) {
-    delete this._events[type];
-    if (this._events.removeListener)
-      this.emit('removeListener', type, listener);
-
-  } else if (isObject(list)) {
-    for (i = length; i-- > 0;) {
-      if (list[i] === listener ||
-          (list[i].listener && list[i].listener === listener)) {
-        position = i;
-        break;
-      }
-    }
-
-    if (position < 0)
-      return this;
-
-    if (list.length === 1) {
-      list.length = 0;
-      delete this._events[type];
-    } else {
-      list.splice(position, 1);
-    }
-
-    if (this._events.removeListener)
-      this.emit('removeListener', type, listener);
-  }
-
-  return this;
-};
-
-EventEmitter.prototype.removeAllListeners = function(type) {
-  var key, listeners;
-
-  if (!this._events)
-    return this;
-
-  // not listening for removeListener, no need to emit
-  if (!this._events.removeListener) {
-    if (arguments.length === 0)
-      this._events = {};
-    else if (this._events[type])
-      delete this._events[type];
-    return this;
-  }
-
-  // emit removeListener for all listeners on all events
-  if (arguments.length === 0) {
-    for (key in this._events) {
-      if (key === 'removeListener') continue;
-      this.removeAllListeners(key);
-    }
-    this.removeAllListeners('removeListener');
-    this._events = {};
-    return this;
-  }
-
-  listeners = this._events[type];
-
-  if (isFunction(listeners)) {
-    this.removeListener(type, listeners);
-  } else if (listeners) {
-    // LIFO order
-    while (listeners.length)
-      this.removeListener(type, listeners[listeners.length - 1]);
-  }
-  delete this._events[type];
-
-  return this;
-};
-
-EventEmitter.prototype.listeners = function(type) {
-  var ret;
-  if (!this._events || !this._events[type])
-    ret = [];
-  else if (isFunction(this._events[type]))
-    ret = [this._events[type]];
-  else
-    ret = this._events[type].slice();
-  return ret;
-};
-
-EventEmitter.prototype.listenerCount = function(type) {
-  if (this._events) {
-    var evlistener = this._events[type];
-
-    if (isFunction(evlistener))
-      return 1;
-    else if (evlistener)
-      return evlistener.length;
-  }
-  return 0;
-};
-
-EventEmitter.listenerCount = function(emitter, type) {
-  return emitter.listenerCount(type);
-};
-
-function isFunction(arg) {
-  return typeof arg === 'function';
-}
-
-function isNumber(arg) {
-  return typeof arg === 'number';
-}
-
-function isObject(arg) {
-  return typeof arg === 'object' && arg !== null;
-}
-
-function isUndefined(arg) {
-  return arg === void 0;
-}
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var parseHTTPHeader = __webpack_require__(40);
-
-/**
- * FileMeta is a class which will hold file meta data. Each LoaderBase contains a FileMeta object
- * that you can use to query.
- *
- * @class FileMeta
- * @constructor
- * @param {String} header HTTP Header sent when loading this file
- */
-var FileMeta = function (header) {
-  /**
-   * This property is the mimetype for the file
-   *
-   * @property mime
-   * @type {String}
-   */
-  this.mime = null;
-
-  /**
-   * This is the file size in bytes
-   *
-   * @type {Number}
-   */
-  this.size = null;
-
-  /**
-   * This is a Date object which represents the last time this file was modified
-   *
-   * @type {Date}
-   */
-  this.lastModified = null;
-
-  /**
-   * This is the HTTP header as an Object for the file.
-   *
-   * @type {Object}
-   */
-  this.httpHeader = null;
-
-  if (header) this.setFromHTTPHeader(header);
-};
-
-FileMeta.prototype = {
-
-  /**
-   * This function will be called in the constructor of FileMeta. It will parse the HTTP
-   * headers returned by a server and save useful information for development.
-   *
-   * @method setFromHTTPHeader
-   * @param {String} header HTTP header returned by the server
-   */
-  setFromHTTPHeader: function (header) {
-    this.httpHeader = parseHTTPHeader(header);
-
-    if (this.httpHeader[ 'content-length' ]) this.size = this.httpHeader[ 'content-length' ];
-
-    if (this.httpHeader[ 'content-type' ]) this.mime = this.httpHeader[ 'content-type' ];
-
-    if (this.httpHeader[ 'last-modified' ]) this.lastModified = new Date(this.httpHeader[ 'last-modified' ]);
-  }
-};
-
-module.exports = FileMeta;
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This module will contain everything related to preloading.
- *
- * @module preloader
- */
-var Class = __webpack_require__(3);
-var LoaderBase = __webpack_require__(5);
-
-/**
- * LoaderVideo will load a video file. The content property will contain a video tag.
- *
- * @class LoaderVideo
- * @constructor
- * @extends {LoaderBase}
- */
-var LoaderVideo = new Class({
-  Extends: LoaderBase,
-  initialize: function (options) {
-    Class.parent(this, LoaderBase.typeVideo, options);
-  },
-
-  _parseContent: function () {
-    Class.parent(this);
-
-    if (window.URL && window.URL.createObjectURL) {
-      var blobURL = window.URL.createObjectURL(this.content);
-      this.content = document.createElement(this.loadType);
-      this.content.src = blobURL;
-    } else {
-      throw new Error('This browser does not support URL.createObjectURL()');
-    }
-  }
-});
-
-module.exports = LoaderVideo;
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var base64Mime = __webpack_require__(6);
-
-var isBase64 = __webpack_require__(12);
-
-/**
- * Return the file extension based on the path passed in. If the file does not have an extension null will be passed back
- *
- * @method getExtension
- * @param {String} url URL we'd like a filextension from. This can be relative or absolute.
- * @return {String}
- */
-module.exports = function getExtension (url) {
-  var ext;
-
-  if (isBase64(url)) {
-    var mime = base64Mime(url);
-    ext = (mime.split('/'))[1];
-  } else {
-    ext = url.split('.').pop();
-  }
-
-  return ext || null;
-};
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var base64Mime = __webpack_require__(6);
-
-var getExtension = __webpack_require__(10);
-var isBase64 = __webpack_require__(12);
-
-var FILE_MIME = {
-  // images
-  gif: 'image/gif',
-  jpg: 'image/jpeg',
-  jpeg: 'image/jpeg',
-  png: 'image/png',
-  svg: 'image/svg+xml',
-  // text
-  html: 'text/html',
-  css: 'text/css',
-  csv: 'text/csv',
-  xml: 'text/xml',
-  // video
-  mp4: 'video/mp4',
-  ogg: 'video/ogg',
-  ogv: 'video/ogg',
-  webm: 'video/webm',
-  // audio
-  wav: 'audio/wav',
-  mp3: 'audio/mpeg'
-};
-
-/**
- * This function will return a mime type based on a file extension or a url. For instance the file 'jpg' would return
- * 'image/jpeg'.
- *
- * @method getMimeFromURL
- * @param  {String} type File extension
- * @return {String} Mime type
- */
-module.exports = function getMimeFromURL (url) {
-  var mime;
-
-  if (isBase64(url)) {
-    mime = base64Mime(url);
-  } else {
-    var ext = getExtension(url);
-    mime = FILE_MIME[ ext.toLowerCase() ];
-  }
-
-  return mime || 'application/octet-stream';
-};
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports) {
-
-/**
- * @reference https://github.com/miguelmota/is-base64/pull/2
- */
-module.exports = function isBase64 (v) {
-  var regex = /^(data:\w+\/[a-zA-Z\+\-\.]+;base64,)?([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$/gi;
-  return regex.test(v);
-};
-
-
-/***/ }),
-/* 13 */
+/* 4 */
 /***/ (function(module, exports) {
 
 var g;
@@ -31062,7 +30055,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 14 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31077,7 +30070,7 @@ var _Backbone = __webpack_require__(2);
 
 var _Backbone2 = _interopRequireDefault(_Backbone);
 
-var _lodash = __webpack_require__(4);
+var _lodash = __webpack_require__(3);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -31085,32 +30078,26 @@ var _jquery = __webpack_require__(0);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _view = __webpack_require__(22);
+var _view = __webpack_require__(13);
 
 var _view2 = _interopRequireDefault(_view);
 
-var _view3 = __webpack_require__(20);
+var _view3 = __webpack_require__(11);
 
 var _view4 = _interopRequireDefault(_view3);
 
-var _view5 = __webpack_require__(21);
+var _view5 = __webpack_require__(12);
 
 var _view6 = _interopRequireDefault(_view5);
 
-var _view7 = __webpack_require__(23);
+var _view7 = __webpack_require__(15);
 
 var _view8 = _interopRequireDefault(_view7);
-
-var _view9 = __webpack_require__(24);
-
-var _view10 = _interopRequireDefault(_view9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Router() {
-
     var self;
-
     var Router = _Backbone2.default.Router.extend({
 
         initialize: function initialize() {
@@ -31121,7 +30108,6 @@ function Router() {
             '': 'startHome',
             'contact(/)': 'startContact',
             'about(/)': 'startAbout',
-            'projects(/)': 'startProjects',
             ':single(/)': 'startSingle'
         },
 
@@ -31145,11 +30131,6 @@ function Router() {
                 self.startSingle(args[0]);
             }
 
-            if (name === 'startProjects') {
-                console.log(name);
-                self.startProjects(args[0]);
-            }
-
             return false;
         },
 
@@ -31165,12 +30146,8 @@ function Router() {
             (0, _view4.default)(args);
         },
 
-        startProjects: function startProjects(args) {
-            (0, _view8.default)(args);
-        },
-
         startSingle: function startSingle(args) {
-            (0, _view10.default)(args);
+            (0, _view8.default)(args);
         }
 
     });
@@ -31181,55 +30158,55 @@ function Router() {
 }
 
 /***/ }),
-/* 15 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-        value: true
+    value: true
 });
 
 exports.default = function () {
-        var self;
-        var View = _Backbone2.default.View.extend({
+    var self;
+    var View = _Backbone2.default.View.extend({
 
-                tagName: 'header',
-                className: 'header',
+        tagName: 'header',
+        className: 'header',
 
-                template: _lodash2.default.template(_template2.default),
+        template: _lodash2.default.template(_template2.default),
 
-                initialize: function initialize() {
-                        this.setup();
-                        this.render();
-                },
+        initialize: function initialize() {
+            this.setup();
+            this.render();
+        },
 
-                setup: function setup() {},
+        setup: function setup() {},
 
-                render: function render() {
-                        var json = {
-                                logo: _logo2.default
+        render: function render() {
+            var json = {
+                logo: _logo2.default
 
-                        };
+            };
 
-                        var setTemplate = this.template(json);
-                        var appendData = this.$el.append(setTemplate);
+            var setTemplate = this.template(json);
+            var appendData = this.$el.append(setTemplate);
 
-                        console.log(appendData);
-                        appendData.insertBefore((0, _jquery2.default)('main'));
-                }
+            console.log(appendData);
+            appendData.insertBefore((0, _jquery2.default)('main'));
+        }
 
-        });
+    });
 
-        new View();
+    new View();
 };
 
 var _Backbone = __webpack_require__(2);
 
 var _Backbone2 = _interopRequireDefault(_Backbone);
 
-var _lodash = __webpack_require__(4);
+var _lodash = __webpack_require__(3);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -31241,36 +30218,36 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _template = __webpack_require__(45);
+var _template = __webpack_require__(27);
 
 var _template2 = _interopRequireDefault(_template);
 
-__webpack_require__(27);
+__webpack_require__(18);
 
-var _logo = __webpack_require__(44);
+var _logo = __webpack_require__(26);
 
 var _logo2 = _interopRequireDefault(_logo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 16 */
+/* 7 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 17 */
+/* 8 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 18 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./001.json": 33
+	"./001.json": 23
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -31286,18 +30263,18 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 18;
+webpackContext.id = 9;
 
 /***/ }),
-/* 19 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(16);
+__webpack_require__(7);
 
-__webpack_require__(17);
+__webpack_require__(8);
 
 var _jquery = __webpack_require__(0);
 
@@ -31307,11 +30284,11 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _route = __webpack_require__(14);
+var _route = __webpack_require__(5);
 
 var _route2 = _interopRequireDefault(_route);
 
-var _view = __webpack_require__(15);
+var _view = __webpack_require__(6);
 
 var _view2 = _interopRequireDefault(_view);
 
@@ -31325,7 +30302,7 @@ function App() {
 App();
 
 /***/ }),
-/* 20 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31365,7 +30342,7 @@ var _Backbone = __webpack_require__(2);
 
 var _Backbone2 = _interopRequireDefault(_Backbone);
 
-var _lodash = __webpack_require__(4);
+var _lodash = __webpack_require__(3);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -31377,16 +30354,16 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _template = __webpack_require__(42);
+var _template = __webpack_require__(24);
 
 var _template2 = _interopRequireDefault(_template);
 
-__webpack_require__(25);
+__webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 21 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31427,7 +30404,7 @@ var _Backbone = __webpack_require__(2);
 
 var _Backbone2 = _interopRequireDefault(_Backbone);
 
-var _lodash = __webpack_require__(4);
+var _lodash = __webpack_require__(3);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -31439,16 +30416,16 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _template = __webpack_require__(43);
+var _template = __webpack_require__(25);
 
 var _template2 = _interopRequireDefault(_template);
 
-__webpack_require__(26);
+__webpack_require__(17);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 22 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31487,6 +30464,7 @@ exports.default = function (args) {
       var setTemplate = this.template(json);
       var appendData = this.$el.append(setTemplate)[0];
       (0, _jquery2.default)("main").html(appendData);
+      (0, _view2.default)(self.$el);
     }
   });
   new View();
@@ -31496,7 +30474,7 @@ var _Backbone = __webpack_require__(2);
 
 var _Backbone2 = _interopRequireDefault(_Backbone);
 
-var _lodash = __webpack_require__(4);
+var _lodash = __webpack_require__(3);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -31508,20 +30486,20 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _template = __webpack_require__(46);
+var _template = __webpack_require__(28);
 
 var _template2 = _interopRequireDefault(_template);
 
-__webpack_require__(28);
+__webpack_require__(19);
 
-var _preloader = __webpack_require__(34);
+var _view = __webpack_require__(14);
 
-var _preloader2 = _interopRequireDefault(_preloader);
+var _view2 = _interopRequireDefault(_view);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 23 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31531,7 +30509,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-exports.default = function () {
+exports.default = function (home) {
     var self;
     var View = _Backbone2.default.View.extend({
         tagName: 'section',
@@ -31541,6 +30519,7 @@ exports.default = function () {
         initialize: function initialize() {
             self = this;
             self.loader();
+            //console.log(home);
         },
 
         loader: function loader() {
@@ -31562,7 +30541,10 @@ exports.default = function () {
 
             var setTemplate = this.template(json);
             var appendData = this.$el.append(setTemplate)[0];
-            (0, _jquery2.default)('main').html(appendData);
+
+            console.log(appendData);
+            // $('main').html(appendData)
+            (0, _jquery2.default)(appendData).insertAfter(home.find('.home-content'));
         }
 
     });
@@ -31574,7 +30556,7 @@ var _Backbone = __webpack_require__(2);
 
 var _Backbone2 = _interopRequireDefault(_Backbone);
 
-var _lodash = __webpack_require__(4);
+var _lodash = __webpack_require__(3);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -31586,16 +30568,16 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _template = __webpack_require__(47);
+var _template = __webpack_require__(29);
 
 var _template2 = _interopRequireDefault(_template);
 
-__webpack_require__(29);
+__webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
-/* 24 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31666,7 +30648,7 @@ var _Backbone = __webpack_require__(2);
 
 var _Backbone2 = _interopRequireDefault(_Backbone);
 
-var _lodash = __webpack_require__(4);
+var _lodash = __webpack_require__(3);
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
@@ -31678,837 +30660,106 @@ var _config = __webpack_require__(1);
 
 var _config2 = _interopRequireDefault(_config);
 
-var _template = __webpack_require__(48);
+var _template = __webpack_require__(30);
 
 var _template2 = _interopRequireDefault(_template);
 
-__webpack_require__(30);
+__webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports) {
+
+module.exports = {"email":"shang.p.yu@gmail.com","phone":"+64 21 115 5626","intro":"I’m Shang-Poh Yu, <br> Creative Problem Solver, <br> Interactive Designer.","quote":"( but you’re welcome to call me Shang )"}
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+module.exports = {"title":"Did you mean <br> MailChimp?","description":"We Did Mean MailChimp. MailChimp  is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness.","introduction":"Introducing MailChimp,<br> One Mispronunciation at a Time.","agency":"Droga5 New York","client":"MailChimp","role":"UX & UI Design","url":"https://mailchimp.com/did-you-mean/","cover":{"image":"common/media/images/001/Mailchimp-3.jpg","video":"common/media/001/mc-sizzle.mp4"},"awards":[{"image":"common/media/awards/cannes.png","title":"4x Cannes Lions"},{"image":"common/media/awards/fwa.png","title":"3x FWA of the Day"},{"image":"common/media/awards/awwwards.png","title":"2x Awwwards of the day"}],"blocks":[{"title":"Inspiration and Ideation","paragraphs":[{"paragraph":"The campaign was inspired by a 13-year-old girl who mispronounced MailChimp as “MailKimp”, on the podcast ‘Serial’. We took that idea and pushed in new and unexpected directions, turning MailChimp into KaleLimp, JailBlimp, SnailPrimp and many others. The process was highly collaborative, with both Droga5 and Resn bringing ideas to the table. We chose our nine favourites and began a covert operation to insert them into wildly disparate areas of popular culture—and having a lot of fun doing so!"}],"images":[{"type":"full","images":[{"image":"common/media/images/001/MailChimp-01.jpg","alt":"text for seo"}]},{"type":"half","images":[{"image":"common/media/images/001/MailChimp-02.jpg","alt":"text for seo"},{"image":"common/media/images/001/MailChimp-03.jpg","alt":"text for seo"}]}]},{"title":"The Experiences","paragraphs":[{"paragraph":"These are two of the interactive experiences I worked on most in the campaign. Was a great time just being trusted and let loose to make some fun play things. Love when you're pleasantly surprised by the moment when things come to life and they're more fun than they were in your head! WhaleSynth was a captivating digital whale noise synthesizer - was so good Brian Eno even tweeted about it. NailChamp started as a joke of having nail artists compete -turns out they were a thing and it the competition got serious! "},{"paragraph":"We created promotional sites for two products that you could actually buy, FailChips (because everyone knows the broken chips at the bottom of the bag are the tastiest) and SnailPrimp (a beauty treatment made from the secretions of real snails). We made the MaleCrimp Tumblr site (another one I worked on), which kicked off an unexpected fashion trend. And, finally, we built websites for three surreal mood films, MailShrimp, KaleLimp and JailBlimp, by Riff Raff Films."}],"images":[{"type":"full","images":[{"image":"common/media/images/001/MailChimp-04.jpg","alt":"text for seo"}]},{"type":"half","images":[{"image":"common/media/images/001/MailChimp-05_whale-still.jpg","alt":"text for seo"},{"image":"common/media/images/001/WhaleSynth-1.gif","alt":"text for seo"}]}]},{"title":"Connecting the dots...","paragraphs":[{"paragraph":"When the campaign launched, we kept the connection to MailChimp secret. Initially, we wanted people to enjoy the websites for what they were. The concept was that people would independently find one or two pieces of the campaign and, when their interest was piqued, they would discover the link to MailChimp. The public response was overwhelmingly positive, from across the cultural spectrum. For us, it was exciting to watch people connect the dots and find their way to MailChimp, in surprising ways. For MailChimp, a brand built on playfulness and creativity, it demonstrated that these qualities are, indeed, good for business."}],"images":[{"type":"full","images":[{"image":"common/media/images/001/MailChimp-09.jpg","alt":"text for seo"}]},{"type":"half","images":[{"image":"common/media/images/001/JailBlimp-1.jpg","alt":"text for seo"},{"image":"common/media/images/001/Kalelimp-2.jpg","alt":"text for seo"},{"image":"common/media/images/001/FailChips-2.jpg","alt":"text for seo"},{"image":"common/media/images/001/MailShrimp-2.jpg","alt":"text for seo"}]}]}]}
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports) {
+
+module.exports = "<h1>About</h1>\n\n"
 
 /***/ }),
 /* 25 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+module.exports = "<div class=\"contact-content\">\n    <h3>Let's Chat, say hello</h3>\n    <div class=\"contact-info\">\n        <a href=\"mailto:shang.p.yu@gmail.com\"><h6>shang.p.yu@gmail.com</h6></a>\n        <a href=\"phone:+641155626\"><h6>+641155626</h6></a>\n    </div>\n</div>\n"
 
 /***/ }),
 /* 26 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 421.19\"><title>Asset 1</title><g id=\"Layer_2\" data-name=\"Layer 2\"><g id=\"Layer_1-2\" data-name=\"Layer 1\"><polygon points=\"200 0 0 72.79 20.61 80.29 200 15 400 87.79 400 72.79 200 0\"/><polygon points=\"379.39 91.79 352.61 101.54 200 46 63.19 95.79 83.8 103.29 200 61 400 133.79 400 118.79 373.21 109.04 400 99.29 379.39 91.79\"/><polygon points=\"200 406.19 0 333.39 0 348.39 200 421.19 400 348.39 379.39 340.89 200 406.19\"/><polygon points=\"20.61 329.39 47.3 319.68 200 375.26 200 375.26 336.9 325.43 316.3 317.93 200 360.26 200 360.26 0 287.46 0 302.46 26.69 312.18 0 321.89 20.61 329.39\"/><polygon points=\"20.61 283.46 47.48 273.68 89.97 289.15 63.1 298.93 83.7 306.43 110.58 296.65 200 329.19 200 329.19 273.62 302.4 253.02 294.9 200 314.19 200 314.19 0 241.4 0 256.4 26.87 266.18 0 275.96 20.61 283.46\"/><polygon points=\"379.39 137.79 352.61 147.54 310.02 132.04 336.81 122.29 316.2 114.79 289.42 124.54 200 92 126.38 118.79 146.99 126.29 200 107 400 179.79 400 164.79 373.21 155.04 400 145.29 379.39 137.79\"/><polygon points=\"379.39 248.9 352.52 258.68 283.69 233.63 310.56 223.85 289.95 216.35 263.08 226.13 220.5 210.63 247.37 200.85 226.76 193.35 200 203.09 200 203.09 0 130.29 0 145.29 26.79 155.04 0 164.79 20.61 172.29 47.4 162.54 116.23 187.6 89.44 197.35 110.05 204.85 136.83 195.1 179.5 210.63 152.72 220.38 173.32 227.88 200 218.17 200 218.17 400 290.96 400 275.96 373.13 266.18 400 256.4 379.39 248.9\"/><polygon points=\"379.39 294.96 352.7 304.68 310.03 289.15 336.72 279.43 316.12 271.93 289.42 281.65 220.59 256.59 247.28 246.88 226.68 239.38 200 249.09 200 249.09 0 176.29 0 191.29 53.04 210.6 0 229.9 20.61 237.4 73.64 218.1 116.31 233.63 63.28 252.93 83.88 260.43 136.92 241.13 179.41 256.59 126.38 275.9 146.98 283.4 200 264.1 400 336.89 400 321.89 373.31 312.18 400 302.46 379.39 294.96\"/><polygon points=\"379.39 183.79 326.36 203.1 283.77 187.6 336.81 168.29 316.2 160.79 263.17 180.1 220.58 164.6 273.62 145.29 253.01 137.79 200 157.09 200 157.09 0 84.29 0 99.29 26.79 109.04 0 118.79 20.61 126.29 47.4 116.54 89.98 132.04 63.19 141.79 83.8 149.29 110.59 139.54 179.42 164.6 152.63 174.35 173.24 181.85 200 172.11 200 172.11 400 244.9 400 229.9 346.96 210.6 400 191.29 379.39 183.79\"/></g></g></svg>"
 
 /***/ }),
 /* 27 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+module.exports = "<div class=\"header-content\">\n    <a href=\"\" class=\"logo\">\n        <%= logo %>\n    </a>\n</div>\n"
 
 /***/ }),
 /* 28 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+module.exports = "<div class=\"home-content\">\n    <div class=\"home-intro\">\n            \n        <h4><%= info.intro %></h4>\n        <p><%= info.quote %></p>\n        <nav>\n            <ul>\n                <li><a href=\"#/projects\">see projects</a></li>\n                <li><a href=\"#/about\">about</a></li>\n                <li><a href=\"#/contact\">contact</a></li>\n            </ul>\n        </nav>\n    </div>\n\n    <div class=\"home-hello\">\n        <div class=\"col\">\n            <div>H</div>\n            <div>L</div>\n            <div>O</div>\n        </div>\n\n        <div class=\"col\">\n            <div>L</div>\n            <div>E</div>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 /* 29 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+module.exports = "\n\n<div class=\"projects-content\">\n\n    <% for(var i=0; i<projects.length; i++) {%>\n\n        <a href=\"#/<%= permalink(projects[i].title) %>\" class=\"projects-project\">\n            <div class=\"projects-project-info\">\n                <h6 class=\"projects-project-info_client\">\n                        <%= projects[i].client %>\n                </h6>\n\n                <h3 class=\"projects-project-info_title\">\n                        <%= projects[i].title %>\n                </h3>\n                <div class=\"btn\">\n                    <div class=\"btn-line\"></div>\n                    <div class=\"btn-text\">see this case</div>\n                </div>\n\n            </div>\n            <div class=\"projects-project-image\">\n\n            </div>\n        </a>\n    <% } %>\n\n\n\n            <div class=\"projects-archive\">\n                <h3 class=\"projects-archive_title\">\n                    the <br> archive\n                </h3>\n\n                <div class=\"projects-archive_thumnails\">\n                    <div class=\"projects-archive_thumnails-item\">\n                        <div></div>\n                    </div>\n                    <div class=\"projects-archive_thumnails-item\">\n                        <div></div>\n                    </div>\n                    <div class=\"projects-archive_thumnails-item\">\n                        <div></div>\n                    </div>\n                </div>\n\n            </div>\n</div>"
 
 /***/ }),
 /* 30 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+module.exports = "<div class=\"single-content\">\n    <div class=\"single-content_video\">\n        <div class=\"single-content_video-media\"></div>\n    </div>\n\n    <div class=\"single-content_section\">\n        <div class=\"single-content_section-title\">\n            <h3>\n                <%= project.title %>\n            </h3>\n        </div>\n        <div class=\"single-content_intro\">\n            <div class=\"single-content_intro-info\">\n                <div class=\"single-content_intro-info-item\">\n                    <h6>Agency</h6>\n                    <p>\n                        <%= project.agency %>\n                    </p>\n                </div>\n\n                <div class=\"single-content_intro-info-item\">\n                    <h6>Role</h6>\n                    <p>\n                        <%= project.role %>\n                    </p>\n                </div>\n\n                <div class=\"single-content_intro-info-item\">\n                    <a href=\" <%= project.url %>\" class=\"btn\" target=\"_blank\">\n                        <div class=\"btn-line\"></div>\n                        <div class=\"btn-text\">\n                            launch site\n                        </div>\n                    </a>\n                </div>\n            </div>\n\n            <div class=\"single-content_intro-desc\">\n                <h4>\n                    <%= project.introduction %>\n                </h4>\n                <p>\n                    <%= project.description %>\n                </p>\n            </div>\n        </div>\n\n        <div class=\"single-content_blocks\">\n            <% for(var i=0; i<project.blocks.length; i++) {%>\n                <div class=\"single-content_block\">\n\n                    <% for(var j=0; j<project.blocks[i].images.length; j++) {%>\n\n                        <%  if (project.blocks[i].images[j].type === 'full') {%>\n\n                            <div class=\"single-content_block-media full\">\n                                <% for(var k=0; k<project.blocks[i].images[j].images.length; k++) {%>\n\n\n                                    <div class=\"single-content_block-media-item\">\n                                        <div style=\"background-image:url(<%= project.blocks[i].images[j].images[k].image %>)\"></div>\n                                    </div>\n                                    <% } %>\n\n                            </div>\n\n                            <% } %>\n\n                                <%  if (project.blocks[i].images[j].type === 'half') {%>\n\n                                    <div class=\"single-content_block-media half\">\n\n                                        <div class=\"single-content_block-media-item\">\n                                            <div></div>\n                                        </div>\n\n                                    </div>\n\n                                    <% } %>\n\n\n\n                                        <% } %>\n\n\n\n\n                                            <div class=\"single-content_block-info\">\n                                                <div class=\"single-content_lock-info-content\">\n                                                    <h4>\n                                                        <%=project.blocks[i].title%>\n                                                    </h4>\n                                                    <% for(var j=0; j<project.blocks[i].paragraphs.length; j++) {%>\n                                                        <p>\n                                                            <%=project.blocks[i].paragraphs[j].paragraph%>\n                                                        </p>\n                                                        <% } %>\n                                                </div>\n                                            </div>\n                </div>\n\n                <% } %>\n\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 /* 31 */
-/***/ (function(module, exports) {
-
-module.exports = {
-	parent: function() {
-		// if the current function calling is the constructor
-		if( this.parent.caller.$$isConstructor ) {
-			var parentFunction = this.parent.caller.$$parentConstructor;
-		} else {
-			if( this.parent.caller.$$name ) {
-				var callerName = this.parent.caller.$$name;
-				var isGetter = this.parent.caller.$$owner.$$getters[ callerName ];
-				var isSetter = this.parent.caller.$$owner.$$setters[ callerName ];
-
-				if( arguments.length == 1 && isSetter ) {
-					var parentFunction = Object.getPrototypeOf( this.parent.caller.$$owner ).$$setters[ callerName ];
-
-					if( parentFunction === undefined ) {
-						throw 'No setter defined in parent';
-					}
-				} else if( arguments.length == 0 && isGetter ) {
-					var parentFunction = Object.getPrototypeOf( this.parent.caller.$$owner ).$$getters[ callerName ];
-
-					if( parentFunction === undefined ) {
-						throw 'No getter defined in parent';
-					}
-				} else if( isSetter || isGetter ) {
-					throw 'Incorrect amount of arguments sent to getter or setter';
-				} else {
-					var parentFunction = Object.getPrototypeOf( this.parent.caller.$$owner )[ callerName ];	
-
-    				if( parentFunction === undefined ) {
-						throw 'No parent function defined for ' + callerName;
-					}
-				}
-			} else {
-				throw 'You cannot call parent here';
-			}
-		}
-
-		return parentFunction.apply( this, arguments );
-	}
-};
-
-/***/ }),
-/* 32 */
-/***/ (function(module, exports) {
-
-module.exports = {"email":"shang.p.yu@gmail.com","phone":"+64 115 5626","intro":"I’m Shang-Poh Yu, <br> Creative Problem Solver, <br> Interactive Designer.","quote":"( but you’re welcome to call me Shang )"}
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports) {
-
-module.exports = {"title":"Did you mean <br> MailChimp?","description":"MailChimp is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness.","introduction":"Introducing MailChimp,<br> One Mispronunciation at a Time.","agency":"Droga5 New York","client":"MailChimp","role":"UX & UI Design","url":"https://mailchimp.com/did-you-mean/","cover":{"image":"common/media/images/001/001.jpg","video":"common/media/001/fwa.mp4"},"awards":[{"image":"common/media/awards/fwa.jpg","title":"FWA of the Day"},{"image":"common/media/awards/awwwards.jpg","title":"Site of the Day"}],"blocks":[{"title":"Inspiration and Ideation","paragraphs":[{"paragraph":"The campaign was inspired by a 13-year-old girl who mispronounced MailChimp as “MailKimp”, on the podcast ‘Serial’. We took that idea and pushed in new and unexpected directions, turning MailChimp into KaleLimp, JailBlimp, SnailPrimp and many others. The process was highly collaborative, with both Droga5 and Resn bringing ideas to the table. We chose our nine favourites and began a covert operation to insert them into wildly disparate areas of popular culture—and having a lot of fun doing so!"}],"images":[{"type":"full","images":[{"image":"commmon/media/images/000.jpg","alt":"text for seo"}]},{"type":"half","images":[{"image":"commmon/media/images/000.jpg","alt":"text for seo"},{"image":"commmon/media/images/000.jpg","alt":"text for seo"}]}]},{"title":"The experiences","paragraphs":[{"paragraph":"These are two of the interactive experiences I worked on most in the campaign. Was a great time just being trusted and let loose to make some fun play things. Love when you're pleasantly surprised by the moment when things come to life and they're more fun than they were in your head! WhaleSynth was a captivating digital whale noise synthesizer - was so good Brian Eno even tweeted about it. NailChamp started as a joke of having nail artists compete -turns out they were a thing and it the competition got serious! "},{"paragraph":"We created promotional sites for two products that you could actually buy, FailChips (because everyone knows the broken chips at the bottom of the bag are the tastiest) and SnailPrimp (a beauty treatment made from the secretions of real snails). We made the MaleCrimp Tumblr site (another one I worked on), which kicked off an unexpected fashion trend. And, finally, we built websites for three surreal mood films, MailShrimp, KaleLimp and JailBlimp, by Riff Raff Films."}],"images":[{"type":"full","images":[{"image":"commmon/media/images/000.jpg","alt":"text for seo"}]},{"type":"half","images":[{"image":"commmon/media/images/000.jpg","alt":"text for seo"},{"image":"commmon/media/images/000.jpg","alt":"text for seo"}]}]},{"title":"Connecting the dots...","paragraphs":[{"paragraph":"When the campaign launched, we kept the connection to MailChimp secret. Initially, we wanted people to enjoy the websites for what they were. The concept was that people would independently find one or two pieces of the campaign and, when their interest was piqued, they would discover the link to MailChimp. The public response was overwhelmingly positive, from across the cultural spectrum. For us, it was exciting to watch people connect the dots and find their way to MailChimp, in surprising ways. For MailChimp, a brand built on playfulness and creativity, it demonstrated that these qualities are, indeed, good for business."}],"images":[{"type":"full","images":[{"image":"commmon/media/images/000.jpg","alt":"text for seo"}]},{"type":"half","images":[{"image":"commmon/media/images/000.jpg","alt":"text for seo"},{"image":"commmon/media/images/000.jpg","alt":"text for seo"}]}]}]}
-
-/***/ }),
-/* 34 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(35);
-
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This module will contain everything related to preloading.
- *
- * @module preloader
- *
- */
-
-var Class = __webpack_require__(3);
-var EventEmitter = __webpack_require__(7).EventEmitter;
-var getExtension = __webpack_require__(10);
-var LoaderImage = __webpack_require__(37);
-var LoaderText = __webpack_require__(39);
-var LoaderJSON = __webpack_require__(38);
-var LoaderVideo = __webpack_require__(9);
-var LoaderAudio = __webpack_require__(36);
-
-/**
-*
-* Object defining which file extensions use which loaders
-*
-* @property LOADERS
-* @type {Object}
-*/
-
-var LOADERS = {
-  png: LoaderImage,
-  jpg: LoaderImage,
-  jpeg: LoaderImage,
-  gif: LoaderImage,
-  json: LoaderJSON,
-  mp4: LoaderVideo,
-  ogg: LoaderVideo,
-  ogv: LoaderVideo,
-  webm: LoaderVideo,
-  mp3: LoaderAudio,
-  wav: LoaderAudio
-};
-
-/**
-*
-* Defines default loader
-*
-* @property LOADER_DEFAULT
-* @type {Function}
-*/
-var LOADER_DEFAULT = LoaderText;
-
-/**
-*
-*
-* @class Preloader
-* @constructor
-* @return {Object} Preloader Preloader object
-*/
-
-var Preloader = new Class({
-  Extends: EventEmitter,
-  /**
-  *
-  * Called on instantiation, sets up properties of Preloader object
-  *
-  * @method initialize
-  *
-  */
-
-  initialize: function (options) {
-    if (!(this instanceof Preloader)) return new Preloader(options);
-    Class.parent(this);
-    this.options = this.parseOptions(options);
-    if (this.options.onComplete) this.on('complete', this.options.onComplete);
-    if (this.options.onProgress) this.on('progress', this.options.onProgress);
-    this.reset();
-    this.loaders = {};
-
-    this._continueLoadQueue = this._continueLoadQueue.bind(this);
-  },
-
-  parseOptions: function (options) {
-    return {
-      xhrImages: options.xhrImages || false,
-      onComplete: typeof options.onComplete === 'function' ? options.onComplete : undefined,
-      onProgress: typeof options.onProgress === 'function' ? options.onProgress : undefined,
-      throttle: options.throttle || 0
-    };
-  },
-
-  mergeOptions: function (options) {
-    return {
-      xhrImages: options.xhrImages || this.options.xhrImages,
-      onComplete: typeof options.onComplete === 'function' ? options.onComplete : this.options.onComplete,
-      onProgress: typeof options.onProgress === 'function' ? options.onProgress : this.options.onProgress,
-      throttle: options.throttle || this.options.throttle
-    };
-  },
-
-  /**
-    *
-   * Generic asset loader function - determines loader to be used based on file-extension
-   *
-   * @method add
-   * @param {String} url Base URL of asset
-   *
-   */
-  add: function (url, options) {
-    if (url) {
-      this.addFromLoaderType(url, this._getLoader(url), options);
-    }
-  },
-
-  /**
-  *
-  *Load image - uses the LoaderImage loader
-  *
-  * @method addImage
-  * @param {String} url Base URL of asset
-  *
-  */
-  addImage: function (url, options) {
-    this.addFromLoaderType(url, LoaderImage, options);
-  },
-
-  /**
-  *
-  *Load JSON - uses the LoaderJSON loader
-  *
-  * @method addJSON
-  * @param {String} url Base URL of asset
-  *
-  */
-  addJSON: function (url, options) {
-    this.addFromLoaderType(url, LoaderJSON, options);
-  },
-
-  /**
-  *
-  * Load text - uses the LoaderText loader
-  *
-  * @method addText
-  * @param {String} url Base URL of asset
-  *
-  */
-  addText: function (url, options) {
-    this.addFromLoaderType(url, LoaderText, options);
-  },
-
-  /**
-  *
-  *Load video - uses the LoaderVideo loader
-  *
-  * @method addVideo
-  * @param {String} url Base URL of asset
-  *
-  */
-  addVideo: function (url, options) {
-    this.addFromLoaderType(url, LoaderVideo, options);
-  },
-
-  /**
-  *
-  *Load audio - uses the LoaderAudio loader
-  *
-  * @method addAudio
-  * @param {String} url Base URL of asset
-  *
-  */
-  addAudio: function (url, options) {
-    this.addFromLoaderType(url, LoaderAudio, options);
-  },
-
-  /**
-  *
-  * Load asset using custom loader
-  *
-  * @method addFromLoaderType
-  * @param {String} url Base URL of asset
-  * @param {Function} loaderType Custom loader function
-  *
-  */
-  addFromLoaderType: function (url, LoaderType, options) {
-    if (!this.loaders[ url ]) {
-      this.loaders[ url ] = new LoaderType(this.mergeOptions(options || {}));
-      this.urls.push(url);
-      return this.loaders[ url ];
-    }
-  },
-
-  /**
-  *
-  * Sets percentage of total load for a given asset
-  *
-  * @method setPercentage
-  * @param {String} url Base URL of asset
-  * @param {Number} percentageOfLoad Number <= 1 representing percentage of total load
-  *
-  */
-  setPercentage: function (url, percentageOfLoad) {
-    this.percentageOfLoad[ url ] = percentageOfLoad;
-  },
-
-  /**
-  *
-  * Begins loading process
-  *
-  * @method load
-  *
-  */
-  load: function () {
-    if (!this.loading) {
-      this._setupPercentages();
-      var len = this.options.throttle || this.urls.length;
-      for (var i = 0; i < len; i++) {
-        this._continueLoadQueue();
-      }
-    }
-  },
-
-  /**
-  *
-  * Resets loading so you can reuse the preloader. does not remove cached loads so `get()` continues to function for all assets.
-  *
-  * @method reset
-  *
-  */
-  reset: function () {
-    this.percTotal = 0;
-    this.loadIdx = 0;
-    this.urls = [];
-    this.progress = 0;
-    this.percentageOfLoad = {};
-    this.loading = false;
-    this.status = {};
-  },
-
-  /**
-  *
-  * Stops loading process
-  *
-  * @method stopLoad
-  *
-  */
-  stopLoad: function () {
-    if (this.loading) {
-      for (var i = 0, len = this.urls.length; i < len; i++) {
-        this.loaders[ this.urls[ i ] ].stopLoad();
-      }
-    }
-  },
-
-  /**
-  *
-  * Retrieves loaded asset from loader
-  *
-  * @method get
-  * @param {String} url Base URL of asset
-  * @return asset instance
-  */
-  get: function (url) {
-    return this.loaders[ url ] && this.loaders[ url ].content;
-  },
-
-  /**
-  *
-  * Loops through stated percentages of all assets and standardizes them
-  *
-  * @method _setupPercentages
-  */
-  _setupPercentages: function () {
-    var percTotal = 0;
-    var percScale = 1;
-    // var numWPerc = 0
-    var numWOPerc = 0;
-    var oneFilePerc = 1 / this.urls.length;
-
-    for (var i = 0, len = this.urls.length; i < len; i++) {
-      if (this.percentageOfLoad[ this.urls[ i ] ]) {
-        percTotal += this.percentageOfLoad[ this.urls[ i ] ];
-        // numWPerc++
-      } else {
-        numWOPerc++;
-      }
-    }
-
-    if (numWOPerc > 0) {
-      if (percTotal > 1) {
-        percScale = 1 / percTotal;
-        percTotal *= percScale;
-      }
-
-      // var percRemaining = 1 - percTotal
-      oneFilePerc = (1 - percTotal) / numWOPerc;
-
-      for (var i = 0, len = this.urls.length; i < len; i++) { // eslint-disable-line no-redeclare
-        if (this.percentageOfLoad[ this.urls[ i ] ]) {
-          this.percentageOfLoad[ this.urls[ i ] ] *= percScale;
-        } else {
-          this.percentageOfLoad[ this.urls[ i ] ] = oneFilePerc;
-        }
-      }
-    }
-  },
-
-  /**
-  *
-  * With every call, assets are successively loaded  and percentLoaded is updated
-  *
-  * @method _continueLoadQueue
-  */
-  _continueLoadQueue: function () {
-    if (this.loadIdx < this.urls.length) {
-      var url = this.urls[ this.loadIdx ];
-      var loader = this.loaders[url];
-      this.status[url] = false;
-
-      this.loadIdx++;
-      loader.on('progress', this._onLoadProgress.bind(this, url));
-      loader.once('error', this._onLoadError.bind(this, url));
-      loader.once('complete', this._onLoadComplete.bind(this, url));
-      loader.load(url);
-    } else if (this._checkComplete()) {
-      this.emit('complete');
-    }
-  },
-
-  /**
-  *
-  * Logs error, updates progress, and continues the load
-  *
-  *
-  * @method _onLoadError
-  * @param {String} url of current loading item
-  * @param {String} error Error message/type
-  */
-  _onLoadError: function (url, error) {
-    console.warn('Couldn\'t load ' + url + ' received the error: ' + error);
-
-    var curPerc = this.percentageOfLoad[ url ];
-
-    this.emit('progress', this.percTotal + curPerc, url);
-    this.status[url] = true;
-    this._continueLoadQueue();
-  },
-
-  /**
-  *
-  * Calculates progress of currently loading asset and dispatches total load progress
-  *
-  *
-  * @method _onLoadProgress
-  * @param {String} url of current loading item
-  * @param {Number} progress Progress of currently loading asset
-  */
-  _onLoadProgress: function (url, progress) {
-    var curPerc = this.percentageOfLoad[ url ] * progress;
-
-    this.emit('progress', this.percTotal + curPerc, url);
-  },
-
-  /**
-  *
-  * Marks url as complete and updates total load percentage
-  *
-  *
-  * @method _onLoadComplete
-  * @param {String} url of current loading item
-  * @param {Object} content The loaded content
-  */
-  _onLoadComplete: function (url, content) {
-    this.percTotal += this.percentageOfLoad[ url ];
-    this.status[url] = true;
-    this._continueLoadQueue();
-  },
-
-  /**
-  *
-  * Returns true / false depending on if all url are finished loading or not
-  *
-  *
-  * @method _checkComplete
-  * @return {Boolean} Is loading done?
-  */
-  _checkComplete: function () {
-    var loaded = true;
-    for (var i = 0, len = this.urls.length; i < len; i++) {
-      if (!this.status[this.urls[ i ]]) loaded = false;
-    }
-    return loaded;
-  },
-
-  /**
-  *
-  * Retrieves the appropriate loader util given the asset file-type
-  *
-  *
-  * @method _getLoader
-  * @param {String} url Base URL of asset
-  * @return {Function} Chosen loader util function based on filetype/extension
-  */
-  _getLoader: function (url) {
-    var extension = getExtension(url);
-    var loader = LOADER_DEFAULT;
-    if (extension && LOADERS[ extension.toLowerCase() ]) loader = LOADERS[ extension.toLowerCase() ];
-    return loader;
-  }
-});
-
-module.exports = Preloader;
-
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This module will contain everything related to preloading.
- *
- * @module preloader
- */
-var Class = __webpack_require__(3);
-var LoaderBase = __webpack_require__(5);
-var LoaderVideo = __webpack_require__(9);
-
-/**
- * LoaderAudio will load an audio file. The content property will contain an audio tag.
- *
- * @class LoaderAudio
- * @constructor
- * @extends {LoaderVideo}
- */
-var LoaderAudio = new Class({
-  Extends: LoaderVideo,
-  initialize: function (options) {
-    Class.parent(this, options);
-    this.loadType = LoaderBase.typeAudio;
-  }
-});
-
-module.exports = LoaderAudio;
-
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* global Blob, Image, ArrayBuffer, FileReader */
-
-/**
- * This module will contain everything related to preloading.
- *
- * @module preloader
- */
-var Class = __webpack_require__(3);
-var LoaderBase = __webpack_require__(5);
-var FileMeta = __webpack_require__(8);
-var getMimeFromURL = __webpack_require__(11);
-
-/**
- * LoaderImage will load in images. If XHR exists in the browser attempting to load image
- * then XHR will be used otherwise LoaderImage will use Image instead to load the Image.
- *
- * @class LoaderImage
- * @constructor
- * @extends {LoaderBase}
- */
-var LoaderImage = new Class({
-
-  Extends: LoaderBase,
-
-  initialize: function (options) {
-    this._imageLoaded = false;
-    Class.parent(this, LoaderBase.typeArraybuffer, options);
-  },
-
-  load: function (url) {
-    // first we check if we can load with XHR period
-    // second check that we can load using the method we'd like to which is ArrayBuffer
-    // third we check that we have all the functions to turn an ArrayBuffer to a DataURI
-    if (this.options.xhrImages &&
-      this.canLoadUsingXHR() &&
-      this.canLoadType(this.loadType) &&
-      ArrayBuffer && (window.URL || window.webkitURL || FileReader)) {
-      Class.parent(this, url);
-    // if the above checks dont validate we'll fall back and just use the Image object to preload
-    } else {
-      this._createAndLoadImage(url);
-    }
-  },
-
-  _dispatchProgress: function (progress) {
-    Class.parent(this, this._imageLoaded ? progress : progress * 0.9999);
-  },
-
-  _dispatchComplete: function () {
-    if (this._imageLoaded) Class.parent(this);
-  },
-
-  _onImageLoadComplete: function () {
-    this._imageLoaded = true;
-    this._dispatchProgress(1);
-    this._dispatchComplete();
-  },
-
-  _onImageLoadFail: function () {
-    this._dispatchError('Image failed to load');
-  },
-
-  _parseContent: function () {
-    var arrayBuffer = null;
-    var blobData = null;
-
-    if (!this.fileMeta) {
-      this.fileMeta = new FileMeta();
-    }
-
-    // if the loadType was not set then the meta will be incorrect possibly
-    // so we'll read it from the url
-    if (!this.loadTypeSet || this.fileMeta.mime === null) {
-      this.fileMeta.mime = getMimeFromURL(this.url);
-    }
-
-    // get the ArrayBuffer
-    if (this.xhr.response instanceof ArrayBuffer) {
-      arrayBuffer = this.xhr.response;
-    // if theres a property mozResponseArrayBuffer  use that
-    } else if (this.xhr.mozResponseArrayBuffer) {
-      arrayBuffer = this.xhr.mozResponseArrayBuffer;
-    // otherwise try converting the string to an ArrayBuffer
-    } else {
-      throw new Error('Return type for image load unsupported');
-    }
-
-    blobData = new Blob([ arrayBuffer ], { type: this.fileMeta.mime });
-
-    // We'll convert the blob to an Image using FileReader if it exists
-    if (window.URL || window.webkitURL) {
-      this._createAndLoadImage((window.URL || window.webkitURL).createObjectURL(blobData));
-    } else if (FileReader) {
-      var reader = new FileReader();
-
-      reader.onloadend = function () {
-        if (window.URL || window.webkitURL) {
-          (window.URL || window.webkitURL).revokeObjectURL(blobData);
-        }
-
-        this._createAndLoadImage(reader.result);
-      }.bind(this);
-
-      reader.readAsDataURL(blobData);
-    }
-  },
-
-  _createAndLoadImage: function (src) {
-    this.content = new Image();
-    this.content.onload = this._onImageLoadComplete.bind(this);
-    this.content.onerror = this._onImageLoadFail.bind(this);
-    this.content.src = src;
-  }
-});
-
-module.exports = LoaderImage;
-
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This module will contain everything related to preloading.
- *
- * @module preloader
- */
-var Class = __webpack_require__(3);
-var LoaderBase = __webpack_require__(5);
-
-/**
- * LoaderJSON will load a JSON file and parse it's content. The content property will contain an Object
- * representation of the JSON data.
- *
- * @class LoaderJSON
- * @constructor
- * @extends {LoaderBase}
- */
-var LoaderJSON = new Class({
-  Extends: LoaderBase,
-  initialize: function (options) {
-    Class.parent(this, LoaderBase.typeJSON, options);
-  }
-});
-
-module.exports = LoaderJSON;
-
-
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * This module will contain everything related to preloading.
- *
- * @module preloader
- */
-var Class = __webpack_require__(3);
-var LoaderBase = __webpack_require__(5);
-
-/**
- * LoaderText will load a file and the content saved in this Loader will be a String.
- *
- * @class LoaderText
- * @constructor
- * @extends {LoaderBase}
- */
-var LoaderText = new Class({
-  Extends: LoaderBase,
-  initialize: function (options) {
-    Class.parent(this, LoaderBase.typeText, options);
-  }
-});
-
-module.exports = LoaderText;
-
-
-/***/ }),
-/* 40 */
-/***/ (function(module, exports) {
-
-/**
- * This function will take an HTTP header and turn it into an object for easier use.
- *
- * @method parseHTTPHeader
- * @param  {String} headerString This is an HTTP header
- * @return {Object} The return value will be an object representation of the HTTP Header
- */
-module.exports = function (headerString) {
-  var headerSplit = headerString.split('\n');
-  var rVal = {};
-  var regex = /([a-zA-Z0-9\-_]+): *(.+)/;
-  var keyValue = null;
-
-  for (var i = 0, len = headerSplit.length; i < len; i++) {
-    // the end has an extra newline
-    if (headerSplit[ i ] !== '') {
-      keyValue = regex.exec(headerSplit[ i ]);
-
-      if (keyValue) {
-        rVal[ keyValue[ 1 ] ] = keyValue[ 2 ];
-      }
-    }
-  }
-
-  return rVal;
-};
-
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports) {
-
-/**
- * This will convert a string to an ArrayBuffer
- *
- * @method stringToArrayBuffer
- * @param  {String} string The string to convert to an array buffer
- * @return {ArrayBuffer} The string data which was converted into an ArrayBuffer
- */
-module.exports = function (string) {
-  var buf = new ArrayBuffer(string.length * 2); // 2 bytes for each char
-  var bufView = new Uint16Array(buf);
-
-  for (var i = 0, strLen = string.length; i < strLen; i++) {
-    bufView[ i ] = string.charCodeAt(i);
-  }
-
-  return buf;
-};
-
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports) {
-
-module.exports = "<h1>About</h1>\r\n\r\n"
-
-/***/ }),
-/* 43 */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"contact-content\">\r\n    <h3>Let's Chat, say hello</h3>\r\n    <div class=\"contact-info\">\r\n        <a href=\"mailto:shang.p.yu@gmail.com\"><h6>shang.p.yu@gmail.com</h6></a>\r\n        <a href=\"phone:+641155626\"><h6>+641155626</h6></a>\r\n    </div>\r\n</div>\r\n"
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports) {
-
-module.exports = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 421.19\"><title>Asset 1</title><g id=\"Layer_2\" data-name=\"Layer 2\"><g id=\"Layer_1-2\" data-name=\"Layer 1\"><polygon points=\"200 0 0 72.79 20.61 80.29 200 15 400 87.79 400 72.79 200 0\"/><polygon points=\"379.39 91.79 352.61 101.54 200 46 63.19 95.79 83.8 103.29 200 61 400 133.79 400 118.79 373.21 109.04 400 99.29 379.39 91.79\"/><polygon points=\"200 406.19 0 333.39 0 348.39 200 421.19 400 348.39 379.39 340.89 200 406.19\"/><polygon points=\"20.61 329.39 47.3 319.68 200 375.26 200 375.26 336.9 325.43 316.3 317.93 200 360.26 200 360.26 0 287.46 0 302.46 26.69 312.18 0 321.89 20.61 329.39\"/><polygon points=\"20.61 283.46 47.48 273.68 89.97 289.15 63.1 298.93 83.7 306.43 110.58 296.65 200 329.19 200 329.19 273.62 302.4 253.02 294.9 200 314.19 200 314.19 0 241.4 0 256.4 26.87 266.18 0 275.96 20.61 283.46\"/><polygon points=\"379.39 137.79 352.61 147.54 310.02 132.04 336.81 122.29 316.2 114.79 289.42 124.54 200 92 126.38 118.79 146.99 126.29 200 107 400 179.79 400 164.79 373.21 155.04 400 145.29 379.39 137.79\"/><polygon points=\"379.39 248.9 352.52 258.68 283.69 233.63 310.56 223.85 289.95 216.35 263.08 226.13 220.5 210.63 247.37 200.85 226.76 193.35 200 203.09 200 203.09 0 130.29 0 145.29 26.79 155.04 0 164.79 20.61 172.29 47.4 162.54 116.23 187.6 89.44 197.35 110.05 204.85 136.83 195.1 179.5 210.63 152.72 220.38 173.32 227.88 200 218.17 200 218.17 400 290.96 400 275.96 373.13 266.18 400 256.4 379.39 248.9\"/><polygon points=\"379.39 294.96 352.7 304.68 310.03 289.15 336.72 279.43 316.12 271.93 289.42 281.65 220.59 256.59 247.28 246.88 226.68 239.38 200 249.09 200 249.09 0 176.29 0 191.29 53.04 210.6 0 229.9 20.61 237.4 73.64 218.1 116.31 233.63 63.28 252.93 83.88 260.43 136.92 241.13 179.41 256.59 126.38 275.9 146.98 283.4 200 264.1 400 336.89 400 321.89 373.31 312.18 400 302.46 379.39 294.96\"/><polygon points=\"379.39 183.79 326.36 203.1 283.77 187.6 336.81 168.29 316.2 160.79 263.17 180.1 220.58 164.6 273.62 145.29 253.01 137.79 200 157.09 200 157.09 0 84.29 0 99.29 26.79 109.04 0 118.79 20.61 126.29 47.4 116.54 89.98 132.04 63.19 141.79 83.8 149.29 110.59 139.54 179.42 164.6 152.63 174.35 173.24 181.85 200 172.11 200 172.11 400 244.9 400 229.9 346.96 210.6 400 191.29 379.39 183.79\"/></g></g></svg>"
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"header-content\">\n    <a href=\"\" class=\"logo\">\n        <%= logo %>\n    </a>\n</div>\n"
-
-/***/ }),
-/* 46 */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"home-content\">\r\n    <div class=\"home-intro\">\r\n            \r\n        <h4><%= info.intro %></h4>\r\n        <p><%= info.quote %></p>\r\n        <nav>\r\n            <ul>\r\n                <li><a href=\"#/projects\">see projects</a></li>\r\n                <li><a href=\"#/about\">about</a></li>\r\n                <li><a href=\"#/contact\">contact</a></li>\r\n            </ul>\r\n        </nav>\r\n    </div>\r\n\r\n    <div class=\"home-hello\">\r\n        <div class=\"col\">\r\n            <div>H</div>\r\n            <div>L</div>\r\n            <div>O</div>\r\n        </div>\r\n\r\n        <div class=\"col\">\r\n            <div>L</div>\r\n            <div>E</div>\r\n        </div>\r\n    </div>\r\n</div>"
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports) {
-
-module.exports = "\r\n\r\n<div class=\"projects-content\">\r\n\r\n    <% for(var i=0; i<projects.length; i++) {%>\r\n\r\n        <a href=\"#/<%= permalink(projects[i].title) %>\" class=\"projects-project\">\r\n            <div class=\"projects-project-info\">\r\n                <h6 class=\"projects-project-info_client\">\r\n                        <%= projects[i].client %>\r\n                </h6>\r\n\r\n                <h3 class=\"projects-project-info_title\">\r\n                        <%= projects[i].title %>\r\n                </h3>\r\n                <div class=\"btn\">\r\n                    <div class=\"btn-line\"></div>\r\n                    <div class=\"btn-text\">see this case</div>\r\n                </div>\r\n\r\n            </div>\r\n            <div class=\"projects-project-image\">\r\n\r\n            </div>\r\n        </a>\r\n    <% } %>\r\n\r\n\r\n\r\n            <div class=\"projects-archive\">\r\n                <h3 class=\"projects-archive_title\">\r\n                    the <br> archive\r\n                </h3>\r\n\r\n                <div class=\"projects-archive_thumnails\">\r\n                    <div class=\"projects-archive_thumnails-item\">\r\n                        <div></div>\r\n                    </div>\r\n                    <div class=\"projects-archive_thumnails-item\">\r\n                        <div></div>\r\n                    </div>\r\n                    <div class=\"projects-archive_thumnails-item\">\r\n                        <div></div>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n</div>"
-
-/***/ }),
-/* 48 */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"single-content\">\r\n    <div class=\"single-content_video\">\r\n        <div class=\"single-content_video-media\"></div>\r\n    </div>\r\n\r\n    <div class=\"single-content_section\">\r\n        <div class=\"single-content_section-title\">\r\n            <h3> <%= project.title %></h3>\r\n        </div>\r\n        <div class=\"single-content_intro\">\r\n            <div class=\"single-content_intro-info\">\r\n                <div class=\"single-content_intro-info-item\">\r\n                    <h6>Agency</h6>\r\n                    <p>\r\n                            <%= project.agency %>\r\n                    </p>\r\n                </div>\r\n\r\n                <div class=\"single-content_intro-info-item\">\r\n                    <h6>Role</h6>\r\n                    <p>\r\n                            <%= project.role %>\r\n                    </p>\r\n                </div>\r\n\r\n                <div class=\"single-content_intro-info-item\">\r\n                    <a href=\" <%= project.url %>\" class=\"btn\" target=\"_blank\">\r\n                        <div class=\"btn-line\"></div>\r\n                        <div class=\"btn-text\">\r\n                            launch site\r\n                        </div>\r\n                    </a>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"single-content_intro-desc\">\r\n                <h4> <%= project.introduction %></h4>\r\n                <p> <%= project.description %></p>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"single-content_blocks\">\r\n                <% for(var i=0; i<project.blocks.length; i++) {%>\r\n                        <div class=\"single-content_block\">\r\n                                \r\n                            <div class=\"single-content_block-media full\">\r\n                \r\n                                    <div class=\"single-content_block-media-item\">\r\n                                        <div></div>\r\n                                    </div>\r\n                \r\n                            </div>\r\n            \r\n                            <div class=\"single-content_block-info\">\r\n                                <div class=\"single-content_lock-info-content\">\r\n                                    <h4><%=project.blocks[i].title%></h4>\r\n                                    <% for(var j=0; j<project.blocks[i].paragraphs.length; j++) {%>\r\n                                        <p><%=project.blocks[i].paragraphs[j].paragraph%></p>\r\n                                    <% } %>\r\n                                 </div>\r\n                            </div>\r\n                        </div>\r\n                                \r\n                <% } %>\r\n       \r\n        </div>\r\n    </div>\r\n</div>"
-
-/***/ }),
-/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscore.js 1.8.3
@@ -34063,7 +32314,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;//     Underscor
 
 
 /***/ }),
-/* 50 */
+/* 32 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
