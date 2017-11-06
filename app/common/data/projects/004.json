@@ -1,7 +1,7 @@
 {
-    "title": "Evinrude <br>E-TEC G2",
-    "description": "Choose Your E-TEC makes the Evinrude E-TEC G2 come to life. Learn all about the engine and explore its breakthrough features. Then, design your own with the simple and intuitive Customizer.",
-    "introduction": "We introduce you to the world’s most advanced outboard engine, the Evinrude E-TEC G2, and give you the tools to design your own",
+    "title": "The Archive",
+    "description": "We introduce you to the world’s most advanced outboard engine, the Evinrude E-TEC G2, and give you the tools to design your own.",
+    "introduction": "Unleash your inner Mustang, anywhere.",
     "agency": "Cramer-Krasselt",
     "client": "Bombardier Recreational Products",
     "role": "UX & UI Design",
@@ -24,10 +24,9 @@
         }
     ],
     "blocks": [{
-        "title": "Customizer Tool",
-        "paragraphs": [{
-            "paragraph": "Customize an E-TEC G2 by selecting its horsepower and designing its color scheme. Rotate the engine for a complete 360° view of the final result. Once you’ve perfected the design, you can download a dynamic PDF of your engine’s specifications and share it on social media."
-        }],
+            "paragraphs": [{
+                "paragraph": "Choose Your E-TEC makes the Evinrude E-TEC G2 come to life. Learn all about the engine and explore its breakthrough features. Then, design your own with the simple and intuitive Customizer."
+            }],
             "images": [{
                     "type": "full",
                     "images": [{
@@ -51,10 +50,11 @@
             ]
         },
         {
-            "title": "The E-TEC Journey",
+            "title": "Customizer Tool",
             "paragraphs": [{
-                "paragraph": "Dynamic camera movements take you through an animated sequence that shows the full extent of the engine, inside and out. So as you journey through the site, the engine moves with you, revealing new angles and layers that show-off its breakthrough design."
+                "paragraph": "Customize an E-TEC G2 by selecting its horsepower and designing its color scheme. Rotate the engine for a complete 360° view of the final result. Once you’ve perfected the design, you can download a dynamic PDF of your engine’s specifications and share it on social media."
             }],
+
             "images": [{
                 "type": "full",
                 "images": [{
@@ -64,9 +64,9 @@
             }]
         },
         {
-            "title": "Frame Loading",
+            "title": "The E-TEC Journey",
             "paragraphs": [{
-                "paragraph": "With 264 frames in the About sequence, our challenge was to provide a high-quality experience with minimal wait time. Before we let users in, we load the first frame in high-resolution and half the other frames in medium-resolution. Afterward, we continue to improve the frame quality in the background."
+                "paragraph": "Dynamic camera movements take you through an animated sequence that shows the full extent of the engine, inside and out. So as you journey through the site, the engine moves with you, revealing new angles and layers that show-off its breakthrough design."
             }],
             "images": [
 
@@ -90,6 +90,10 @@
                 }
             ]
         }, {
+            "title": "Frame Loading",
+            "paragraphs": [{
+                "paragraph": "With 264 frames in the About sequence, our challenge was to provide a high-quality experience with minimal wait time. Before we let users in, we load the first frame in high-resolution and half the other frames in medium-resolution. Afterward, we continue to improve the frame quality in the background."
+            }],
             "images": [
 
                 {
