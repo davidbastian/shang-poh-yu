@@ -1,13 +1,13 @@
 {
     "title": "The<br> Archive",
-    "description": "We introduce you to the world’s most advanced outboard engine, the Evinrude E-TEC G2, and give you the tools to design your own.",
-    "introduction": "Unleash your inner Mustang, anywhere.",
+    "description": "",
+    "introduction": "Below are a few other projects I’ve had fun working on. Some are digital, some are not.",
     "agency": "Cramer-Krasselt",
-    "client": "Bombardier Recreational Products",
+    "client": "additional awesome",
     "role": "UX & UI Design",
     "url": "http://www.chooseyouretec.com/en-us",
     "cover": {
-        "image": "common/media/images/001/Mailchimp-3.jpg",
+        "image": "common/media/images/004/Archive-cover.jpg",
         "video": "common/media/001/mc-sizzle.mp4"
     },
     "awards": [{
@@ -24,25 +24,26 @@
         }
     ],
     "blocks": [{
-            "paragraphs": [{
-                "paragraph": "Choose Your E-TEC makes the Evinrude E-TEC G2 come to life. Learn all about the engine and explore its breakthrough features. Then, design your own with the simple and intuitive Customizer."
-            }],
-            "images": [{
-                    "type": "full",
-                    "images": [{
-                        "image": "common/media/images/003/etec01.jpg",
-                        "alt": "text for seo"
-                    }]
-                },
+        "title": "The McWhopper",
+        "paragraphs": [{
+            "paragraph": "Resn teamed up with Y&R New Zealand to create McWhopper.com. The custom Tumblr experience was an open letter from Burger King to McDonald's, detailing every aspect of the Peace Day plan, from the co-branded designs to the recipe for the McWhopper itself."
+        },
+        {
+            "paragraph": "A synthesis of the restaurants’ signature burgers, the McWhopper combined the the best of the mouth-watering Whopper and the iconic Big Mac. The campaign hinged on the public wanting this burger, so we had to make it look as delicious as possible."
+        },
+        {
+            "paragraph": "With over 2 billion web impressions and over 700,000 users on the website in the first 48 hours, the response exceeded all expectations. McWhopper was a huge win for Burger King and for Peace Day."
+        }],
+            "images": [
 
                 {
                     "type": "half",
                     "images": [{
-                            "image": "common/media/images/003/etec02.jpg",
+                            "image": "common/media/images/004/mcwhopper-1.jpg",
                             "alt": "text for seo"
                         },
                         {
-                            "image": "common/media/images/003/etec03.jpg",
+                            "image": "common/media/images/004/mcwhopper-2.jpg",
                             "alt": "text for seo"
                         }
                     ]
