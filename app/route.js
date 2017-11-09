@@ -5,6 +5,7 @@ import HomeView from './views/home/view';
 import AboutView from './views/about/view';
 import ContactView from './views/contact/view';
 import SingleView from './views/single/view';
+import Config from './config';
 
 export default function Router() {
     var self;
@@ -23,10 +24,9 @@ export default function Router() {
 
         execute: function(callback, args, name) {
             // console.log(callback, args, name)
-
             if (name === 'startHome') {
-                console.log(name);
                 self.startHome(args[0]);
+               
             }
 
             if (name === 'startContact') {

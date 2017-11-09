@@ -10,7 +10,7 @@ import './style.scss'; //styles
 export default function(home) {
     var self;
     var View = Backbone.View.extend({
-        tagName: 'section',
+        tagName: 'div',
         className: 'projects',
 
         template: _.template(Template),
@@ -43,6 +43,11 @@ export default function(home) {
             console.log(appendData);
            // $('main').html(appendData)
            $(appendData).insertAfter(home.find('.home-content'));
+
+           self.addEvents();
+        },
+        addEvents:function(){
+ 
         }
 
     });

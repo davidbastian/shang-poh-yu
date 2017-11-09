@@ -14,6 +14,10 @@ export default function Config() {
         'copydeck': {
             projects:Projects,
             info: Info
+        },
+        'route': {
+            active:'',
+            ready:''
         }
     }
 

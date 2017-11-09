@@ -1,5 +1,7 @@
 @import '../../common/styles/variables';
 
+
+
 .projects-content {
    /* overflow-y: scroll;
     width: 100vw;
@@ -12,6 +14,8 @@
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
+        position: relative;
+
         .projects-project-info {
             .projects-project-info_client {
                 text-transform: uppercase;
@@ -27,6 +31,8 @@
             height: 40vw;
             background-color: $color01;
             position: relative;
+            background-position: center;
+            background-size: cover;
         }
     }
 

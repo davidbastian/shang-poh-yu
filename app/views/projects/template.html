@@ -1,10 +1,14 @@
 
 
-<div class="projects-content">
 
+
+<div class="projects-content">
+        
     <% for(var i=0; i<projects.length; i++) {%>
 
-        <a href="#/<%= permalink(projects[i].title) %>" class="projects-project">
+        <a href="#/<%= permalink(projects[i].title) %>" class="projects-project scroll-section">
+
+
             <div class="projects-project-info">
                 <h6 class="projects-project-info_client">
                         <%= projects[i].client %>
@@ -19,9 +23,11 @@
                 </div>
 
             </div>
-            <div class="projects-project-image">
+            <div class="projects-project-image" style="background-image:url(<%= projects[i].cover.image %>)">
 
             </div>
+
+
         </a>
     <% } %>
 
