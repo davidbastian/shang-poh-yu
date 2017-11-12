@@ -96,13 +96,13 @@ export default function(args) {
 
       $('main').append(clone);
 
-      TweenMax.to(clone,0.4,{
+      TweenMax.to(clone,0.3,{
         css:{
           'width':mainCoverPos.width,
           'x':mainCoverPos.left,
           'y':mainCoverPos.top,
           'height':mainCoverPos.height,
-          ease:'Power4.easeOut'
+          ease:'Expo.easeInOut'
         },
         onComplete:function(){
           console.log(Config(),'hola');
