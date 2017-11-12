@@ -1,10 +1,12 @@
 import Backbone from "Backbone";
 import _ from "lodash";
 import $ from "jquery";
+import Router from '../../route';
 import VirtualScroll from "virtual-scroll";
 import { TweenMax,Expo } from "gsap";
 
 import Config from "../../config";
+import {viewsArray} from '../../views-array';
 import Template from "./template.html"; // template
 import "./style.scss"; //styles
 
@@ -27,6 +29,8 @@ export default function(args,name) {
     initialize: function() {
       self = this;
       self.loader();
+
+      viewsArray.push(self);
      
     },
 
@@ -36,6 +40,8 @@ export default function(args,name) {
 
 
     render: function(copydeck) {
+   
+
       var json = {
         info: copydeck.info
       };
@@ -52,7 +58,8 @@ export default function(args,name) {
       self.checkCurrent();
 
       self.addEvents();
-;
+
+  
 
      
     },
@@ -78,38 +85,6 @@ export default function(args,name) {
               });
       
       }
-
-
-     /* if (current) {
-        self.anchorReady = false;
-
-      self.anchor = (current+1)*100;
-
-
-
-        TweenMax.set(container, {
-          transform: "translateY(-" + self.anchor  + "vh)",
-          force3D:true,
-        });
-
-        self.anchorReady = true;
-
-      }
-
-      */
-
-
-
-    },
-
-    hola:function(name){
-      
-      Backbone.history.on("change", function(route, router,params) {
-        console.log(route,routes,params,'asdasdasd',name);
-      });
-      Backbone.history.on("all", function(route, router, params) {
-        console.log(params,'asdaasdasdds');
-      });
 
     },
 
@@ -196,7 +171,7 @@ export default function(args,name) {
           self.target = self.target + target;
         }
 
-        console.log(self.target);
+       // console.log(self.target);
 
         if (self.target<= 0) {
         
@@ -211,13 +186,7 @@ export default function(args,name) {
       } else {
         self.target = 0;
       }
-
       }
-
-
-    
-
-
 
    /*   if (self.anchorReady === true) {
 

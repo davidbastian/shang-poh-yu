@@ -15,7 +15,7 @@ export default function Config() {
             projects:Projects,
             info: Info
         },
-        'route': []
+        'route': ''
     }
 
     return config;

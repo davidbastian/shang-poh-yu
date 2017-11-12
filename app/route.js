@@ -41,6 +41,14 @@ export default function Router() {
                 self.startSingle(args[0],name);
             }
 
+            if (!$('main').attr('data-url-current')){
+                $('main').attr('data-url-current',name);
+            } else {
+                $('main').attr('data-url-prev', $('main').attr('data-url-current') );
+                $('main').attr('data-url-current',name); 
+
+            }
+
             return false;
         },
 

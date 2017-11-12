@@ -2,6 +2,7 @@ import Backbone from "Backbone";
 import _ from "lodash";
 import $ from "jquery";
 import { TweenMax, TimelineMax, Expo } from "gsap";
+import {viewsArray} from '../../views-array';
 
 import Config from "../../config";
 import Template from "./template.html"; // template
@@ -26,9 +27,10 @@ export default function(args,name) {
       self = this;
       self.args = args;
 
-     
-
       self.loader();
+      viewsArray.push(self);
+
+      console.log(viewsArray);
     },
 
     loader: function() {
@@ -125,7 +127,7 @@ export default function(args,name) {
 
             var bottom = $(window).height() - $('.single-content_awards')[0].getBoundingClientRect().bottom;
 
-            console.log(bottom);
+        //    console.log(bottom);
 
             if (bottom > 50) {
               $('main').attr('data-last',self.current);
