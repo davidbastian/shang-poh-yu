@@ -15,10 +15,7 @@ export default function Config() {
             projects:Projects,
             info: Info
         },
-        'route': {
-            active:'',
-            ready:''
-        }
+        'route': []
     }
 
     return config;

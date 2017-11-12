@@ -102,7 +102,7 @@ export default function(args) {
             self.currentY += (self.targetY - self.currentY) * self.ease;
 
             TweenMax.set(self.$el.find('.single-content'),{
-                y: self.currentY
+                yPercent: (self.currentY*100)/self.$el.find('.single-content').outerHeight()
             })
 
         }

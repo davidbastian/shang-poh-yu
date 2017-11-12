@@ -2,7 +2,7 @@ import Backbone from "Backbone";
 import _ from "lodash";
 import $ from "jquery";
 import VirtualScroll from "virtual-scroll";
-import { TweenMax } from "gsap";
+import { TweenMax,Expo } from "gsap";
 
 import Config from "../../config";
 import Template from "./template.html"; // template
@@ -10,7 +10,7 @@ import "./style.scss"; //styles
 
 import ProjectsView from "../projects/view";
 
-export default function(args) {
+export default function(args,name) {
   var self;
   var View = Backbone.View.extend({
     tagName: "section",
@@ -23,15 +23,15 @@ export default function(args) {
     initialize: function() {
       self = this;
       self.loader();
+     
     },
+
+
 
     loader: function() {
       self.render(Config().copydeck);
     },
 
-    setup: function(story) {
-      self.render(story);
-    },
 
     render: function(copydeck) {
       var json = {
@@ -50,8 +50,23 @@ export default function(args) {
       });
 
       self.addEvents();
-      self.setCover();
+
+      self.hola(name);
     },
+
+    hola:function(name){
+      
+      Backbone.history.on("change", function(route, router,params) {
+        console.log(route,routes,params,'asdasdasd',name);
+      });
+      Backbone.history.on("all", function(route, router, params) {
+        console.log(params,'asdaasdasdds');
+      });
+
+     // Backbone.history.navigate('#/' + fragment, { trigger: true });
+    },
+
+
 
     addEvents: function() {
       document.addEventListener("touchmove", function(e) {
@@ -59,14 +74,12 @@ export default function(args) {
       });
 
       self.scroll.on(self.onScroll);
-
       self.$el.find('.projects-project').on('click',self.openProject.bind(this));
 
     },
 
     openProject:function(e){
 
-      console.log( Config().route);
       var mainCover = self.$el.find('.single-content_video-media');
       var mainCoverPos = mainCover[0].getBoundingClientRect();
       var current = $(e.currentTarget);
@@ -96,14 +109,15 @@ export default function(args) {
 
       $('main').append(clone);
 
-      TweenMax.to(clone,0.3,{
+      TweenMax.to(clone,1,{
         css:{
           'width':mainCoverPos.width,
           'x':mainCoverPos.left,
           'y':mainCoverPos.top,
           'height':mainCoverPos.height,
-          ease:'Expo.easeInOut'
+          
         },
+        ease:Expo.easeInOut,
         onComplete:function(){
           console.log(Config(),'hola');
           $('.single').addClass('active');
@@ -117,17 +131,6 @@ export default function(args) {
 
       console.log(clone);
       
-    },
-
-    setCover:function(){
-     /* TweenMax.set(mainCover,{
-        css: {
-          width:projectCoverBounding.width,
-          height:projectCoverBounding.height,
-          x:projectCoverBounding.left,
-        }
-      });*/
-
     },
 
     onScroll: function(e) {

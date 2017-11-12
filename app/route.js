@@ -25,39 +25,39 @@ export default function Router() {
         execute: function(callback, args, name) {
             // console.log(callback, args, name)
             if (name === 'startHome') {
-                self.startHome(args[0]);
+                self.startHome(args[0],name);
                
             }
 
             if (name === 'startContact') {
-                self.startContact(args[0]);
+                self.startContact(args[0],name);
             }
 
             if (name === 'startAbout') {
-                self.startAbout(args[0]);
+                self.startAbout(args[0],name);
             }
 
             if (name === 'startSingle') {
-                self.startSingle(args[0]);
+                self.startSingle(args[0],name);
             }
 
             return false;
         },
 
-        startHome: function(args) {
-            HomeView(args);
+        startHome: function(args,name) {
+            HomeView(args,name);
         },
 
-        startContact: function(args) {
-            ContactView(args);
+        startContact: function(args,name) {
+            ContactView(args,name);
         },
 
-        startAbout: function(args) {
-            AboutView(args);
+        startAbout: function(args,name) {
+            AboutView(args,name);
         },
 
-        startSingle: function(args) {
-            SingleView(args);
+        startSingle: function(args,name) {
+            SingleView(args,name);
         }
 
 
