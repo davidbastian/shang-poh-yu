@@ -23,6 +23,12 @@
   }
 }
 
+.open-home {
+  .home {
+    opacity: 0;
+  }
+}
+
 .home {
  // overflow-y: scroll;
  // height: 100vh;

@@ -20,6 +20,8 @@ export default function(args,name) {
 
     anchor: 0,
     anchorReady:true,
+    target:0,
+
 
     template: _.template(Template),
     initialize: function() {
@@ -27,8 +29,6 @@ export default function(args,name) {
       self.loader();
      
     },
-
-
 
     loader: function() {
       self.render(Config().copydeck);
@@ -49,11 +49,57 @@ export default function(args,name) {
         el: self.el
       });
 
-      self.addEvents();
+      self.checkCurrent();
 
-      self.hola(name);
+      self.addEvents();
+;
 
      
+    },
+
+    checkCurrent:function(){
+
+      var current = $('main').attr('data-last');
+      var container = self.$el.find(".home-wrap");
+      var scrollSection = self.$el.find(".scroll-section").length;
+
+      if (current) {
+          self.target = -(100/scrollSection)*current;
+              TweenMax.set(container,  {
+                yPercent: self.target,
+              });
+        
+              TweenMax.to(self.$el,0.5,{
+                opacity:1,
+                ease:Expo.easeInOut,
+                onComplete:function(){
+                 $('main').removeClass('open-home');
+                }
+              });
+      
+      }
+
+
+     /* if (current) {
+        self.anchorReady = false;
+
+      self.anchor = (current+1)*100;
+
+
+
+        TweenMax.set(container, {
+          transform: "translateY(-" + self.anchor  + "vh)",
+          force3D:true,
+        });
+
+        self.anchorReady = true;
+
+      }
+
+      */
+
+
+
     },
 
     hola:function(name){
@@ -65,7 +111,6 @@ export default function(args,name) {
         console.log(params,'asdaasdasdds');
       });
 
-     // Backbone.history.navigate('#/' + fragment, { trigger: true });
     },
 
 
@@ -137,10 +182,75 @@ export default function(args,name) {
 
     onScroll: function(e) {
       var container = self.$el.find(".home-wrap");
-      var scrollSection = self.$el.find(".scroll-section").length -1;
+      var scrollSection = self.$el.find(".scroll-section").length;
       var delta = e.deltaY;
 
+      var target = (100/scrollSection);
+
       if (self.anchorReady === true) {
+        self.anchorReady = false;
+
+        if (delta < 0) {
+            self.target = self.target - target;      
+        } else {
+          self.target = self.target + target;
+        }
+
+        console.log(self.target);
+
+        if (self.target<= 0) {
+        
+        TweenMax.to(container, 1, {
+          ease: "Expo.easeInOut",
+          yPercent: self.target,
+          onComplete: function() {
+            self.anchorReady = true;
+          }
+        });
+
+      } else {
+        self.target = 0;
+      }
+
+      }
+
+
+    
+
+
+
+   /*   if (self.anchorReady === true) {
+
+        if (delta < 0) {
+          if (top > 0) {
+          TweenMax.to(container, 1, {
+            ease: "Expo.easeInOut",
+            yPercent: '-='+ target,
+            onComplete: function() {
+              self.anchorReady = true;
+            }
+          });
+
+        }
+
+        } else {
+          TweenMax.to(container, 1, {
+            ease: "Expo.easeInOut",
+            yPercent: '+='+target,
+           
+            onComplete: function() {
+              self.anchorReady = true;
+            }
+          });
+
+        }
+
+
+      }
+
+
+
+     /* if (self.anchorReady === true) {
         if (delta < 0) {
           if (self.anchor <=0) {
             self.anchor = 0;
@@ -163,12 +273,17 @@ export default function(args,name) {
 
         TweenMax.to(container, 1, {
           ease: "Expo.easeInOut",
-          transform: "translateY(-" + self.anchor + "vh)",
+          yPercent: 100/,
+
+          force3d:true,
+         
           onComplete: function() {
             self.anchorReady = true;
           }
         });
-      }
+
+      }*/
+
     }
   });
   new View();

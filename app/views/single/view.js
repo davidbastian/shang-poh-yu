@@ -18,7 +18,8 @@ export default function(args,name) {
     template: _.template(Template),
     targetY:0,
     currentY: 0,
-    ease : 0.06,
+    ease : 0.1,
+    scrollActive:true,
 
     initialize: function() {
     
@@ -50,18 +51,22 @@ export default function(args,name) {
         if (self.permalink(title) === self.args) {
           self.render(project);
           console.log(project);
+         
+          self.current = i+1;
         }
       }
     },
 
 
     render: function(project) {
+      $('section').remove();
       var json = {
         project: project
       };
       console.log(json);
       var setTemplate = this.template(json);
       var appendData = this.$el.append(setTemplate)[0];
+      
       $("main").append(appendData);
 
 
@@ -72,8 +77,6 @@ export default function(args,name) {
       });
 
       self.addEvents();
-
-      console.log(name);
 
     },
 
@@ -88,7 +91,7 @@ export default function(args,name) {
     },
 
     onScroll: function(e) {
-        self.targetY -= e.deltaY;
+        self.targetY += e.deltaY;
         self.targetY  = Math.max( (self.$el.find('.single-content').height() - $(window).height()) * -1, self.targetY);
         self.targetY = Math.min(0, self.targetY);
 
@@ -100,6 +103,8 @@ export default function(args,name) {
         var run = function() {
 
             requestAnimationFrame(run);
+
+            if (self.scrollActive === true) {
             self.currentY += (self.targetY - self.currentY) * self.ease;
 
             TweenMax.set(self.$el.find('.single-content'),{
@@ -117,6 +122,29 @@ export default function(args,name) {
                 });
               }
             }
+
+            var bottom = $(window).height() - $('.single-content_awards')[0].getBoundingClientRect().bottom;
+
+            console.log(bottom);
+
+            if (bottom > 50) {
+              $('main').attr('data-last',self.current);
+              $('main').addClass('open-home');
+              self.scrollActive = false;
+              
+              
+              TweenMax.to(self.$el,0.5,{
+                opacity:0,
+                ease:Expo.easeInOut,
+                onComplete:function(){
+                  self.scroll.off(self.onScroll);
+                  Backbone.history.navigate('#/', { trigger: true });
+                }
+              });
+              
+            }
+
+          }
            
 
         };
