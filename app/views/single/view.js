@@ -1,13 +1,15 @@
 import Backbone from "Backbone";
 import _ from "lodash";
 import $ from "jquery";
+import { TweenMax, TimelineMax, Expo } from "gsap";
 
 import Config from "../../config";
 import Template from "./template.html"; // template
 import "./style.scss"; //styles
 import VirtualScroll from "virtual-scroll";
 
-export default function(args) {
+
+export default function(args,name) {
   var self;
   var View = Backbone.View.extend({
     tagName: "section",
@@ -26,7 +28,6 @@ export default function(args) {
      
 
       self.loader();
-      this.setup();
     },
 
     loader: function() {
@@ -53,9 +54,6 @@ export default function(args) {
       }
     },
 
-    setup: function() {
-        
-    },
 
     render: function(project) {
       var json = {
@@ -74,6 +72,8 @@ export default function(args) {
       });
 
       self.addEvents();
+
+      console.log(name);
 
     },
 
@@ -98,14 +98,28 @@ export default function(args) {
 
     scrollAnima:function(){
         var run = function() {
+
             requestAnimationFrame(run);
             self.currentY += (self.targetY - self.currentY) * self.ease;
 
             TweenMax.set(self.$el.find('.single-content'),{
                 yPercent: (self.currentY*100)/self.$el.find('.single-content').outerHeight()
-            })
+            });
 
-        }
+            for (let index = 0; index < self.$el.find('.single-content_block-media-item').length; index++) {
+              var element = self.$el.find('.single-content_block-media-item').eq(index);
+              var top = $(window).height() - element[0].getBoundingClientRect().top;
+              if (top > 100) {
+                TweenMax.to(element.find('div'),2.5,{
+                  y:0,
+                  opacity:1,
+                  ease:Expo.easeOut,
+                });
+              }
+            }
+           
+
+        };
         
         run();
     },

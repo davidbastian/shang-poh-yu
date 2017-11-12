@@ -8,6 +8,8 @@ import Config from "../../config";
 import Template from "./template.html"; // template
 import "./style.scss"; //styles
 
+import animaText from '../../components/animaText';
+
 import ProjectsView from "../projects/view";
 
 export default function(args,name) {
@@ -38,8 +40,6 @@ export default function(args,name) {
         info: copydeck.info
       };
 
-      console.log(json);
-
       var setTemplate = this.template(json);
       var appendData = this.$el.append(setTemplate)[0];
       $("main").html(appendData);
@@ -52,6 +52,8 @@ export default function(args,name) {
       self.addEvents();
 
       self.hola(name);
+
+     
     },
 
     hola:function(name){
@@ -79,7 +81,6 @@ export default function(args,name) {
     },
 
     openProject:function(e){
-
       var mainCover = self.$el.find('.single-content_video-media');
       var mainCoverPos = mainCover[0].getBoundingClientRect();
       var current = $(e.currentTarget);
@@ -87,6 +88,10 @@ export default function(args,name) {
       var pos = currentImage[0].getBoundingClientRect();
       var clone = $('<div>');
       var img = currentImage.css('background-image');
+
+      $('main').addClass('open-single');
+
+      animaText(current, 'chars, words','reverse',0.005,0.6);
 
       TweenMax.set(currentImage,{
         css: {
@@ -120,24 +125,19 @@ export default function(args,name) {
         ease:Expo.easeInOut,
         onComplete:function(){
           console.log(Config(),'hola');
-          $('.single').addClass('active');
+          $('main').removeClass('open-single');
           self.$el.remove();
           clone.remove();
           self.scroll.off(self.onScroll);
           self.$el.find('.projects-project').off('click');
         }
       });
-
-
-      console.log(clone);
       
     },
 
     onScroll: function(e) {
       var container = self.$el.find(".home-wrap");
       var scrollSection = self.$el.find(".scroll-section").length -1;
-
-     // console.log(scrollSection);
       var delta = e.deltaY;
 
       if (self.anchorReady === true) {
@@ -158,8 +158,6 @@ export default function(args,name) {
 
         self.$el.find(".scroll-section").removeClass('active');
         self.$el.find(".scroll-section").eq(self.anchor/100).addClass('active');
-        
-
 
         self.anchorReady = false;
 

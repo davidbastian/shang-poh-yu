@@ -33,7 +33,7 @@ export default function(home) {
                     var special = spaces.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g,'');
                     var slug = special.toLowerCase();
                     
-                    return slug
+                    return slug;
                 },
             };
 

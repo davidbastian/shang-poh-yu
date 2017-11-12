@@ -1,9 +1,13 @@
 @import "../../common/styles/variables";
-.single {
-    opacity: 0;
-    &.active {
-        opacity: 1;
+.open-single {
+    .single {
+        opacity: 0;
     }
+    
+}
+.single {
+    opacity: 1;
+
     .single-content {
         width: 100vw;
         overflow: hidden;
@@ -119,6 +123,8 @@
                         background-position: center;
                         background-size: cover;
                         background-repeat: no-repeat;
+                        transform: translateY(40%);
+                        opacity: 0;
                     }
                     &:before {
                         padding-top: 56.25%;
@@ -129,4 +135,34 @@
             }
         }
     }
+
+    .single-content_awards {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 90px;
+        padding-bottom: 180px;
+
+        .single-content_awards-wrap {
+            display: flex;
+           // justify-content: space-between;
+        }
+
+        .single-content_awards-inner {
+            width: 50%;
+            border-left: 5px solid transparent;
+            box-sizing: border-box;
+        }
+
+        .single-content_awards-item {
+            margin-right: 40px;
+
+            img {
+                display: block;
+                height: 9%;
+                margin: 20px 0;
+            }
+           
+        }
+    }
+
 }

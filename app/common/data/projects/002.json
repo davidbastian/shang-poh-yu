@@ -10,19 +10,16 @@
         "image": "common/media/images/002/Mustang-Cover.jpg",
         "video": "common/media/001/mc-sizzle.mp4"
     },
-    "awards": [{
-            "image": "common/media/awards/cannes.png",
-            "title": "4x Cannes Lions"
-        },
-        {
-            "image": "common/media/awards/fwa.png",
-            "title": "3x FWA of the Day"
-        },
-        {
-            "image": "common/media/awards/awwwards.png",
-            "title": "2x Awwwards of the day"
-        }
-    ],
+    "awards": [
+    {
+        "image": "common/media/images/awards/fwa.jpg",
+        "title": "1x FWA of the Day"
+    },
+    {
+        "image": "common/media/images/awards/awwwards.jpg",
+        "title": "1x Awwwards of the day"
+    }
+],
     "blocks": [{
             "title": "A New Road for a Legendary Car",
             "paragraphs": [{

@@ -107,5 +107,24 @@
                 <% } %>
 
         </div>
+
+        <div class="single-content_awards">
+                <div class="single-content_awards-inner">
+                    <h4>Awards won</h4>
+                    <div class="single-content_awards-wrap">
+                        
+                                <% for(var i=0; i<project.awards.length; i++) {%>
+                                        <div class="single-content_awards-item">
+                                        
+                                                    <img src="<%= project.awards[i].image %>">
+
+                                                    <p><%=project.awards[i].title %></p>
+                                          </div>
+                                <% } %>
+                    </div>
+                </div>
+
+        </div>
+
     </div>
 </div>
