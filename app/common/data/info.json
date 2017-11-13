@@ -1,7 +1,20 @@
 {
-  "email": "shang.p.yu@gmail.com",
-  "phone": "+64 21 115 5626",
-  "intro":
-    "I’m Shang-Poh Yu. <br> Creative Problem Solver, <br> Interactive Designer.",
-  "quote": "( but you’re welcome to call me Shang )"
+    "email": "shang.p.yu@gmail.com",
+    "phone": "+64 21 115 5626",
+    "intro": "I’m Shang-Poh Yu. <br> Creative Problem Solver, <br> Interactive Designer.",
+    "quote": "( but you’re welcome to call me Shang )",
+    "about": {
+        "title": "About",
+        "intro": "As a designer, I like to push the boundaries of possibility and expectation when it comes to creating innovative interactive experiences. I am looking to dedicate my time, skills and energy to meaningful, sustainable, high impact projects.",
+        "paragraphs": [{
+                "paragraph": "I am 26. Taiwanese New Zealander. Currently working at Resn, an incredible, award winning digital agency. My role there has been as an interactive designer with increasing art direction responsibilities. Design and creative problem solving are two of my biggest passions. Have worked and gained experience in various areas of the creative industry. The area I have fallen most in love and thrive in is in digital interactive design. The experiences and learning I have gained from these last three years of working at such an innovative, high achieving company have really helped me to grow and flourish as a designer."
+            },
+            {
+                "paragraph": "A high priority of mine is to learn. I love to discover how things work and why they are created. Am confident on my ability to create high quality, effective outputs with high attention to detail. My greatest asset I can offer is my ideas and conceptual thinking."
+            },
+            {
+                "paragraph": "My approach to creating innovative experiences stems from being considerate to who you are designing for. As a result, I produce targeted, effective and personable outcomes that audiences can resonate with – Humanised Design. One of my favourite quotes is by Frank Chimero, he says “People ignore design that ignores people.” That’s why it’s important to base your designs on a foundation of truth and insight. Then adding the exciting part – the design thinking and giving experiences a bit of personality to create an outstanding end result."
+            }
+        ]
+    }
 }
