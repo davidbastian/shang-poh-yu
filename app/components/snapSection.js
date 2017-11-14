@@ -12,12 +12,12 @@ export default function(sections, current, area) {
     el: area[0]
   });
 
+  $(sections[current]).addClass("active");
+
   scroll.on(function(e) {
     if (ready === true) {
       ready = false;
-
       if (e.deltaY < 0) {
-        console.log(current);
 
         if (current <= size - 2) {
           TweenMax.to($(sections[current]), 1, {
@@ -29,15 +29,17 @@ export default function(sections, current, area) {
             }
           });
 
+          console.log($(sections[current + 1]));
+
           TweenMax.to($(sections[current + 1]), 1, {
             ease: "Expo.easeInOut",
-            yPercent: "-=100"
+            yPercent: "-=100%"
           });
+          
         } else {
           ready = true;
         }
       } else {
-
         if (current > 0) {
           TweenMax.to($(sections[current]), 1, {
             ease: "Expo.easeInOut",
@@ -50,22 +52,14 @@ export default function(sections, current, area) {
 
           TweenMax.to($(sections[current - 1]), 1, {
             ease: "Expo.easeInOut",
-            yPercent: "+=100"
+            yPercent: "+=100%"
           });
-        }else {
+        } else {
           ready = true;
         }
-
-
       }
 
-      // ready = false;
-
-      // console.log(counter);
-
-      // $(sections[counter]).next().addClass('active');
     }
   });
 
-  $(sections[current]).addClass("active");
 }
