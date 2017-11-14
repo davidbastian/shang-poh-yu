@@ -14,6 +14,8 @@ import animaText from '../../components/animaText';
 
 import ProjectsView from "../projects/view";
 
+import snapSection from '../../components/snapSection';
+
 export default function(args,name) {
   var self;
   var View = Backbone.View.extend({
@@ -23,6 +25,7 @@ export default function(args,name) {
     anchor: 0,
     anchorReady:true,
     target:0,
+    currentSection:0,
 
 
     template: _.template(Template),
@@ -40,8 +43,6 @@ export default function(args,name) {
 
 
     render: function(copydeck) {
-   
-
       var json = {
         info: copydeck.info
       };
@@ -49,14 +50,27 @@ export default function(args,name) {
       var setTemplate = this.template(json);
       var appendData = this.$el.append(setTemplate)[0];
       $("main").html(appendData);
+
       ProjectsView(self.$el.find(".home-wrap"));
 
-      self.scroll = new VirtualScroll({
+
+
+      var sections = [];
+      var scrollSection =self.$el.find('.scroll-section');
+      
+
+      for (let index = 0; index < scrollSection.length; index++) {
+        sections.push( scrollSection[index]);
+        
+      }
+
+     snapSection(sections,self.currentSection,self.$el);
+
+     /* self.scroll = new VirtualScroll({
         el: self.el
-      });
+      });*/
 
-      self.checkCurrent();
-
+     // self.checkCurrent();
       self.addEvents();
 
   
@@ -95,7 +109,7 @@ export default function(args,name) {
         e.preventDefault();
       });
 
-      self.scroll.on(self.onScroll);
+     // self.scroll.on(self.onScroll);
       self.$el.find('.projects-project').on('click',self.openProject.bind(this));
 
     },

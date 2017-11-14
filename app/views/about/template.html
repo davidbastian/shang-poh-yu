@@ -1,2 +1,43 @@
-<h1>About</h1>
+<div class="about-content">
 
+    <div class="about-content-section">
+
+        <div class="about-content-wrap">
+
+            <h3 class="about_title">
+                <%= info.about.title %>
+            </h3>
+
+            <div class="about-content-wrap-inner">
+                <div class="about-content-inner">
+                    <div class="about-content-heading">
+                        <h4>
+                            <%= info.about.intro %>
+                        </h4>
+                    </div>
+
+                    <div class="about-content-copy">
+                        <% for(var i=0; i<info.about.paragraphs.length; i++) {%>
+                            <p>
+                                <%= info.about.paragraphs[i].paragraph %>
+                            </p>
+                            <% } %>
+                    </div>
+
+                </div>
+
+                <div class="about-content-profile">
+                    <img src=" <%= profile %>" alt="">
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+
+    </div>
+
+</div>

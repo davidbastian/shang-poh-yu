@@ -46,7 +46,6 @@ export default function Router() {
             } else {
                 $('main').attr('data-url-prev', $('main').attr('data-url-current') );
                 $('main').attr('data-url-current',name); 
-
             }
 
             return false;

@@ -5,6 +5,7 @@ import $ from 'jquery';
 import Config from "../../config";
 import Template from './template.html'; // template
 import './style.scss'; //styles
+import profile from  '../../common/media/images/about/i.jpg';
 
 
 export default function() {
@@ -14,17 +15,23 @@ export default function() {
         className: 'about',
         template: _.template(Template),
         initialize: function() {
-            this.setup();
-            this.render();
+            self = this;
+            self.loader();
         },
 
         setup: function() {
 
         },
 
-        render: function() {
-            var json = {
+        loader: function() {
+            self.render(Config().copydeck);
+        },
+      
 
+        render: function(copydeck) {
+            var json = {
+                info: copydeck.info,
+                profile:profile,
             };
 
             var setTemplate = this.template(json);
