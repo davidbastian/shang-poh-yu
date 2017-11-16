@@ -1,3 +1,3 @@
-let viewsArray = ["asd",'asdads'];
+//let viewsArray = ["asd",'asdads'];
 
-export {viewsArray};
+//export {viewsArray};

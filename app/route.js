@@ -17,6 +17,7 @@ export default function Router() {
 
         routes: {
             '': 'startHome',
+            'projects(/)': 'startHome',
             'contact(/)': 'startContact',
             'about(/)': 'startAbout',
             ':single(/)': 'startSingle'
@@ -26,7 +27,6 @@ export default function Router() {
             // console.log(callback, args, name)
             if (name === 'startHome') {
                 self.startHome(args[0],name);
-               
             }
 
             if (name === 'startContact') {

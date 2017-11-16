@@ -24,10 +24,14 @@
     .about-content-wrap-inner {
         display: flex;
         justify-content: space-between;
+
+        &.align-center {
+            align-items: center;
+        }
     }
 
     .about-content-inner {
-        width: 40vw;
+        width: 33vw;
 
 
 
@@ -37,6 +41,7 @@
 
         p {
             margin-bottom: 30px;
+          
         }
 
         &:last-child {
@@ -51,6 +56,43 @@
         img {
             width:100%;
             display: block;
+        }
+    }
+
+    .about-content_awards {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 90px;
+        padding-bottom: 180px;
+        width: 36vw;
+
+        P {
+            font-size: 1px;
+        }
+      
+
+        .about-content_awards-wrap {
+            display: flex;
+            flex-wrap: wrap;
+           // justify-content: flex-end;
+           // justify-content: space-between;
+        }
+
+        .about-content_awards-inner {
+            width: 100%;
+            border-left: 5px solid transparent;
+            box-sizing: border-box;
+        }
+
+        .about-content_awards-item {
+            margin-right: 40px;
+
+            img {
+                display: block;
+                height: 8%;
+                margin: 20px 0;
+            }
+           
         }
     }
 }

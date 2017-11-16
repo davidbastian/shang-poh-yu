@@ -1,7 +1,7 @@
 {
     "email": "shang.p.yu@gmail.com",
     "phone": "+64 21 115 5626",
-    "intro": "I’m Shang-Poh Yu. <br> Creative Problem Solver, <br> Interactive Designer.",
+    "intro": "<span>I’m Shang-Poh Yu.</span> <br> <span>Creative Problem Solver,</span> <br><span> Interactive Designer.</span>",
     "quote": "( but you’re welcome to call me Shang )",
     "about": {
         "title": "About",
@@ -12,6 +12,41 @@
             {
                 "paragraph": "A high priority of mine is to learn. I love to discover how things work and why they are created. I am confident in my ability to create high quality, effective outputs with attention to detail. My greatest assets are my ideas and my ability to think conceptually. My approach to creating innovative experiences is to always consider the end user. As a result, I produce targeted, effective and personable outcomes that resonate with audiences."
             }
-        ]
-    }
+        ],
+        "awards":"Have had the plasure of working with some world class creatives to win some cool awards",
+        "clients":"Some clients I have the pleasure of working with"
+    },
+    "awards": [{
+        "image": "common/media/images/awards/cannes.jpg",
+        "title": "3x Cannes Lions"
+    },
+    {
+        "image": "common/media/images/awards/fwa.jpg",
+        "title": "2x FWA of the Day"
+    },{
+        "image": "common/media/images/awards/awwwards.jpg",
+        "title": "3x Cannes Lions"
+    },
+    {
+        "image": "common/media/images/awards/dda.jpg",
+        "title": "2x FWA of the Day"
+    },{
+        "image": "common/media/images/awards/the-one-show.jpg",
+        "title": "3x Cannes Lions"
+    },
+    {
+        "image": "common/media/images/awards/webby.jpg",
+        "title": "2x FWA of the Day"
+    },
+    {
+        "image": "common/media/images/awards/fwa.jpg",
+        "title": "2x FWA of the Day"
+    },{
+        "image": "common/media/images/awards/cannes.jpg",
+        "title": "3x Cannes Lions"
+    },
+    {
+        "image": "common/media/images/awards/fwa.jpg",
+        "title": "2x FWA of the Day"
+    }]
 }

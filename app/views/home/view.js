@@ -6,7 +6,7 @@ import VirtualScroll from "virtual-scroll";
 import { TweenMax, Expo } from "gsap";
 
 import Config from "../../config";
-import { viewsArray } from "../../views-array";
+//import { viewsArray } from "../../views-array";
 import Template from "./template.html"; // template
 import "./style.scss"; //styles
 
@@ -25,14 +25,18 @@ export default function(args, name) {
     anchor: 0,
     anchorReady: true,
     target: 0,
-    currentSection: 2,
+    currentSection: 0,
 
     template: _.template(Template),
     initialize: function() {
       self = this;
+      self.url = Backbone.history.getFragment();
       self.loader();
 
-      viewsArray.push(self);
+    //  viewsArray.push(self);
+
+ 
+
     },
 
     loader: function() {
@@ -40,6 +44,7 @@ export default function(args, name) {
     },
 
     render: function(copydeck) {
+
       var json = {
         info: copydeck.info
       };
@@ -50,11 +55,7 @@ export default function(args, name) {
 
       ProjectsView(self.$el.find(".home-wrap"));
 
-     
-      self.checkCurrent();
-
-      
-
+      self.checkCurrent();  
       self.addEvents();
     },
 
@@ -73,17 +74,51 @@ export default function(args, name) {
           }
         });
       } else {
-        self.currentSection = 0;
+
+
+        if (self.url === 'projects') {
+          console.log(self.url);
+          self.currentSection=1;
+        } else {
+          self.currentSection = 0;
+
+        }
+       
       }
 
-       var sections = [];
-      var scrollSection = self.$el.find(".scroll-section");
-
-      for (let index = 0; index < scrollSection.length; index++) {
-        sections.push(scrollSection[index]);
+      for (var index = 0; index < self.$el.find(".projects-project").length; index++) {
+        var section = self.$el.find(".projects-project").eq(index);
+        var anima = animaText(section, "chars, words", "reverse", 0.005, 0.6);
+        section[0].textAnima =  anima;     
       }
 
-      snapSection(sections, self.currentSection, self.$el);
+      snapSection(self.currentSection, self.$el,self.$el.find('.home-intro-cta'));
+
+      for (var  span = 0; span < self.$el.find('.home-intro h4 span').length; span++) {
+        var intro = animaText(self.$el.find('.home-intro h4 span').eq(span), "chars, words","", 0.04, 0.5);
+        intro.play();
+      }
+
+      for (var l = 0; l < self.$el.find('.home-intro nav a').length; l++) {
+        var link =  animaText(self.$el.find('.home-intro nav a').eq(l), "chars, words","", 0.04, 0.5);
+        link.play();
+      }
+
+      for (var c = 0; c <= 5; c++) {
+        TweenMax.fromTo(self.$el.find('[data-count='+c+']'),1.5,{
+          opacity:0,
+          xPercent:-20,
+        //  scale:0.9,
+        },{
+          opacity: 1,
+        //  scale:1,
+          xPercent:0,
+          delay:(1)+(0.15*c),
+          ease:'Expo.easeOut'
+        });
+      }
+    
+
     },
 
     addEvents: function() {
@@ -92,23 +127,22 @@ export default function(args, name) {
       });
 
       self.$el
-        .find(".projects-project")
-        .on("click", self.openProject.bind(this));
+        .find(".projects-project").on("click", self.openProject.bind(this));
     },
 
     openProject: function(e) {
       var mainCover = self.$el.find(".single-content_video-media");
       var mainCoverPos = mainCover[0].getBoundingClientRect();
       var current = $(e.currentTarget);
+      var index =  current.parent().index();
       var currentImage = current.find(".projects-project-image");
       var pos = currentImage[0].getBoundingClientRect();
       var clone = $("<div>");
       var img = currentImage.css("background-image");
 
+
+      current[0].textAnima.play();
       $("main").addClass("open-single");
-
-      animaText(current, "chars, words", "reverse", 0.005, 0.6);
-
       TweenMax.set(currentImage, {
         css: {
           opacity: "0"
@@ -143,40 +177,9 @@ export default function(args, name) {
           $("main").removeClass("open-single");
           self.$el.remove();
           clone.remove();
-         // self.scroll.off(self.onScroll);
           self.$el.find(".projects-project").off("click");
         }
       });
-    },
-
-    onScroll: function(e) {
-      var container = self.$el.find(".home-wrap");
-      var scrollSection = self.$el.find(".scroll-section").length;
-      var delta = e.deltaY;
-
-      var target = 100 / scrollSection;
-
-      if (self.anchorReady === true) {
-        self.anchorReady = false;
-
-        if (delta < 0) {
-          self.target = self.target - target;
-        } else {
-          self.target = self.target + target;
-        }
-
-        if (self.target <= 0) {
-          TweenMax.to(container, 1, {
-            ease: "Expo.easeInOut",
-            yPercent: self.target,
-            onComplete: function() {
-              self.anchorReady = true;
-            }
-          });
-        } else {
-          self.target = 0;
-        }
-      }
     }
   });
   new View();

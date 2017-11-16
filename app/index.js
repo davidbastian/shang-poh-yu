@@ -4,7 +4,7 @@ import $ from 'jquery'
 import Config from "./config"
 import Router from './route'
 
-import headerView from '../app/views/header/view'
+import headerView from '../app/views/header/view';
 
 function App() {
     headerView();

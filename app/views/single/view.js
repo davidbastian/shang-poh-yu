@@ -127,7 +127,6 @@ export default function(args,name) {
 
             var bottom = $(window).height() - $('.single-content_awards')[0].getBoundingClientRect().bottom;
 
-
             if (bottom > 50) {
               $('main').attr('data-last',self.current);
               $('main').addClass('open-home');
