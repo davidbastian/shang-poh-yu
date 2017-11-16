@@ -67,7 +67,7 @@
         width: 36vw;
 
         P {
-            font-size: 1px;
+            font-size: 13px;
         }
       
 
@@ -82,10 +82,14 @@
             width: 100%;
             border-left: 5px solid transparent;
             box-sizing: border-box;
+
         }
 
         .about-content_awards-item {
-            margin-right: 40px;
+            margin: 10px 0;
+          //  margin-right: 40px;
+            min-width: 115px;
+            margin-left: 40px;
 
             img {
                 display: block;
