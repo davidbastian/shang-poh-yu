@@ -44,7 +44,7 @@ export default function(sections, current, area) {
             yPercent: 0
           },
           {
-            yPercent: -100,
+            yPercent: -120,
             ease: "Expo.easeInOut",
             onComplete: function() {
               current = current + 1;
@@ -58,7 +58,7 @@ export default function(sections, current, area) {
           next,
           1,
           {
-            yPercent: 100
+            yPercent: 140
           },
           {
             yPercent: 0,
@@ -84,7 +84,7 @@ export default function(sections, current, area) {
             yPercent: 0
           },
           {
-            yPercent: 100,
+            yPercent: 140,
             ease: "Expo.easeInOut",
             onComplete: function() {
               current = current - 1;
@@ -98,7 +98,7 @@ export default function(sections, current, area) {
           prev,
           1,
           {
-            yPercent: -100
+            yPercent: -120
           },
           {
             yPercent: 0,

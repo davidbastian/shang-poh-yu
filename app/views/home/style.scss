@@ -41,6 +41,10 @@
     overflow: hidden;
     position: relative;*/
 
+    >div {
+      overflow: visible;
+    }
+
     .home-intro {
       max-width: 80vw;
       margin: 0 auto;
