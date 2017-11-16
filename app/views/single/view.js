@@ -61,7 +61,7 @@ export default function(args,name) {
 
 
     render: function(project) {
-      $('section').remove();
+    //  $('section').remove();
       var json = {
         project: project
       };

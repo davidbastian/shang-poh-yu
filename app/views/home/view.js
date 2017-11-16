@@ -83,7 +83,6 @@ export default function(args, name) {
         sections.push(scrollSection[index]);
       }
 
-
       snapSection(sections, self.currentSection, self.$el);
     },
 
