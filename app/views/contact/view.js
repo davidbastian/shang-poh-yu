@@ -6,6 +6,8 @@ import Config from "../../config";
 import Template from './template.html'; // template
 import './style.scss'; //styles
 
+import animaText from "../../components/animaText";
+
 
 export default function() {
     var self;
@@ -15,12 +17,8 @@ export default function() {
 
         template: _.template(Template),
         initialize: function() {
-            this.setup();
+            self = this;
             this.render();
-        },
-
-        setup: function() {
-
         },
 
         render: function() {
@@ -30,7 +28,11 @@ export default function() {
 
             var setTemplate = this.template(json);
             var appendData = this.$el.append(setTemplate)[0];
-            $('main').html(appendData)
+            $('main').html(appendData);
+
+            animaText(self.$el.find('h3'), "chars, words","", 0.04, 0.5).play();
+            animaText(self.$el.find('.contact-info a').eq(0), "chars, words","", 0.04, 0.5).play();
+            animaText(self.$el.find('.contact-info a').eq(1), "chars, words","", 0.04, 0.5).play();
         }
 
     });
