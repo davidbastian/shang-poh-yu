@@ -1,5 +1,4 @@
 @import '../../common/styles/variables';
-
 .single-content_video {
   width: 100vw;
   border: 60px solid transparent;
@@ -8,18 +7,19 @@
   top: 0;
   left: 0;
   height: 100vh;
+  overflow: hidden;
   .single-content_video-media {
-      width: 100%;
-    //  background: red;
-      position: absolute;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: block;
+    background-size: cover;
+    background-position: center;
+    &:before {
+      padding-top: 56.25%;
+      content: "";
       display: block;
-      background-size: cover;
-      background-position: center;
-      &:before {
-          padding-top: 56.25%;
-          content: "";
-          display: block;
-      }
+    }
   }
 }
 
@@ -30,9 +30,9 @@
 }
 
 .home {
- // overflow-y: scroll;
- // height: 100vh;
-//  overflow-x: hidden;
+  // overflow-y: scroll;
+  // height: 100vh;
+  //  overflow-x: hidden;
   .home-content {
     /*width: 100%;
     height: 100%;
@@ -40,11 +40,9 @@
     top: 0;
     overflow: hidden;
     position: relative;*/
-
     >div {
       overflow: visible;
     }
-
     .home-intro {
       max-width: 80vw;
       margin: 0 auto;
@@ -60,42 +58,35 @@
       nav {
         margin-top: 30px;
         a {
-            color:$color03;
+          color: $color03;
         }
-       div {
-         cursor: pointer;
-         color:$color03;
-       }
+        div {
+          cursor: pointer;
+          color: $color03;
+        }
       }
-
     }
-
     .home-hello {
-        position: absolute;
-        top: 0;
-        right: 10vw;
+      position: absolute;
+      top: 0;
+      right: 10vw;
+      display: flex;
+      transform: scale(1.3);
+      transform-origin: right;
+      .col {
         display: flex;
-        transform: scale(1.3);
-        transform-origin: right;
-
-        .col {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          
-
-          div {
-            height: 33.3333vh;
-            font-size: 33.333vh;
-          }
-
-          &:last-child {
-            padding-left: 8vw;
-            justify-content: center;
-            flex-direction: column-reverse;
-          }
-
+        flex-direction: column;
+        align-items: center;
+        div {
+          height: 33.3333vh;
+          font-size: 33.333vh;
         }
+        &:last-child {
+          padding-left: 8vw;
+          justify-content: center;
+          flex-direction: column-reverse;
+        }
+      }
     }
   }
 }
