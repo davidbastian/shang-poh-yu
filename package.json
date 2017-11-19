@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack-dev-server --open",
-    "optimize": ""
+    "optimize": "node ./tasks/optimize.images.js"
   },
   "keywords": [],
   "author": "davidbastian.red",
@@ -27,6 +27,10 @@
     "file-loader": "^0.11.1",
     "gsap": "^1.19.1",
     "image-webpack-loader": "^3.3.1",
+    "imagemin": "^5.3.1",
+    "imagemin-jpeg-recompress": "^5.1.0",
+    "imagemin-mozjpeg": "^6.0.0",
+    "imagemin-pngquant": "^5.0.1",
     "imports-loader": "^0.7.1",
     "ip": "^1.1.5",
     "jquery": "^3.2.1",
@@ -35,6 +39,7 @@
     "modernizr-detectizr": "0.0.2",
     "node-sass": "^4.5.3",
     "papaparse": "^4.3.6",
+    "path": "^0.12.7",
     "postcss-load-config": "1.0.0",
     "postcss-loader": "1.0.0",
     "preloader": "^4.0.1",
