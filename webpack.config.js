@@ -6,8 +6,6 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 
 var ip = require('ip');
 
-new webpack.IgnorePlugin(/vertx/);
-
 module.exports = {
     entry: './app/index.js',
     output: {
@@ -75,7 +73,6 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin(),
         new ExtractTextPlugin('style.css'),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.IgnorePlugin(/vertx/),
         new CopyWebpackPlugin([
             { from: 'app/index.html' }
            /* ,{ from: 'app/favicon.ico' }*/
