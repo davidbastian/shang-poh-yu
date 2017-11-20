@@ -1,4 +1,23 @@
+.about {
+    opacity: 0;
+}
 .about-content {
+
+
+    .js-image {
+        width: 33vw;
+        position: relative;
+        height: 32vw;
+        img {
+            display: block;
+            width: 33vw;
+            position: absolute;
+
+            &:first-child {
+                z-index: 1;
+            }
+        }
+    }
     
 
     .about-content-section {

@@ -4,8 +4,8 @@ const imagemin = require('imagemin');
 const imageminJpegRecompress = require('imagemin-jpeg-recompress');
 const imageminMozjpeg = require('imagemin-mozjpeg');
 
-var input = path.join(__dirname, '../app/common/media/images/')+'*.jpg';
-var ouput = path.join(__dirname, '../dist/common/media/images/');
+var input = path.join(__dirname, '../app/common/media/images/clients/')+'*.jpg';
+var ouput = path.join(__dirname, '../dist/common/media/images/clients');
  
 
 imagemin([input],ouput,{

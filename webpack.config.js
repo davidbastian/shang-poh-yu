@@ -74,7 +74,8 @@ module.exports = {
         new ExtractTextPlugin('style.css'),
         new webpack.HotModuleReplacementPlugin(),
         new CopyWebpackPlugin([
-            { from: 'app/index.html' }
+            { from: 'app/index.html' },
+            { from: 'app/common/media/', to: 'common/media/' }
            /* ,{ from: 'app/favicon.ico' }*/
         ])
     ]

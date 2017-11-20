@@ -28,7 +28,6 @@ export default function(args,name) {
       self.args = args;
 
       self.loader();
-      viewsArray.push(self);
 
       console.log(viewsArray);
     },
@@ -53,8 +52,22 @@ export default function(args,name) {
         if (self.permalink(title) === self.args) {
           self.render(project);
           console.log(project);
+
+          self.current = i+2;
+          
+          if ((i+2) > 4) {
+            self.current = 1;
+          } else {
+            self.current = i+2;
+
+          }
          
-          self.current = i+1;
+         /* if (i <= 4) {
+            self.current = i+1;
+          } else {
+            self.current = 1;
+          }*/
+          
         }
       }
     },

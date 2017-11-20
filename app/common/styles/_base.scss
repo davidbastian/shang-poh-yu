@@ -41,9 +41,11 @@ main {
   transform: translateY(140%);
   overflow: hidden;
   position: fixed;
+  pointer-events: none;
 
   &.active {
     transform: translateY(0vh);
+    pointer-events: initial;
 
   }
 }

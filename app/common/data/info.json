@@ -24,10 +24,10 @@
   },
   "clients": [
     {
-      "image": "common/media/images/clients/adidas.jpg"
+      "image": "common/media/images/clients/clients00.jpg"
     },
     {
-      "image": "common/media/images/clients/adobe.jpg"
+      "image": "common/media/images/clients/clients01.jpg"
     },
     {
       "image": "common/media/images/clients/burger-king.jpg"
@@ -72,6 +72,12 @@
      
   ],
   "awards": [
+
+    {
+      "image": "common/media/images/awards/awards.jpg",
+      "title": ""
+    },
+
     {
       "image": "common/media/images/awards/cannes.jpg",
       "title": "3x Cannes Lions"

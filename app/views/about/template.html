@@ -3,7 +3,7 @@
     <div class="scroll-section">
         <div class="about-content-section">
 
-            <div class="about-content-wrap">
+            <div class="about-content-wrap js-info">
 
                 <h3 class="about_title">
                     <%= info.about.title %>
@@ -27,7 +27,7 @@
 
                     </div>
 
-                    <div class="about-content-profile">
+                    <div class="about-content-profile js-image">
                         <img src=" <%= profile %>" alt="">
                     </div>
 
@@ -44,7 +44,7 @@
                 <div class="about-content-wrap">
     
                     <div class="about-content-wrap-inner align-center">
-                        <div class="about-content-inner">
+                        <div class="about-content-inner js-info">
                             <div class="about-content-heading">
                                 <h4>
                                     <%= info.about.awards %>
@@ -54,22 +54,8 @@
     
                         </div>
     
-                        <div class="about-content_awards">
-                                <div class="about-content_awards-inner">
-                                    <div class="about-content_awards-wrap">
-                                        
-                                                <% for(var i=0; i<info.awards.length; i++) {%>
-                                                        <div class="about-content_awards-item">
-                                                        
-                                                                    <img src="<%= info.awards[i].image %>">
-                
-                                                                    <p><%=info.awards[i].title %></p>
-                                                          </div>
-                                                <% } %>
-                                    </div>
-                                </div>
-                
-                
+                        <div class="js-image">
+                                <img src="<%= info.awards[0].image %>">
                         </div>
     
     
@@ -85,7 +71,7 @@
                     <div class="about-content-wrap">
         
                         <div class="about-content-wrap-inner align-center">
-                            <div class="about-content-inner">
+                            <div class="about-content-inner js-info">
                                 <div class="about-content-heading">
                                     <h4>
                                         <%= info.about.clients %>
@@ -95,22 +81,9 @@
         
                             </div>
         
-                            <div class="about-content_awards">
-                                    <div class="about-content_awards-inner">
-                                        <div class="about-content_awards-wrap">
-                                            
-                                                    <% for(var i=0; i<info.clients.length; i++) {%>
-                                                            <div class="about-content_awards-item">
-                                                            
-                                                                        <img src="<%= info.clients[i].image %>">
-                    
-                                                                       
-                                                              </div>
-                                                    <% } %>
-                                        </div>
-                                    </div>
-                    
-                    
+                            <div class="js-image js-carousel">
+                                    <img src="<%= info.clients[0].image %>">
+                                    <img src="<%= info.clients[1].image %>">
                             </div>
         
         

@@ -19,6 +19,7 @@ export default function() {
         template: _.template(Template),
 
         initialize: function() {
+            self = this;
             this.setup();
             this.render();
         },
@@ -38,6 +39,11 @@ export default function() {
 
             console.log(appendData);
             appendData.insertBefore($('main'));
+
+            self.$el.find('.logo').on('click',function(){
+                $('main').attr('data-last','0');
+                
+            });
         }
 
     });
