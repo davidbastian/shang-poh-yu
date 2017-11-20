@@ -3,8 +3,8 @@ var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
-var ip = require('ip'); 
 
+var ip = require('ip');
 
 module.exports = {
     entry: './app/index.js',
@@ -12,12 +12,17 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
+
     devServer: {
         contentBase: path.join(__dirname, "dist"),
         //compress: true,
         
-        port: 9999,
+        port: 9996,
         host: ip.address()
+    },
+
+    externals: {
+        'TweenLite': 'TweenLite'
     },
     module: {
         rules: [{
@@ -42,17 +47,10 @@ module.exports = {
         }, {
             test: /\.(gif|png|jpe?g)$/i,
             loaders: [
-                'file-loader', {
-                    loader: 'image-webpack-loader',
-                    query: {
-                        name: 'common/media/images/[name].[ext]',
-                        progressive: true,
-                        optimizationLevel: 7,
-                        interlaced: false,
-                        pngquant: {
-                            quality: '65-90',
-                            speed: 4
-                        }
+                {
+                    loader: "file-loader",
+                    options: {
+                        name: 'common/media/images/[name].[ext]'
                     }
                 }
             ]
@@ -62,17 +60,22 @@ module.exports = {
             options: {
                 name: 'common/fonts/[name].[ext]',
             }
+        }, {
+            test: /\.(mp3|wav)$/,
+            loader: 'file-loader',
+            options: {
+                name: 'common/media/audio/[name].[ext]',
+            }
         }]
     },
     plugins: [
         new webpack.LoaderOptionsPlugin({ options: { postcss: [autoprefixer] } }),
+        new webpack.optimize.UglifyJsPlugin(),
         new ExtractTextPlugin('style.css'),
-       //new webpack.optimize.UglifyJsPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-
         new CopyWebpackPlugin([
-            { from: 'app/index.html' },
-            { from: 'app/common/media/', to: 'common/media/' }
+            { from: 'app/index.html' }
+           /* ,{ from: 'app/favicon.ico' }*/
         ])
     ]
 };
