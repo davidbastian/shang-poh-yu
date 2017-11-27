@@ -4,9 +4,10 @@ html,
 body {
  // background: $color02;
   color: $color03;
-  font-family: "Questrial",sans-serif;
-  font-weight: normal;
+  font-family: "Roboto",sans-serif;
+  font-weight: 300;
   font-style: normal;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   letter-spacing: 0.5px;
@@ -77,8 +78,8 @@ h6 {
 
 p,
 a {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 16px;
+  line-height: 26px;
 }
 
 a {

@@ -5,7 +5,7 @@ import { TweenMax, TimelineMax, Expo } from "gsap";
 import SplitText from "../plugins/SplitText.min";
 import VirtualScroll from "virtual-scroll";
 
-export default function(current, area, cta) {
+export default function(current, area, cta, about) {
   var counter = current;
   var el = area.find(".scroll-section");
   var ready = true;
@@ -18,71 +18,6 @@ export default function(current, area, cta) {
   active.addClass("active");
 
   if (cta) {
-   /* if (counter > 0 && counter < size) {
-      if (ready === true) {
-        ready = false;
-
-        setTimeout(function() {
-          console.log("hola");
-
-          el.eq(current + 1).addClass("active");
-         
-
-          TweenMax.fromTo(
-            active,
-            1,
-            {
-              y: 0,
-              opacity: 1
-            },
-            {
-              opacity: 0,
-              y: -100,
-              ease: "Expo.easeInOut",
-              onComplete: function() {
-                
-                current = current +1;
-
-                active.removeClass("active");
-                ready = true;
-                startScroll();
-              }
-            }
-          );
-
-          TweenMax.fromTo(
-            el.eq(current + 1).find(".js-image"),
-            1,
-            {
-              y: 0,
-              opacity: 0
-            },
-            {
-              y: 0,
-              opacity: 1,
-              ease: "Expo.easeInOut"
-            }
-          );
-
-          TweenMax.fromTo(
-            el.eq(current + 1).find(".js-info"),
-            1,
-            {
-              y: 100,
-              opacity: 0
-            },
-            {
-              y: 0,
-              opacity: 1,
-              ease: "Expo.easeInOut"
-            }
-          );
-        }, 1500);
-      }
-    } else if (counter ===0) {
-      startScroll();
-
-    }*/
 
     cta.on("click", function() {
       counter = counter + 1;
@@ -123,6 +58,62 @@ export default function(current, area, cta) {
 
       TweenMax.fromTo(
         el.eq(current + 1).find(".js-info"),
+        1,
+        {
+          y: 100,
+          opacity: 0
+        },
+        {
+          y: 0,
+          opacity: 1,
+          ease: "Expo.easeInOut"
+        }
+      );
+
+      return false;
+    });
+
+
+
+    about.on("click", function() {
+      counter = counter + 5;
+
+      el.eq(current + 5).addClass("active");
+      TweenMax.fromTo(
+        active,
+        1,
+        {
+          y: 0,
+          opacity: 1
+        },
+        {
+          opacity: 0,
+          y: -100,
+          ease: "Expo.easeInOut",
+          onComplete: function() {
+            current = current + 5;
+            active.removeClass("active");
+            ready = true;
+          }
+        }
+      );
+
+      TweenMax.fromTo(
+        el.eq(current + 5).find(".js-image"),
+        1,
+        {
+          y: 0,
+          opacity: 0
+        },
+        {
+          y: 0,
+          opacity: 1,
+          ease: "Expo.easeInOut"
+        }
+      );
+
+      TweenMax.fromTo(
+        el.eq(current + 5).find(".js-info"),
         1,
         {
           y: 100,
@@ -234,9 +225,9 @@ export default function(current, area, cta) {
             );
           } else {
             ready = true;
-            
-            
-            Backbone.history.navigate('#/about', { trigger: true });
+            if (cta) {
+            //  Backbone.history.navigate("#/about", { trigger: true });
+            }
           }
         } else {
           ready = false;

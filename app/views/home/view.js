@@ -13,6 +13,8 @@ import "./style.scss"; //styles
 import animaText from "../../components/animaText";
 
 import ProjectsView from "../projects/view";
+import AboutView from "../about/view";
+import ContactView from "../contact/view";
 
 import snapSection from "../../components/snapSection";
 
@@ -53,7 +55,11 @@ export default function(args, name) {
       var appendData = this.$el.append(setTemplate)[0];
       $("main").html(appendData);
 
+      
+      ContactView(self.$el.find(".home-wrap"));
+      AboutView(self.$el.find(".home-wrap"));
       ProjectsView(self.$el.find(".home-wrap"));
+     
 
       self.checkCurrent();  
       self.addEvents();
@@ -92,7 +98,7 @@ export default function(args, name) {
         section[0].textAnima =  anima;     
       }
 
-      snapSection(self.currentSection, self.$el,self.$el.find('.home-intro-cta'));
+      snapSection(self.currentSection, self.$el,self.$el.find('.home-intro-cta'), self.$el.find('.home-intro-about'), self.$el.find('.home-intro-contact'));
 
       for (var  span = 0; span < self.$el.find('.home-intro h4 span').length; span++) {
         var intro = animaText(self.$el.find('.home-intro h4 span').eq(span), "chars, words","", 0.04, 0.5);
@@ -128,6 +134,8 @@ export default function(args, name) {
 
       self.$el
         .find(".projects-project").on("click", self.openProject.bind(this));
+
+
     },
 
     openProject: function(e) {

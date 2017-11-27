@@ -9,10 +9,10 @@ import './style.scss'; //styles
 import animaText from "../../components/animaText";
 
 
-export default function() {
+export default function(home) {
     var self;
     var View = Backbone.View.extend({
-        tagName: 'section',
+        tagName: 'div',
         className: 'contact',
 
         template: _.template(Template),
@@ -28,7 +28,8 @@ export default function() {
 
             var setTemplate = this.template(json);
             var appendData = this.$el.append(setTemplate)[0];
-            $('main').html(appendData);
+            
+            $(appendData).insertAfter(home.find('.home-content'));
 
             animaText(self.$el.find('h3'), "chars, words","", 0.04, 0.5).play();
             animaText(self.$el.find('.contact-info a').eq(0), "chars, words","", 0.04, 0.5).play();

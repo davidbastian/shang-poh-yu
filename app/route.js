@@ -17,9 +17,6 @@ export default function Router() {
 
         routes: {
             '': 'startHome',
-            'projects(/)': 'startHome',
-            'contact(/)': 'startContact',
-            'about(/)': 'startAbout',
             ':single(/)': 'startSingle'
         },
 
@@ -27,14 +24,6 @@ export default function Router() {
             // console.log(callback, args, name)
             if (name === 'startHome') {
                 self.startHome(args[0],name);
-            }
-
-            if (name === 'startContact') {
-                self.startContact(args[0],name);
-            }
-
-            if (name === 'startAbout') {
-                self.startAbout(args[0],name);
             }
 
             if (name === 'startSingle') {
@@ -53,14 +42,6 @@ export default function Router() {
 
         startHome: function(args,name) {
             HomeView(args,name);
-        },
-
-        startContact: function(args,name) {
-            ContactView(args,name);
-        },
-
-        startAbout: function(args,name) {
-            AboutView(args,name);
         },
 
         startSingle: function(args,name) {
