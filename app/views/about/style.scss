@@ -52,9 +52,7 @@
 
     .about-content-inner {
         width: 33vw;
-
-
-
+        min-width: 500px;
         h4 {
             margin-bottom: 40px ;
         }
@@ -68,7 +66,6 @@
             margin-bottom: 0;
         }
     }
-
 
     .about-content-profile {
         width: 25vw;

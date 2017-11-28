@@ -5,7 +5,7 @@ import { TweenMax, TimelineMax, Expo } from "gsap";
 import SplitText from "../plugins/SplitText.min";
 import VirtualScroll from "virtual-scroll";
 
-export default function(current, area, cta, about) {
+export default function(current, area, cta, about,contact) {
   var counter = current;
   var el = area.find(".scroll-section");
   var ready = true;
@@ -114,6 +114,60 @@ export default function(current, area, cta, about) {
 
       TweenMax.fromTo(
         el.eq(current + 5).find(".js-info"),
+        1,
+        {
+          y: 100,
+          opacity: 0
+        },
+        {
+          y: 0,
+          opacity: 1,
+          ease: "Expo.easeInOut"
+        }
+      );
+
+      return false;
+    });
+
+    contact.on("click", function() {
+      counter = counter + 8;
+
+      el.eq(current + 8).addClass("active");
+      TweenMax.fromTo(
+        active,
+        1,
+        {
+          y: 0,
+          opacity: 1
+        },
+        {
+          opacity: 0,
+          y: -100,
+          ease: "Expo.easeInOut",
+          onComplete: function() {
+            current = current + 8;
+            active.removeClass("active");
+            ready = true;
+          }
+        }
+      );
+
+      TweenMax.fromTo(
+        el.eq(current + 8).find(".js-image"),
+        1,
+        {
+          y: 0,
+          opacity: 0
+        },
+        {
+          y: 0,
+          opacity: 1,
+          ease: "Expo.easeInOut"
+        }
+      );
+
+      TweenMax.fromTo(
+        el.eq(current + 8).find(".js-info"),
         1,
         {
           y: 100,

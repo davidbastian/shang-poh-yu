@@ -101,7 +101,7 @@
                 {
                     "type": "half",
                     "images": [{
-                            "image": "common/media/images/001/JailBlimp-1.jpg",
+                            "image": "common/media/images/001/jailblimp-1.jpg",
                             "alt": "text for seo"
                         },
                         {
@@ -109,7 +109,7 @@
                             "alt": "text for seo"
                         },
                         {
-                            "image": "common/media/images/001/FailChips-2.jpg",
+                            "image": "common/media/images/001/failchips-2.jpg",
                             "alt": "text for seo"
                         },
                         {

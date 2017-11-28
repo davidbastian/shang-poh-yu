@@ -100,15 +100,38 @@ export default function(args, name) {
 
       snapSection(self.currentSection, self.$el,self.$el.find('.home-intro-cta'), self.$el.find('.home-intro-about'), self.$el.find('.home-intro-contact'));
 
-      for (var  span = 0; span < self.$el.find('.home-intro h4 span').length; span++) {
-        var intro = animaText(self.$el.find('.home-intro h4 span').eq(span), "chars, words","", 0.04, 0.5);
-        intro.play();
-      }
+     var introA = animaText(self.$el.find('.home-intro h4 span').eq(0), "chars, words","", 0.04, 0.5);
+      var introB = animaText(self.$el.find('.home-intro h4 span').eq(1), "chars, words","", 0.04, 0.5);
+      var introC = animaText(self.$el.find('.home-intro h4 span').eq(2), "chars, words","", 0.04, 0.5);
+      introA.play();
 
-      for (var l = 0; l < self.$el.find('.home-intro nav a').length; l++) {
-        var link =  animaText(self.$el.find('.home-intro nav a').eq(l), "chars, words","", 0.04, 0.5);
-        link.play();
-      }
+      setTimeout(function(){
+        introB.play();
+      },3000);
+
+      setTimeout(function(){
+
+        introC.play();
+      },3500);
+
+      var linkA =  animaText(self.$el.find('.home-intro nav a').eq(0), "chars, words","", 0.04, 0.5);
+      var linkB =  animaText(self.$el.find('.home-intro nav a').eq(1), "chars, words","", 0.04, 0.5);
+      var linkC =  animaText(self.$el.find('.home-intro nav a').eq(2), "chars, words","", 0.04, 0.5);
+
+     
+        setTimeout(function(){
+        linkA.play();
+      },5000);
+
+      setTimeout(function(){
+        linkB.play();
+      },5200);
+
+      setTimeout(function(){
+        linkC.play();
+      },5400);
+
+
 
       for (var c = 0; c <= 5; c++) {
         TweenMax.fromTo(self.$el.find('[data-count='+c+']'),1.5,{
@@ -135,7 +158,33 @@ export default function(args, name) {
       self.$el
         .find(".projects-project").on("click", self.openProject.bind(this));
 
+        self.$el.find('.projects-project-info').on('mouseenter',self.onMouseEnter.bind(this));
+        self.$el.find('.projects-project-info').on('mouseleave',self.onMouseLeave.bind(this));
 
+    },
+
+    onMouseEnter:function(e){
+      var el = $(e.currentTarget);
+      var line =  el.find('.btn-line');
+
+      TweenMax.to(line,0.5,{
+        width:40,
+        ease:'Expo.easeOut'
+      });
+      
+    },
+
+    onMouseLeave:function(e){
+      var el = $(e.currentTarget);
+      var line =  el.find('.btn-line');
+
+      TweenMax.to(line,0.5,{
+        width:20,
+        ease:'Expo.easeOut'
+      });
+
+     
+      
     },
 
     openProject: function(e) {

@@ -55,6 +55,8 @@
             }
             .single-content_intro-desc {
                 width: 40vw;
+                border-right: 8vw solid transparent;
+                box-sizing: border-box;
                 h4 {
                     margin-bottom: 60px;
                 }
@@ -70,8 +72,11 @@
                 display: flex;
                 justify-content: flex-end;
                 margin-top: 90px;
+                margin-bottom: 180px;
                 .single-content_lock-info-content {
                     width: 40vw;
+                    border-right: 8vw solid transparent;
+                    box-sizing: border-box;
                     h4 {
                         margin-bottom: 30px;
                     }
