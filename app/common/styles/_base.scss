@@ -3,7 +3,7 @@
 html,
 body {
   font-family: 'Aktiv Grotesk Corp';
-  color:$color01;
+  color: $color01;
 }
 
 body {}
@@ -22,8 +22,8 @@ h2 {
 }
 
 h3 {
-    font-size: 30px;
-    line-height: 38px;
+  font-size: 30px;
+  line-height: 38px;
 }
 
 h5 {
@@ -44,11 +44,10 @@ h5 {
 .slide-anima {
   opacity: 0;
 }
-.slide {
 
+.slide {
   &.active {
     z-index: 1;
-
     .slide-anima {
       opacity: 1;
     }
@@ -64,14 +63,12 @@ h5 {
     align-items: center;
     flex-wrap: wrap;
     height: 100vh;
-
     h5 {
       margin-bottom: 60px;
     }
     h2 {
       margin-bottom: 30px;
     }
-
   }
   .carousel {
     width: 45vw;

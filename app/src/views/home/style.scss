@@ -1,15 +1,17 @@
 .home {
-    .intro {
-        align-self: flex-end;
-        margin-bottom: 20vh;
-    
-        nav {
-            margin-top: 60px;
-            display: flex;
-            flex-direction: column;
-
-            a {
-                padding: 5px 0;
+    .slide {
+        &:first-child {
+            .intro {
+                align-self: flex-end;
+                margin-bottom: 20vh;
+                nav {
+                    margin-top: 60px;
+                    display: flex;
+                    flex-direction: column;
+                    a {
+                        padding: 5px 0;
+                    }
+                }
             }
         }
     }

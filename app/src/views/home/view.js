@@ -25,13 +25,17 @@ class View {
 
         this.render(markup);
 
-        const HomeSlider = new SliderModule({
-            wrap: markup
-        });
+     
     }
 
     render(markup) {
         document.body.getElementsByTagName('main')[0].innerHTML = markup.outerHTML;
+
+        const HomeSlider = new SliderModule({
+            wrap: document.body.querySelector('.home'),
+            time:0.5,
+            pos:30,
+        });
     }
 
     setIntro() {
