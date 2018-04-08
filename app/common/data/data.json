@@ -54,5 +54,17 @@
         "src": "common/media/mustang/003.jpg"
       }
     ]
+  },
+  {
+    "client": "Bombardier Recreational Products",
+    "title": "Evinrude<br>E-TEC G2",
+    "role": "UX & UI Design",
+    "introduction": "We introduce you to the world’s most advanced outboard engine, the Evinrude E-TEC G2, and give you the tools to design your own",
+    "link": "http://www.chooseyouretec.com/en-us",
+    "agency": "Cramer-Krasselt",
+    "carousel": [{
+        "src": "common/media/evinrude/001.jpg"
+      }
+    ]
   }]
 }

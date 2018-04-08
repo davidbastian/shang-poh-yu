@@ -9,7 +9,9 @@ class SliderModule {
         this.wrap = args.wrap;
         this.pos = args.pos;
         this.time = args.time;
+        this.ease = args.ease;
         this.deltaReady = true;
+
 
         console.log(this.wrap, 'sliders');
         this.setup();
@@ -48,10 +50,10 @@ class SliderModule {
             const slide = slides[i];
 
             if (slide.classList.contains('active')) {
-                if ((i+1) >= slides.length) {
+                if ((i + 1) >= slides.length) {
                     count = 0;
                 } else {
-                    count = i+1;
+                    count = i + 1;
                 }
                 App.controller.slideActiveUpdate(count);
 
@@ -59,12 +61,44 @@ class SliderModule {
                 const anima = slide.querySelector('.slide-anima');
                 const animaNext = slideNext.querySelector('.slide-anima');
 
+
+                const fade = slide.querySelector('.fade-anima');
+                const fadeNext = slideNext.querySelector('.fade-anima');
+
+
+                TweenMax.fromTo(fade, self.time, {
+                    opacity: 1,
+                }, {
+                    opacity: 0,
+                    ease: self.ease
+                });
+
+                TweenMax.fromTo(fadeNext, self.time, {
+                    opacity: 0,
+                }, {
+                    opacity: 1,
+                    ease: self.ease
+                });
+
+
+
                 TweenMax.fromTo(anima, self.time, {
                     opacity: 1,
                     y: 0,
                 }, {
                     opacity: 0,
-                    ease: 'Power2.easeOut',
+                    ease: self.ease,
+                    y: -self.pos,
+
+                });
+
+
+                TweenMax.fromTo(anima, self.time, {
+                    opacity: 1,
+                    y: 0,
+                }, {
+                    opacity: 0,
+                    ease: self.ease,
                     y: -self.pos,
 
                 });
@@ -74,12 +108,12 @@ class SliderModule {
                     y: self.pos,
                 }, {
                     opacity: 1,
-                    ease: 'Power2.easeOut',
+                    ease: self.ease,
                     y: 0,
-                    onComplete:function(){      
-                         slide.classList.remove('active');
-                         slideNext.classList.add('active');
-                         self.deltaReady = true;
+                    onComplete: function () {
+                        slide.classList.remove('active');
+                        slideNext.classList.add('active');
+                        self.deltaReady = true;
                     }
                 });
             }
@@ -96,10 +130,10 @@ class SliderModule {
             const slide = slides[i];
 
             if (slide.classList.contains('active')) {
-                if ((i-1) <= 0) {
+                if ((i - 1) <= 0) {
                     count = 0;
                 } else {
-                    count = i-1;
+                    count = i - 1;
                 }
                 App.controller.slideActiveUpdate(count);
 
@@ -107,12 +141,34 @@ class SliderModule {
                 const anima = slide.querySelector('.slide-anima');
                 const animaPrev = slidePrev.querySelector('.slide-anima');
 
+
+
+
+                const fade = slide.querySelector('.fade-anima');
+                const fadePrev = slidePrev.querySelector('.fade-anima');
+
+
+                TweenMax.fromTo(fade, self.time, {
+                    opacity: 1,
+                }, {
+                    opacity: 0,
+                    ease: self.ease
+                });
+
+                TweenMax.fromTo(fadePrev, self.time, {
+                    opacity: 0,
+                }, {
+                    opacity: 1,
+                    ease: self.ease
+                });
+
+
                 TweenMax.fromTo(anima, self.time, {
                     opacity: 1,
                     y: 0,
                 }, {
                     opacity: 0,
-                    ease: 'Power2.easeOut',
+                    ease: self.ease,
                     y: self.pos,
 
                 });
@@ -122,12 +178,12 @@ class SliderModule {
                     y: -self.pos,
                 }, {
                     opacity: 1,
-                    ease: 'Power2.easeOut',
+                    ease: self.ease,
                     y: 0,
-                    onComplete:function(){      
-                         slide.classList.remove('active');
-                         slidePrev.classList.add('active');
-                         self.deltaReady = true;
+                    onComplete: function () {
+                        slide.classList.remove('active');
+                        slidePrev.classList.add('active');
+                        self.deltaReady = true;
                     }
                 });
             }

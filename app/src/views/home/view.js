@@ -35,6 +35,7 @@ class View {
             wrap: document.body.querySelector('.home'),
             time:0.5,
             pos:30,
+            ease:'Power2.easeOut'
         });
     }
 
@@ -59,6 +60,7 @@ class View {
                         <a href="">contact</a>
                     </nav>
                 </div>
+                <div class="fade-anima"></div>
             </div>
         </div>
         `;
@@ -78,7 +80,7 @@ class View {
                         <h2>${project.title}</h2>
                         <div class="btn" href="${toSlug(project.title)}">
                             <span class ="line"></span>
-                            <div>see this project</div>
+                            <div>see this case</div>
                         </div>
                     </div>
                 </div>
@@ -95,7 +97,7 @@ class View {
 
     setCarousel(carousel) {
         let carouselHTML = `
-            <div class="carousel">
+            <div class="carousel fade-anima">
             </div>
         `;
         carouselHTML = toHTML(carouselHTML);
