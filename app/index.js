@@ -1,8 +1,9 @@
+import './common/fonts/stylesheet.css';
 import "./common/styles/_base.scss";
 import AppModel from "./src/models/model.app.js";
 import AppView from "./src/views/view.app.js";
 import AppController from "./src/controllers/controller.app.js";
-import Route from "./route.js";
+import RouteController from "./src/controllers/controller.route.js";
 import Data from "./common/data/data.json";
 
 class App {
@@ -10,15 +11,11 @@ class App {
     this.model = AppModel;
     this.view = AppView;
     this.controller = AppController;
-    this.controller.view = this.view;
-    this.controller.model = this.model;
-    this.controller.setData(Data);
-    this.view.init();
+    this.route = RouteController;
   }
 }
 
 window.App = new App();
-Route.start();
-window.App.router = Route;
+window.App.route.init();
 
 export default window.App;
