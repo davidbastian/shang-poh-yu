@@ -33,9 +33,9 @@ class View {
 
         const HomeSlider = new SliderModule({
             wrap: document.body.querySelector('.home'),
-            time:0.5,
-            pos:30,
-            ease:'Power2.easeOut'
+            time:1,
+            pos:100,
+            ease:'Expo.easeInOut'
         });
     }
 
@@ -73,18 +73,18 @@ class View {
             const project = Data.projects[i];
             const carousel = this.setCarousel(project.carousel);
             let markup = `
-            <div class="slide">
+            <a class="slide"  href="#/${toSlug(project.title)}">
                 <div class="content">
                     <div class="intro slide-anima">
                         <h5>${project.client}</h5>
                         <h2>${project.title}</h2>
-                        <div class="btn" href="${toSlug(project.title)}">
+                        <div class="btn">
                             <span class ="line"></span>
                             <div>see this case</div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
             `;
 
             markup = toHTML(markup);
