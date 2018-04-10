@@ -29,10 +29,10 @@ class SliderModule {
         if (this.deltaReady === true) {
 
             if (direction.deltaY > 0) {
-                this.goUp();
+                this.goDown();
             } else {
 
-                this.goDown();
+                this.goUp();
             }
 
             this.deltaReady = false;
