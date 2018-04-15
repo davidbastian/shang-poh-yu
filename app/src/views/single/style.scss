@@ -1,3 +1,140 @@
 .single {
-    
+    h3 {
+        margin-bottom: 30px;
+    }
+    .single-hero {
+        height: 100vh;
+        width: 100vw;
+        box-sizing: border-box;
+        border: 60px solid transparent;
+        position: relative;
+        .single-hero-media {
+            position: relative;
+            widows: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    }
+    .single-title {
+        margin-bottom: 60px;
+        margin-top: 60px;
+        display: flex;
+        justify-content: flex-end;
+        h2 {
+            border-left: 6px solid transparent;
+            box-sizing: border-box;
+            width: 40vw;
+        }
+    }
+    .single-intro {
+        display: flex;
+        justify-content: space-between;
+        .single-intro_info {
+            &>div {
+                margin-bottom: 30px;
+            }
+        }
+        .single-intro_desc {
+            border: 0px;
+            border-left: 12px solid transparent;
+            border-right: 8vw solid transparent;
+            box-sizing: border-box;
+            margin-bottom: 120px;
+            width: 40vw;
+        }
+    }
+    .single-content {
+        .single-content_block {
+            display: flex;
+            flex-wrap: wrap;
+            border: 0px;
+            border-bottom: 12px solid transparent;
+            box-sizing: border-box;
+            .single-content_block-media_item {
+                position: relative;
+                &:before {
+                    padding-top: 56.25%;
+                    content: "";
+                    display: block;
+                }
+                >div {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    background-position: center;
+                    background-size: cover;
+                    background-repeat: no-repeat; //  transform: translateY(40%);
+                    //  opacity: 0;
+                }
+            }
+            .single-content_block-media_full {
+                width: 100%;
+            }
+            .single-content_block-media_half {
+                width: 50%;
+                border: 0;
+                box-sizing: border-box;
+                &:first-child {
+                    border-right: 6px solid transparent;
+                }
+                &:last-child {
+                    border-left: 6px solid transparent;
+                }
+            }
+            .single-content_block-inner {
+                border-left: 6px solid transparent;
+                box-sizing: border-box;
+                width: 40vw;
+                border-right: 8vw solid transparent;
+            }
+        }
+        .single-content_block-info {
+            margin-bottom: 80px;
+            margin-top: 80px;
+            display: flex;
+            justify-content: flex-end;
+            p {
+                margin-bottom: 30px;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+    .single-awards {
+        margin-bottom: 60px;
+        margin-top: 60px;
+        display: flex;
+        justify-content: flex-end;
+        .single-awards-inner {
+            border: 0px;
+            border-left: 12px solid transparent;
+            border-right: 8vw solid transparent;
+            box-sizing: border-box;
+            margin-bottom: 120px;
+            width: 40vw;
+            display: flex;
+            flex-wrap: wrap;
+            h3 {
+                width: 100%;
+            }
+            >div {
+                width: 30%;
+                min-width: 170px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-right: 30px;
+                img {
+                    width: 80%;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
 }

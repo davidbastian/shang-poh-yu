@@ -4,12 +4,25 @@ html,
 body {
   font-family: 'Aktiv Grotesk Corp';
   color: $color01;
+  overflow-x: hidden;
 }
 
 body {}
 
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
 .hide {
   display: none !important;
+}
+
+p,
+a {
+  font-size: 16px;
+  line-height: 26px;
 }
 
 a {

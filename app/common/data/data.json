@@ -20,51 +20,242 @@
     ]
   },
   "projects": [{
-    "client": "Mailchimp",
-    "title": "Did you mean <br> MailChimp?",
-    "role": "UX & UI Design",
-    "introduction": "Introducing MailChimp, One Mispronunciation at a Time.",
-    "link": "https://mailchimp.com/did-you-mean/",
-    "agency": "Droga5 New York",
-    "carousel": [{
-        "src": "common/media/mailchimp/001.jpg"
-      },
-      {
-        "src": "common/media/mailchimp/002.jpg"
-      },
-      {
-        "src": "common/media/mailchimp/003.jpg"
-      }
-    ]
-  },
-  {
-    "client": "Ford motor company",
-    "title": "Pocket <br> Mustang",
-    "role": "UX & UI Design",
-    "introduction": "Unleash your inner Mustang, anywhere.",
-    "link": "http://pocketmustang.ford.co.nz/en/",
-    "agency": "GTB Shanghai",
-    "carousel": [{
-        "src": "common/media/mustang/001.jpg"
-      },
-      {
-        "src": "common/media/mustang/002.png"
-      },
-      {
-        "src": "common/media/mustang/003.jpg"
-      }
-    ]
-  },
-  {
-    "client": "Bombardier Recreational Products",
-    "title": "Evinrude<br>E-TEC G2",
-    "role": "UX & UI Design",
-    "introduction": "We introduce you to the world’s most advanced outboard engine, the Evinrude E-TEC G2, and give you the tools to design your own",
-    "link": "http://www.chooseyouretec.com/en-us",
-    "agency": "Cramer-Krasselt",
-    "carousel": [{
+      "client": "Mailchimp",
+      "title": "Did you mean<br> MailChimp?",
+      "role": "UX & UI Design",
+      "introduction": "Introducing MailChimp,<br>One Mispronunciation at a Time.",
+      "description": "We Did Mean MailChimp. MailChimp is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness.",
+      "link": "https://mailchimp.com/did-you-mean/",
+      "agency": "Droga5 New York",
+      "awards": [{
+          "img": "common/media/awards/cannes.jpg",
+          "text": "3x Cannes Lions"
+        },
+        {
+          "img": "common/media/awards/fwa.jpg",
+          "text": "2x FWA of the Day"
+        }
+      ],
+      "carousel": [{
+          "src": "common/media/mailchimp/001.jpg"
+        },
+        {
+          "src": "common/media/mailchimp/002.jpg"
+        },
+        {
+          "src": "common/media/mailchimp/003.jpg"
+        }
+      ],
+      "content": [{
+          "type": "media",
+          "src": ["common/media/mailchimp/004.jpg"]
+        },
+        {
+          "type": "media",
+          "src": ["common/media/mailchimp/005.jpg", "common/media/mailchimp/006.jpg"]
+        },
+        {
+          "type": "info",
+          "title": "Inspiration and Ideation",
+          "description": ["The campaign was inspired by a 13-year-old girl who mispronounced MailChimp as “MailKimp”, on the podcast ‘Serial’. We took that idea and pushed in new and unexpected directions, turning MailChimp into KaleLimp, JailBlimp, SnailPrimp and many others. The process was highly collaborative, with both Droga5 and Resn bringing ideas to the table. We chose our nine favourites and began a covert operation to insert them into wildly disparate areas of popular culture—and having a lot of fun doing so!"]
+        },
+        {
+          "type": "media",
+          "src": ["common/media/mailchimp/007.jpg"]
+        },
+        {
+          "type": "media",
+          "src": ["common/media/mailchimp/008.gif", "common/media/mailchimp/009.gif"]
+        },
+
+        {
+          "type": "media",
+          "src": ["common/media/mailchimp/010.jpg", "common/media/mailchimp/011.jpg"]
+        },
+
+        {
+          "type": "info",
+          "title": "The Experiences",
+          "description": ["These are two of the interactive experiences I worked on most in the campaign. Was a great time just being trusted and let loose to make some fun play things. Love when you're pleasantly surprised by the moment when things come to life and they're more fun than they were in your head! WhaleSynth was a captivating digital whale noise synthesizer - was so good Brian Eno even tweeted about it. NailChamp started as a joke of having nail artists compete -turns out they were a thing and it the competition got serious!", "We created promotional sites for two products that you could actually buy, FailChips (because everyone knows the broken chips at the bottom of the bag are the tastiest) and SnailPrimp (a beauty treatment made from the secretions of real snails). We made the MaleCrimp Tumblr site (another one I worked on), which kicked off an unexpected fashion trend. And, finally, we built websites for three surreal mood films, MailShrimp, KaleLimp and JailBlimp, by Riff Raff Films."]
+        },
+        {
+          "type": "media",
+          "src": ["common/media/mailchimp/012.jpg"]
+        },
+        {
+          "type": "media",
+          "src": ["common/media/mailchimp/013.jpg", "common/media/mailchimp/014.jpg"]
+        },
+
+        {
+          "type": "media",
+          "src": ["common/media/mailchimp/015.jpg", "common/media/mailchimp/016.jpg"]
+        },
+
+        {
+          "type": "info",
+          "title": "Connecting the dots...",
+          "description": ["When the campaign launched, we kept the connection to MailChimp secret. Initially, we wanted people to enjoy the websites for what they were. The concept was that people would independently find one or two pieces of the campaign and, when their interest was piqued, they would discover the link to MailChimp. The public response was overwhelmingly positive, from across the cultural spectrum. For us, it was exciting to watch people connect the dots and find their way to MailChimp, in surprising ways. For MailChimp, a brand built on playfulness and creativity, it demonstrated that these qualities are, indeed, good for business."]
+        }
+      ]
+    },
+    {
+      "client": "Ford Motor Company",
+      "title": "Pocket<br> Mustang",
+      "role": "UX & UI Design",
+      "introduction": "Unleash your inner Mustang, anywhere.",
+      "description": "We worked with GBT Shanghai to give users the feeling of being a kid again, by using their phones like a toy Mustang.",
+      "link": "http://pocketmustang.ford.co.nz/en/",
+      "agency": "GTB Shangai",
+      "awards": [{
+          "img": "common/media/awards/fwa.jpg",
+          "text": "1x FWA of the Day"
+        },
+        {
+          "img": "common/media/awards/awwwards.jpg",
+          "text": "1x Awwards of the Day"
+        }
+      ],
+      "carousel": [{
+          "src": "common/media/mustang/001.jpg"
+        },
+        {
+          "src": "common/media/mustang/002.png"
+        },
+        {
+          "src": "common/media/mustang/003.jpg"
+        }
+      ],
+      "content": [{
+          "type": "media",
+          "src": ["common/media/mustang/004.jpg"]
+        },
+        {
+          "type": "media",
+          "src": ["common/media/mustang/005.jpg", "common/media/mustang/006.jpg"]
+        },
+        {
+          "type": "info",
+          "title": "A New Road for a Legendary Car",
+          "description": ["The iconic Ford Mustang has been a legend in the automotive world for over 50 years. Yet, in China, it is still a relative newcomer, first hitting the streets in 2015. When it launched, demand to test-drive Mustang was strong, but Ford hit a bottleneck. Enthusiasts were waiting up to three months to take one for a spin. GTB Shanghai partnered with Resn to let people feel the excitement of test-driving a Mustang right now. No waiting lists. No limitations. Just pure exhilaration. To achieve this, we put a miniature Mustang right inside your pocket."]
+        },
+        {
+          "type": "media",
+          "src": ["common/media/mustang/007.jpg"]
+        },
+
+        {
+          "type": "info",
+          "title": "A Journey of Discovery",
+          "description": ["At the beginning of the project, GTB came to Resn with a technical feasibility query. Could we create a mobile browser-based experience that reconstructs a smartphone’s movement in space? We responded with a proof of concept prototype that generated a map of a virtual race track, in real-time, by using data from a phone’s gyroscope and accelerometer. This discovery-led phase included detailed technical prototyping, animatic storyboards and animation previs. Our solution demonstrated that we could create an experience that captured the exhilaration of driving a real Mustang.", "A Ford Mustang is built for performance and Pocket Mustang is no different. During the development phase, we refined our motion analysis system to achieve the highest level of sensitivity and accuracy possible. Eventually, our system could recognize over 300 different phone movements. We also brought in the Resn AI Video Editor (RAVE), for Pocket Mustang’s final reveal. We optimized RAVE to automatically select the best shots and angles for rhythm and timing. To bring customizable elements into the video, we used our interactive content platform, Cake. Cake features a dynamic rendering process that can bring an audience deeper into a story, by adding extra layers of interaction and personalized content."]
+        },
+        {
+          "type": "media",
+          "src": ["common/media/mustang/008.jpg", "common/media/mustang/009.jpg"]
+        },
+
+        {
+          "type": "media",
+          "src": ["common/media/mustang/010.jpg", "common/media/mustang/011.jpg"]
+        },
+
+        {
+          "type": "info",
+          "title": "Go With The Flow",
+          "description": ["The UX gives deep consideration to the flow. The simple instructions are easy to follow and quick to learn. A color selector lets you choose between five different colors of Mustang, with simple swipe gestures. The customization elements ensure your user experience is unique, from the maneuvers you execute, right through to rendering your name on the driver’s helmet in the video with Cake. Every design decision reinforced our goal of creating an experience that was easy to understand, simple to use and, above all, fun to play."]
+        },
+
+        {
+          "type": "media",
+          "src": ["common/media/mustang/012.jpg"]
+        },
+
+        {
+          "type": "info",
+          "title": "Crossing the Finish Line",
+          "description": ["After you record your moves, we give you a little souvenir of your test-drive: a high-octane, shareable video of a real Mustang replicating your every hairpin turn and tire squeal. To do this, we spent two days in the Arizona desert filming World Champion drifter Vaughn Gittin Jr. performing every trick in the book. Using this footage, we analyse your maneuvers and RAVE cuts together a video of your test drive in seconds. Now you can share your expert drifting skills with the world.", "With Pocket Mustang, we achieved our goal of allowing anyone to experience the exhilaration of driving a Ford Mustang.We created a world - first interactive experience with a customizable / sharable outcome while simultaneously raising awareness and creating positive sentiment for the Mustang brand.We rolled out customised and localised versions of Pocket Mustang to four markets in Asia Pacific: China, Taiwan, India and New Zealand.In every market, Pocket Mustang exceeded reach and impact targets and contributed to Mustang’ s growth in market share.Experience Pocket Mustang for yourself by visiting http://pocketmustang.ford.co.nz/en/ on your mobile browser."]
+        },
+
+        {
+          "type": "media",
+          "src": ["common/media/mustang/013.jpg", "common/media/mustang/014.jpg"]
+        },
+
+        {
+          "type": "media",
+          "src": ["common/media/mustang/015.jpg"]
+        }
+      ]
+    },
+    {
+      "client": "Bombardier Recreational Products",
+      "title": "Evinrude<br> E-TEC G2",
+      "role": "UX & UI Design",
+      "introduction": "We introduce you to the world’s most advanced outboard engine, the Evinrude E-TEC G2, and give you the tools to design your own",
+      "description": "Choose Your E-TEC makes the Evinrude E-TEC G2 come to life. Learn all about the engine and explore its breakthrough features. Then, design your own with the simple and intuitive Customizer.",
+      "link": "http://www.chooseyouretec.com/en-us",
+      "agency": "Cramer-Krasselt",
+      "awards": [{
+          "img": "common/media/awards/fwa.jpg",
+          "text": "1x FWA of the Day"
+        },
+        {
+          "img": "common/media/awards/awwwards.jpg",
+          "text": "1x Awwards of the Day"
+        }
+      ],
+      "carousel": [{
         "src": "common/media/evinrude/001.jpg"
-      }
-    ]
-  }]
+      }],
+      "content": [{
+          "type": "media",
+          "src": ["common/media/evinrude/004.jpg"]
+        },
+        {
+          "type": "media",
+          "src": ["common/media/evinrude/005.jpg", "common/media/evinrude/006.jpg"]
+        },
+        {
+          "type": "info",
+          "title": "Customizer Tool",
+          "description": ["Customize an E-TEC G2 by selecting its horsepower and designing its color scheme. Rotate the engine for a complete 360° view of the final result. Once you’ve perfected the design, you can download a dynamic PDF of your engine’s specifications and share it on social media."]
+        },
+        {
+          "type": "media",
+          "src": ["common/media/evinrude/007.jpg"]
+        },
+
+        {
+          "type": "info",
+          "title": "The E-TEC Journey",
+          "description": ["Dynamic camera movements take you through an animated sequence that shows the full extent of the engine, inside and out. So as you journey through the site, the engine moves with you, revealing new angles and layers that show-off its breakthrough design."]
+        },
+        {
+          "type": "media",
+          "src": ["common/media/evinrude/008.jpg", "common/media/evinrude/009.jpg"]
+        },
+
+        {
+          "type": "media",
+          "src": ["common/media/evinrude/010.jpg"]
+        },
+
+        {
+          "type": "info",
+          "title": "Frame Loading",
+          "description": ["With 264 frames in the About sequence, our challenge was to provide a high-quality experience with minimal wait time. Before we let users in, we load the first frame in high-resolution and half the other frames in medium-resolution. Afterward, we continue to improve the frame quality in the background."]
+        },
+
+        {
+          "type": "media",
+          "src": ["common/media/evinrude/011.jpg"]
+        },
+
+        {
+          "type": "media",
+          "src": ["common/media/evinrude/012.jpg", "common/media/evinrude/013.jpg"]
+        }
+      ]
+    }
+  ]
 }
