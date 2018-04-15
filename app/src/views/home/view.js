@@ -22,10 +22,12 @@ class View {
         let intro = this.setIntro();
         markup.appendChild(intro);
         let projects = this.setProjects(markup);
+        let about = this.setAbout(markup);
+        markup.appendChild(about);
 
         this.render(markup);
 
-     
+
     }
 
     render(markup) {
@@ -33,18 +35,43 @@ class View {
 
         const HomeSlider = new SliderModule({
             wrap: document.body.querySelector('.home'),
-            time:1,
-            pos:100,
-            ease:'Expo.easeInOut'
+            time: 1,
+            pos: 100,
+            ease: 'Expo.easeInOut'
         });
+    }
+
+    setAbout(markup) {
+
+        const about = `
+            <div class="slide about">
+                <div class="content">
+                    <div class="slide-anima about-content">
+                        <h2>About</h2>
+                        <div class="about-info ">
+                            <h3>${Data.details.about.intro}</h3>
+                            <p>${Data.details.about.info}</p>
+                        </div>
+
+                        <div class="about-media fade-anima">
+                            <div class="about-media-inner">
+                                <div style="background-image:url(${Data.details.about.img})">   </div>    
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        `;
+
+        return toHTML(about);
+
     }
 
     setIntro() {
         let current;
         if (App.model.slideActive === 0) {
             current = 'active';
-        }
-        else {
+        } else {
             current = '';
 
         }

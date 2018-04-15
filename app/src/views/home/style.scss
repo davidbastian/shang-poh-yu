@@ -15,4 +15,46 @@
             }
         }
     }
+    .about {
+        .about-media {
+            width: 30vw;
+            align-self: baseline;
+        }
+        .about-info {
+            width: 36vw;
+        }
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            align-content: center;
+            width: 100%;
+            h2 {
+                width: 100%;
+            }
+            h3 {
+                margin-bottom: 30px;
+            }
+        }
+        .about-media-inner {
+            position: relative;
+            &:before {
+                padding-top: 56.25%;
+                content: "";
+                display: block;
+            }
+            >div {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat; //  transform: translateY(40%);
+                //  opacity: 0;
+            }
+        }
+    }
 }

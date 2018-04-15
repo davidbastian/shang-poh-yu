@@ -4,7 +4,11 @@
     "email": "shang.p.yu@gmail.com",
     "phone": "+64 1155626",
     "intro": "I’m Shang-Poh Yu.<br> Creative Problem Solver,<br> Interactive Designer.",
-    "aboutme": "",
+    "about": {
+      "info": "A high priority of mine is to learn. I love to discover how things work and why they are created. I am confident in my ability to create high quality, effective outputs with attention to detail. My greatest assets are my ideas and my ability to think conceptually. My approach to creating innovative experiences is to always consider the end user. As a result, I produce targeted, effective and personable outcomes that resonate with audiences.",
+      "intro":"As a designer, I like to push the boundaries of possibility and expectation when it comes to creating innovative interactive experiences.",
+      "img":"common/media/profile/i.jpg"
+    },
     "social": [{
         "title": "Twitter"
 
@@ -18,6 +22,16 @@
 
       }
     ]
+  },
+  "prizes": {
+    "intro":"Have had the plasure of working with some world class creatives to win some cool awards.",
+    "awards":[
+      {
+        "img":"",
+        "text":""
+      }
+    ]
+
   },
   "projects": [{
       "client": "Mailchimp",
