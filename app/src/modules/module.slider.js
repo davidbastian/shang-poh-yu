@@ -24,7 +24,33 @@ class SliderModule {
 
         App.handler = handler;
         handler.on(self.checkDirection.bind(this));
-        this.goUp();
+
+        if (App.model.slideActive !== 0) {
+            this.goUp(2,1);
+        }
+
+         var intro = document.body.querySelector('#see-projects');
+         var about = document.body.querySelector('#about');
+         var contact = document.body.querySelector('#contact');
+
+         intro.addEventListener('click',function(e){
+            self.goUp(0,1);
+            e.preventDefault();
+
+         });
+
+         about.addEventListener('click',function(e){
+            self.goUp(0, 5);
+            e.preventDefault();
+
+         });
+
+         contact.addEventListener('click',function(e){
+            self.goUp(0, 8);
+            e.preventDefault();
+
+         });
+       
     }
 
     checkDirection(direction) {
@@ -32,10 +58,10 @@ class SliderModule {
         if (this.deltaReady === true) {
 
             if (direction.deltaY > 0) {
-                this.goDown();
+                this.goDown(0,1);
             } else {
 
-                this.goUp();
+                this.goUp(0,1);
             }
 
             this.deltaReady = false;
@@ -44,10 +70,18 @@ class SliderModule {
 
     }
 
-    goUp() {
+    goUp(delay,c) {
         const self = this;
         let slides = this.wrap.querySelectorAll('.slide');
-        let count = 0;
+
+        var count = 0;
+
+        var d;
+        if (delay) {
+            d = 0.5;
+        } else {
+            d = 0;
+        }
 
         for (let i = 0; i < slides.length; i++) {
             const slide = slides[i];
@@ -56,7 +90,7 @@ class SliderModule {
                 if ((i + 1) >= slides.length) {
                     count = 0;
                 } else {
-                    count = i + 1;
+                    count = i + c;
                 }
                 App.controller.slideActiveUpdate(count);
 
@@ -73,14 +107,16 @@ class SliderModule {
                     opacity: 1,
                 }, {
                     opacity: 0,
-                    ease: self.ease
+                    ease: self.ease,
+                    delay:d
                 });
 
                 TweenMax.fromTo(fadeNext, self.time, {
                     opacity: 0,
                 }, {
                     opacity: 1,
-                    ease: self.ease
+                    ease: self.ease,
+                    delay:d
                 });
 
 
@@ -92,6 +128,8 @@ class SliderModule {
                     opacity: 0,
                     ease: self.ease,
                     y: -self.pos,
+                    delay:d
+
 
                 });
 
@@ -103,6 +141,7 @@ class SliderModule {
                     opacity: 0,
                     ease: self.ease,
                     y: -self.pos,
+                    delay:d
 
                 });
 
@@ -113,6 +152,7 @@ class SliderModule {
                     opacity: 1,
                     ease: self.ease,
                     y: 0,
+                    delay:d,
                     onComplete: function () {
                         slide.classList.remove('active');
                         slideNext.classList.add('active');

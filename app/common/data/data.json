@@ -337,6 +337,81 @@
           "src": ["common/media/evinrude/012.jpg", "common/media/evinrude/013.jpg"]
         }
       ]
+    },
+    {
+      "client": "Aditional Awesome",
+      "title": "The<br> Archive",
+      "role": "archive",
+      "introduction": "Below are a few other projects I’ve had fun working on. Some are digital, some are not.",
+      "description": "",
+      "link": "",
+      "agency": "",
+      "awards": [{
+          "img": "",
+          "text": ""
+        },
+        {
+          "img": "",
+          "text": ""
+        }
+      ],
+      "carousel": [{
+        "src": "common/media/archive/001.jpg"
+      }],
+      "content": [
+        {
+          "type": "media",
+          "src": ["common/media/archive/002.jpg", "common/media/archive/003.jpg"]
+        },
+        {
+          "type": "info",
+          "title": "The McWhopper",
+          "description": ["Resn teamed up with Y&R New Zealand to create McWhopper.com. The custom Tumblr experience was an open letter from Burger King to McDonald's, detailing every aspect of the Peace Day plan, from the co-branded designs to the recipe for the McWhopper itself.","A synthesis of the restaurants’ signature burgers, the McWhopper combined the the best of the mouth-watering Whopper and the iconic Big Mac. The campaign hinged on the public wanting this burger, so we had to make it look as delicious as possible.","With over 2 billion web impressions and over 700,000 users on the website in the first 48 hours, the response exceeded all expectations. McWhopper was a huge win for Burger King and for Peace Day."]
+        },
+        {
+          "type": "media",
+          "src": ["common/media/archive/004.jpg", "common/media/archive/005.jpg"]
+        },
+        {
+          "type": "info",
+          "title": "Tiffany & Co.",
+          "description": ["We created a winter diorama, using iconic New York landmarks, referencing a digital video by Psyop. The five diorama scenes each incorporate a different shopping category from the Holiday Gift Guide. Products from the Gift Guide are placed within each scene and serve as unique points for user interaction."]
+        },
+        {
+          "type": "media",
+          "src": ["common/media/archive/006.jpg", "common/media/archive/007.jpg"]
+        },
+        {
+          "type": "info",
+          "title": "Toyota BTTF",
+          "description": ["We recreated the dashboard to be as fun, realistic and interactive as possible. Was all in aid of showing off Toyota Mirai's Fueled by the Future campaign.","My role in the project was as a UX and UI designer. A Droga5 and Resn team-up project. Unfortunately we didn't get to meet Doc and Marty..."]
+        },
+        {
+          "type": "media",
+          "src": ["common/media/archive/008.jpg", "common/media/archive/009.jpg"]
+        },
+        {
+          "type": "info",
+          "title": "Resn Labs China",
+          "description": ["The five interactive experiences are based on a past Resn projects, bridge the gap between the digital and physical worlds. The Exhibition Control System (which I designed) provides seamless integration and cross device communication to ensure the entire space can be controlled by a single individual.","Every aspect of Resn Labs China, from the creative concept and software development to the spatial design and build, was undertaken by Resn and the talented build team."]
+        },{
+          "type": "media",
+          "src": ["common/media/archive/010.jpg", "common/media/archive/011.jpg"]
+        },
+        {
+          "type": "info",
+          "title": "Muso",
+          "description": ["The way students are learning is changing, yet how music is being taught has not. I felt that there was a huge opportunity to create a tool that was optimised for music students. A tool which promotes passion and a deeper understanding of what they do. A tool which includes a wider range of material and interactive tutorials to explain concepts which were previously too difficult to understand from reading a piece of paper. But having a tutor with you, a good tutor always available at your finger tips would be a game changer."]
+        },{
+          "type": "media",
+          "src": ["common/media/archive/012.jpg", "common/media/archive/013.jpg"]
+        },
+        {
+          "type": "info",
+          "title": "WheyCartel",
+          "description": ["WheyCartel is a company I help start. It started from us asking questions about what protein suppliments contain and what we were actually putting into our bodies. After some research we found that many other people had the same concerns. We worked with Fonterra to create a pure protein which was as pure as you can get. Something versatile, healthy and flavourless. We sold using a subscription model so that our customers would always have fresh protein delivered when they needed it."]
+        }
+      ]
     }
   ]
 }

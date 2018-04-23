@@ -6,9 +6,8 @@ import {
 } from '../../../common/utils/utils.js';
 import './style.scss';
 
-//import ScrollModule from "../../modules/module.scroll";
+import ScrollModule from "../../modules/module.scroll";
 
-import VirtualScroll from 'virtual-scroll';
 
 class View {
 
@@ -187,6 +186,7 @@ class View {
     }
 
     setAwards(block) {
+
         let markup = `
         <div class="single-awards content">
         </div>
@@ -228,9 +228,21 @@ class View {
         const project = this.checkProject();
         console.log(project);
 
+        console.log(project,'asdasd');
+
+        var archive;
+
+        if (project.role === 'archive') {
+            archive = 'archive';
+
+        }
+        else {
+            archive = '';
+        }
+
 
         let outer = `
-            <section class="single">
+            <section class="single ${archive}">
             </section>
         `;
 
@@ -264,110 +276,60 @@ class View {
 
         this.render(outer);
 
-       /* this.scroll = new ScrollModule({
+        App.singleScroll = new ScrollModule({
             el: document.body.querySelector(".single-wrap"),
             wrap: window,
             ease: 0.06,
             delta: "y",
             direction: "y",
             view: window
-          });*/
+        });
 
-          
 
-         /* self.instance = new VirtualScroll({
-            el: this.scrollWrap,
-            touchMultiplier: 5,
-            firefoxMultiplier:35,
-          });*/
+
+       
 
 
     }
 
     render(markup) {
-        const self = this;
+
+       
+
 
         document.body.getElementsByTagName('main')[0].innerHTML = markup.outerHTML;
-        self.scrollAnima();
 
-        self.scroll = new VirtualScroll({
-          el: self.el
-        });
-  
-        self.addEvents();
-  
-      }
-  
-      addEvents(){
-          const self = this;
-          document.addEventListener('touchmove', function(e) { 
-              e.preventDefault(); 
-          });
-  
-          self.scroll.on(self.onScroll);
-  
-      }
-  
-      onScroll(e) {
-          const self = this;
-          self.targetY += e.deltaY;
-          self.targetY  = Math.max( (self.$el.find('.single-content').height() - $(window).height()) * -1, self.targetY);
-          self.targetY = Math.min(0, self.targetY);
-  
-        //  console.log(self.targetY);
-  
-      }
-  
-      scrollAnima(){
-          const self = this;
-          var run = function() {
-  
-              requestAnimationFrame(run);
-  
-              if (self.scrollActive === true) {
-              self.currentY += (self.targetY - self.currentY) * self.ease;
-  
-              TweenMax.set(self.$el.find('.single-content'),{
-                  yPercent: (self.currentY*100)/self.$el.find('.single-content').outerHeight()
-              });
-  
-              for (let index = 0; index < self.$el.find('.single-content_block-media-item').length; index++) {
-                var element = self.$el.find('.single-content_block-media-item').eq(index);
-                var top = $(window).height() - element[0].getBoundingClientRect().top;
+        TweenMax.ticker.addEventListener("tick", myFunction);
+
+        function myFunction(event) {
+            for (let index = 0; index < document.body.querySelectorAll('.single-content_block-media_item').length; index++) {
+                var element = document.body.querySelectorAll('.single-content_block-media_item')[index];
+                var top = window.innerHeight - element.getBoundingClientRect().top;
                 if (top > 100) {
-                  TweenMax.to(element.find('div'),2.5,{
-                    y:0,
-                    opacity:1,
-                    ease:Expo.easeOut,
-                  });
+                    TweenMax.to(element.querySelector('div'), 2.5, {
+                        y: 0,
+                        opacity: 1,
+                        ease: Expo.easeOut,
+                    });
                 }
-              }
-  
-              var bottom = $(window).height() - $('.single-content_awards')[0].getBoundingClientRect().bottom;
-  
-              if (bottom > 50) {
-                $('main').attr('data-last',self.current);
-                $('main').addClass('open-home');
-                self.scrollActive = false;
-                
-                TweenMax.to(self.$el,0.5,{
-                  opacity:0,
-                  ease:Expo.easeInOut,
-                  onComplete:function(){
-                    self.scroll.off(self.onScroll);
-                    Backbone.history.navigate('#/', { trigger: true });
-                  }
-                });
-                
-              }
-  
             }
-             
-  
-          };
-          
-          run();
-      }
+
+            var bottom = window.innerHeight - document.body.querySelector('.single-awards').getBoundingClientRect().bottom;
+            if (bottom > -100) {
+                TweenMax.ticker.removeEventListener("tick", myFunction);
+                TweenMax.to(document.body.querySelector('.single'), 0.5, {
+                    opacity: 0,
+                    ease: Expo.easeInOut,
+                    onComplete: function () {
+                         App.singleScroll.removeEvents();
+                         window.location.hash = '#';
+                    }
+                });
+
+            }
+        }
+
+    }
 }
 
 const v = new View();

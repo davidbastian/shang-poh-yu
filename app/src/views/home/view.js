@@ -59,11 +59,31 @@ class View {
             ease: 'Expo.easeInOut'
         });
 
-
-
         this.setIntroHello();
-
         this.setTransition();
+
+        for (let i = 0; i < document.body.querySelectorAll('.slide-project').length; i++) {
+            const slide = document.body.querySelectorAll('.slide-project')[i];
+
+            slide.querySelector('.intro-p').addEventListener('mouseenter',function(){
+                TweenMax.to(slide.querySelector('.line'),0.5,{
+                    ease:'Expo.easeOut',
+                    width:40
+                });
+            });
+    
+            slide.querySelector('.intro-p').addEventListener('mouseleave',function(){
+                TweenMax.to(slide.querySelector('.line'),0.5,{
+                    ease:'Expo.easeOut',
+                    width:20
+                });
+            });
+
+            
+        }
+
+        
+
     }
 
     setSlideActive() {
@@ -79,6 +99,8 @@ class View {
             } else {
                 slide.classList.remove('active');
             }
+
+            
 
         }
     }
@@ -115,7 +137,9 @@ class View {
                     height: '100%',
                     ease: 'Expo.easeInOut',
                     onComplete: function () {
-
+                        if (App.handler) {
+                            App.handler.off();
+                        }
                         window.location.hash = href;
 
                     }
@@ -229,9 +253,9 @@ class View {
                 <div class="intro">
                     <h3>${Data.details.intro}</h3>
                     <nav>
-                        <a href="">see projects</a>
-                        <a href="">about</a>
-                        <a href="">contact</a>
+                        <a href="" id="see-projects" >see projects</a>
+                        <a href="" id="about" >about</a>
+                        <a href="" id="contact" >contact</a>
                     </nav>
                 </div>
 
@@ -343,6 +367,19 @@ class View {
                 }
             });
 
+            document.body.querySelector('#about').addEventListener('mouseenter', function (e) {
+                noclick = false;
+                counter = 2;
+                self.setReflection(container);
+
+            });
+
+            document.body.querySelector('#contact').addEventListener('mouseenter', function (e) {
+                noclick = false;
+                self.setGlitch(container);
+            });
+
+
 
 
         });
@@ -431,7 +468,7 @@ class View {
             let markup = `
             <a class="slide slide-project"  href="#/${toSlug(project.title)}">
                 <div class="content">
-                    <div class="intro slide-anima">
+                    <div class="intro intro-p slide-anima">
                         <h5>${project.client}</h5>
                         <h2>${project.title}</h2>
                         <div class="btn">
@@ -447,6 +484,8 @@ class View {
             markup.querySelector('.content').appendChild(carousel);
 
             mainMarkup.appendChild(markup);
+
+            
 
         }
     }

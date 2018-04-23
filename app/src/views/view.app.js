@@ -7,13 +7,12 @@ class View {
     setup (){
         const markup  = `
             <header>
-                <a id="logo" href="#">
-                <img src="" alt="">
-                </a>
+            <a href="#/" class="logo">
+                <img src="common/media/profile/logo.jpg" alt="" style="position: absolute; width: 100%;"/>
+            </a>
             </header>
 
             <main>
-        
             </main>
         `;
 
