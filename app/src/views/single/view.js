@@ -273,9 +273,7 @@ class View {
             view: window
           });*/
 
-          var scrollArea = (markup - outer) * 100 / markup;
-
-          console.log(scrollArea);
+          
 
          /* self.instance = new VirtualScroll({
             el: this.scrollWrap,
@@ -283,11 +281,93 @@ class View {
             firefoxMultiplier:35,
           });*/
 
+
     }
 
     render(markup) {
+        const self = this;
+
         document.body.getElementsByTagName('main')[0].innerHTML = markup.outerHTML;
-    }
+        self.scrollAnima();
+
+        self.scroll = new VirtualScroll({
+          el: self.el
+        });
+  
+        self.addEvents();
+  
+      }
+  
+      addEvents(){
+          const self = this;
+          document.addEventListener('touchmove', function(e) { 
+              e.preventDefault(); 
+          });
+  
+          self.scroll.on(self.onScroll);
+  
+      }
+  
+      onScroll(e) {
+          const self = this;
+          self.targetY += e.deltaY;
+          self.targetY  = Math.max( (self.$el.find('.single-content').height() - $(window).height()) * -1, self.targetY);
+          self.targetY = Math.min(0, self.targetY);
+  
+        //  console.log(self.targetY);
+  
+      }
+  
+      scrollAnima(){
+          const self = this;
+          var run = function() {
+  
+              requestAnimationFrame(run);
+  
+              if (self.scrollActive === true) {
+              self.currentY += (self.targetY - self.currentY) * self.ease;
+  
+              TweenMax.set(self.$el.find('.single-content'),{
+                  yPercent: (self.currentY*100)/self.$el.find('.single-content').outerHeight()
+              });
+  
+              for (let index = 0; index < self.$el.find('.single-content_block-media-item').length; index++) {
+                var element = self.$el.find('.single-content_block-media-item').eq(index);
+                var top = $(window).height() - element[0].getBoundingClientRect().top;
+                if (top > 100) {
+                  TweenMax.to(element.find('div'),2.5,{
+                    y:0,
+                    opacity:1,
+                    ease:Expo.easeOut,
+                  });
+                }
+              }
+  
+              var bottom = $(window).height() - $('.single-content_awards')[0].getBoundingClientRect().bottom;
+  
+              if (bottom > 50) {
+                $('main').attr('data-last',self.current);
+                $('main').addClass('open-home');
+                self.scrollActive = false;
+                
+                TweenMax.to(self.$el,0.5,{
+                  opacity:0,
+                  ease:Expo.easeInOut,
+                  onComplete:function(){
+                    self.scroll.off(self.onScroll);
+                    Backbone.history.navigate('#/', { trigger: true });
+                  }
+                });
+                
+              }
+  
+            }
+             
+  
+          };
+          
+          run();
+      }
 }
 
 const v = new View();
