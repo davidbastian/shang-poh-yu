@@ -14,6 +14,28 @@
                 }
             }
         }
+
+        .img {
+            &.active {
+                z-index: 1;
+            }
+
+        }
+    }
+    #hello {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        left: -10vw;
+        top: 0;
+        z-index: -1;
+
+        canvas {
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+        }
     }
     .about {
         .about-media {
@@ -21,7 +43,7 @@
             align-self: baseline;
         }
         .about-info {
-            width: 36vw;
+            width: 37vw;
         }
         .about-content {
             display: flex;
@@ -55,6 +77,86 @@
                 background-repeat: no-repeat; //  transform: translateY(40%);
                 //  opacity: 0;
             }
+        }
+    }
+    .recognition-content {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        .fade-anima {
+            display: flex;
+            width: 80%;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+        h3 {
+            border-right: 13vw solid transparent;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        h6 {
+            font-size: 0.7vw;
+            line-height: 0.9vw;
+        }
+        .recognition-item {
+            width: 33.333%;
+            box-sizing: border-box;
+            border: 15px solid transparent;
+            border-left: 0;
+            display: flex;
+            flex-direction: column;
+            img {
+                width: 66.6666%;
+                margin-bottom: 1.5vw;
+            }
+        }
+    }
+
+    .awards-content {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        .fade-anima {
+            display: flex;
+            width: 80%;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+        h3 {
+            border-right: 13vw solid transparent;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        .award-item img {
+            width: 66.6666%;
+            margin-bottom: 1.5vw;
+        }
+        h6 {
+            font-size: 0.7vw;
+            line-height: 0.9vw;
+        }
+        .award-item {
+            width: 33.333%;
+            box-sizing: border-box;
+            border: 15px solid transparent;
+            border-left: 0;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    .contact {
+        text-align: center;
+        .content {
+            justify-content: center;
+        }
+        .fade-anima {
+            opacity: 0;
+            position: fixed;
+            bottom: 0;
+            width: 100vw;
+            margin-bottom: 60px;
         }
     }
 }

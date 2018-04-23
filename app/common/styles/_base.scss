@@ -7,6 +7,10 @@ body {
   overflow-x: hidden;
 }
 
+.dg {
+  z-index: 99 !important;
+}
+
 body {}
 
 header {
@@ -105,4 +109,32 @@ h5 {
 .content {
   width: 80vw;
   margin: 0 auto;
+}
+
+.fake-hero {
+  height: 100vh;
+  width: 100vw;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 60px solid transparent;
+  position: fixed;
+  z-index: 10;
+  .carousel {
+    width: 45vw;
+    height: 40vw;
+    position: absolute;
+    .img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: #b7b7b7;
+      background-position: center;
+      background-size: cover;
+      &.active {
+        z-index: 1;
+      }
+    }
+  }
 }

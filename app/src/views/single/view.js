@@ -6,6 +6,10 @@ import {
 } from '../../../common/utils/utils.js';
 import './style.scss';
 
+//import ScrollModule from "../../modules/module.scroll";
+
+import VirtualScroll from 'virtual-scroll';
+
 class View {
 
     init(params) {
@@ -13,6 +17,14 @@ class View {
         this.params = params;
 
         this.setup();
+        if (document.querySelector('.fake-hero')) {
+            document.querySelector('.fake-hero').outerHTML = '';
+        }
+
+        if (App.handler) {
+            App.handler.off();
+        }
+
     }
 
     checkProject() {
@@ -203,7 +215,7 @@ class View {
             d = toHTML(d);
 
             markupInner.appendChild(d);
-            
+
         }
 
         markup.appendChild(markupInner);
@@ -216,11 +228,25 @@ class View {
         const project = this.checkProject();
         console.log(project);
 
-        let markup = `
+
+        let outer = `
             <section class="single">
             </section>
         `;
+
+        this.el = outer;
+
+        outer = toHTML(outer);
+
+
+        let markup = `
+            <div class="single-wrap">
+            </div>
+        `;
+
         markup = toHTML(markup);
+
+
 
         let hero = this.setHero(project);
         let title = this.setTitle(project);
@@ -234,7 +260,29 @@ class View {
         markup.appendChild(blocks);
         markup.appendChild(awards);
 
-        this.render(markup);
+        outer.appendChild(markup);
+
+        this.render(outer);
+
+       /* this.scroll = new ScrollModule({
+            el: document.body.querySelector(".single-wrap"),
+            wrap: window,
+            ease: 0.06,
+            delta: "y",
+            direction: "y",
+            view: window
+          });*/
+
+          var scrollArea = (markup - outer) * 100 / markup;
+
+          console.log(scrollArea);
+
+         /* self.instance = new VirtualScroll({
+            el: this.scrollWrap,
+            touchMultiplier: 5,
+            firefoxMultiplier:35,
+          });*/
+
     }
 
     render(markup) {

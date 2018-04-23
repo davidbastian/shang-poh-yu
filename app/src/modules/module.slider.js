@@ -21,7 +21,10 @@ class SliderModule {
     setup() {
         const self = this;
         let handler = new VirtualScroll({});
+
+        App.handler = handler;
         handler.on(self.checkDirection.bind(this));
+        this.goUp();
     }
 
     checkDirection(direction) {

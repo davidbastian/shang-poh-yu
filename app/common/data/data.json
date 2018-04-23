@@ -6,8 +6,8 @@
     "intro": "I’m Shang-Poh Yu.<br> Creative Problem Solver,<br> Interactive Designer.",
     "about": {
       "info": "A high priority of mine is to learn. I love to discover how things work and why they are created. I am confident in my ability to create high quality, effective outputs with attention to detail. My greatest assets are my ideas and my ability to think conceptually. My approach to creating innovative experiences is to always consider the end user. As a result, I produce targeted, effective and personable outcomes that resonate with audiences.",
-      "intro":"As a designer, I like to push the boundaries of possibility and expectation when it comes to creating innovative interactive experiences.",
-      "img":"common/media/profile/i.jpg"
+      "intro": "As a designer, I like to push the boundaries of possibility and expectation when it comes to creating innovative interactive experiences.",
+      "img": "common/media/profile/i.jpg"
     },
     "social": [{
         "title": "Twitter"
@@ -23,16 +23,83 @@
       }
     ]
   },
-  "prizes": {
-    "intro":"Have had the plasure of working with some world class creatives to win some cool awards.",
-    "awards":[
-      {
-        "img":"",
-        "text":""
-      }
-    ]
+  "recognition": [{
+      "intro": "Have had the pleasure of working with some world class creatives to win some cool awards.",
+      "logos": [{
+          "img": "common/media/brands/cannes.jpg",
+          "text": "24 Cannes Lions<br> Inc. Grand Prix"
+        },
 
-  },
+        {
+          "img": "common/media/brands/fwa.jpg",
+          "text": "10 Favourite<br>Website Awards"
+        },
+
+        {
+          "img": "common/media/brands/awwwards.jpg",
+          "text": "8 Awwwards"
+        },
+
+        {
+          "img": "common/media/brands/dad.jpg",
+          "text": "9 Design & Art<br>Direction Awards"
+        },
+        {
+          "img": "common/media/brands/oneshow.jpg",
+          "text": "8 The One Show<br>Awards"
+        },
+        {
+          "img": "common/media/brands/webby.jpg",
+          "text": "3 Webbys"
+        },
+        {
+          "img": "common/media/brands/css.jpg",
+          "text": "7 CSS Design <br> Awards"
+        },
+        {
+          "img": "common/media/brands/best.jpg",
+          "text": "5 Best Awards"
+        }
+      ]
+
+    }, {
+      "intro": "Some clients I have the pleasure <br>of working with.",
+      "logos": [{
+          "img": "common/media/brands/google.jpg"
+        },
+
+        {
+          "img": "common/media/brands/wk.jpg"
+        },
+
+        {
+          "img": "common/media/brands/clemenger.jpg"
+        },
+
+        {
+          "img": "common/media/brands/adidas.jpg"
+        },
+        {
+          "img": "common/media/brands/adobe.jpg"
+        },
+        {
+          "img": "common/media/brands/burger.jpg"
+        },
+        {
+          "img": "common/media/brands/ea.jpg"
+        },
+        {
+          "img": "common/media/brands/ogilvy.jpg"
+        },
+        {
+          "img": "common/media/brands/huawei.jpg"
+        }
+      ]
+
+    }
+
+  ],
+
   "projects": [{
       "client": "Mailchimp",
       "title": "Did you mean<br> MailChimp?",
@@ -42,11 +109,11 @@
       "link": "https://mailchimp.com/did-you-mean/",
       "agency": "Droga5 New York",
       "awards": [{
-          "img": "common/media/awards/cannes.jpg",
+          "img": "common/media/brands/cannes.jpg",
           "text": "3x Cannes Lions"
         },
         {
-          "img": "common/media/awards/fwa.jpg",
+          "img": "common/media/brands/fwa.jpg",
           "text": "2x FWA of the Day"
         }
       ],
@@ -122,11 +189,11 @@
       "link": "http://pocketmustang.ford.co.nz/en/",
       "agency": "GTB Shangai",
       "awards": [{
-          "img": "common/media/awards/fwa.jpg",
+          "img": "common/media/brands/fwa.jpg",
           "text": "1x FWA of the Day"
         },
         {
-          "img": "common/media/awards/awwwards.jpg",
+          "img": "common/media/brands/awwwards.jpg",
           "text": "1x Awwards of the Day"
         }
       ],
@@ -210,11 +277,11 @@
       "link": "http://www.chooseyouretec.com/en-us",
       "agency": "Cramer-Krasselt",
       "awards": [{
-          "img": "common/media/awards/fwa.jpg",
+          "img": "common/media/brands/fwa.jpg",
           "text": "1x FWA of the Day"
         },
         {
-          "img": "common/media/awards/awwwards.jpg",
+          "img": "common/media/brands/awwwards.jpg",
           "text": "1x Awwards of the Day"
         }
       ],

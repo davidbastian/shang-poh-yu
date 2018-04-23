@@ -25,6 +25,7 @@ class RouteController {
     checkParams(params) {
         console.log(params,'params');
         if (params === "/") {
+            history.replaceState(undefined, undefined, "#");
             HomeView.init(params);
         } else {
            SingleView.init(params);
