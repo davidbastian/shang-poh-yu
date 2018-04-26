@@ -5,8 +5,12 @@ import {
     toSlug
 } from '../../../common/utils/utils.js';
 import './style.scss';
+import {
+    constrain
+} from '../../../common/utils/utils';
 
-import ScrollModule from "../../modules/module.scroll";
+import VirtualScroll from 'virtual-scroll';
+
 
 
 class View {
@@ -15,14 +19,126 @@ class View {
         console.log('start SingleView', window, params);
         this.params = params;
 
+
         this.setup();
         if (document.querySelector('.fake-hero')) {
             document.querySelector('.fake-hero').outerHTML = '';
         }
-
         if (App.handler) {
             App.handler.off();
         }
+    }
+
+    setup() {
+        const project = this.checkProject();
+        console.log(project);
+
+        console.log(project, 'asdasd');
+
+        var archive;
+
+        if (project.role === 'archive') {
+            archive = 'archive';
+
+        } else {
+            archive = '';
+        }
+
+
+        let outer = `
+            <section class="single ${archive}">
+            </section>
+        `;
+
+        this.el = outer;
+
+        outer = toHTML(outer);
+
+
+        let markup = `
+            <div class="single-wrap">
+            </div>
+        `;
+
+        markup = toHTML(markup);
+
+
+
+        let hero = this.setHero(project);
+        let title = this.setTitle(project);
+        let intro = this.setIntro(project);
+        let blocks = this.setBlocks(project);
+        let awards = this.setAwards(project);
+
+        markup.appendChild(hero);
+        markup.appendChild(title);
+        markup.appendChild(intro);
+        markup.appendChild(blocks);
+        markup.appendChild(awards);
+
+        outer.appendChild(markup);
+
+        this.render(outer);
+
+    }
+
+    render(markup) {
+
+        document.body.getElementsByTagName('main')[0].innerHTML = markup.outerHTML;
+        TweenMax.ticker.addEventListener("tick", myFunction);
+
+        var instance = new VirtualScroll();
+        var targetY = 0;
+        var pos = 0;
+        var ease = 0.06;
+        var el = document.body.querySelector('.single-wrap');
+        var area = (el.offsetHeight - window.innerHeight) * 100 / el.offsetHeight;
+
+        console.log(el);
+
+        instance.on(function (e) {
+            targetY += e.deltaY * 0.01;
+            area = (el.offsetHeight - window.innerHeight) * 100 / el.offsetHeight;
+            targetY = constrain(targetY, -area, 0);
+
+            //   console.log(targetY,e.deltaY);
+        });
+
+        function myFunction(event) {
+            pos += (targetY - pos) * ease;
+            //console.log(pos);
+            el.style.transform = "translateY(" + pos + "%)";
+
+            for (let index = 0; index < el.querySelectorAll('.single-content_block-media_item').length; index++) {
+                var element = el.querySelectorAll('.single-content_block-media_item')[index];
+                var top = window.innerHeight - element.getBoundingClientRect().top;
+                if (top > 100) {
+                    TweenMax.to(element.querySelector('div'), 2.5, {
+                        y: 0,
+                        opacity: 1,
+                        ease: Expo.easeOut,
+                    });
+                }
+            }
+
+            var bottom = window.innerHeight - el.querySelector('.single-awards').getBoundingClientRect().bottom;
+            if (bottom > -100) {
+                TweenMax.ticker.removeEventListener("tick", myFunction);
+                TweenMax.to(document.body.querySelector('.single'), 0.5, {
+                    opacity: 0,
+                    ease: Expo.easeInOut,
+                    onComplete: function () {
+                        instance.off();
+                        window.location.hash = '#';
+                    }
+                });
+
+            }
+        }
+        window.addEventListener("hashchange", function () {
+            TweenMax.ticker.removeEventListener("tick", myFunction);
+            instance.off();
+        });
 
     }
 
@@ -40,16 +156,36 @@ class View {
     }
 
     setHero(project) {
+        var img;
+        var t;
 
-        const markup = `
+
+        console.log(App.heroImage);
+
+        if (App.heroImage) {
+
+            t = App.heroImage.transform;
+            img = App.heroImage.backgroundImage;
+
+        } else {
+            img = `url(${project.carousel[0].src})`;
+            t = ``;
+        }
+
+        let markup = `
         <div class="single-hero">
-            <div class="single-hero-media" style="background-image:url(${project.carousel[0].src})">
+            <div class="single-hero-media">
 
             </div>
         </div>
         `;
 
-        return toHTML(markup);
+        markup = toHTML(markup);
+
+        markup.querySelector('.single-hero-media').style.backgroundImage = img;
+        markup.querySelector('.single-hero-media').style.transform = t;
+
+        return markup;
 
     }
 
@@ -90,6 +226,10 @@ class View {
             </div>
         </div>
         `;
+
+
+
+
         return toHTML(markup);
     }
 
@@ -224,112 +364,6 @@ class View {
 
     }
 
-    setup() {
-        const project = this.checkProject();
-        console.log(project);
-
-        console.log(project,'asdasd');
-
-        var archive;
-
-        if (project.role === 'archive') {
-            archive = 'archive';
-
-        }
-        else {
-            archive = '';
-        }
-
-
-        let outer = `
-            <section class="single ${archive}">
-            </section>
-        `;
-
-        this.el = outer;
-
-        outer = toHTML(outer);
-
-
-        let markup = `
-            <div class="single-wrap">
-            </div>
-        `;
-
-        markup = toHTML(markup);
-
-
-
-        let hero = this.setHero(project);
-        let title = this.setTitle(project);
-        let intro = this.setIntro(project);
-        let blocks = this.setBlocks(project);
-        let awards = this.setAwards(project);
-
-        markup.appendChild(hero);
-        markup.appendChild(title);
-        markup.appendChild(intro);
-        markup.appendChild(blocks);
-        markup.appendChild(awards);
-
-        outer.appendChild(markup);
-
-        this.render(outer);
-
-        App.singleScroll = new ScrollModule({
-            el: document.body.querySelector(".single-wrap"),
-            wrap: window,
-            ease: 0.06,
-            delta: "y",
-            direction: "y",
-            view: window
-        });
-
-
-
-       
-
-
-    }
-
-    render(markup) {
-
-       
-
-
-        document.body.getElementsByTagName('main')[0].innerHTML = markup.outerHTML;
-
-        TweenMax.ticker.addEventListener("tick", myFunction);
-
-        function myFunction(event) {
-            for (let index = 0; index < document.body.querySelectorAll('.single-content_block-media_item').length; index++) {
-                var element = document.body.querySelectorAll('.single-content_block-media_item')[index];
-                var top = window.innerHeight - element.getBoundingClientRect().top;
-                if (top > 100) {
-                    TweenMax.to(element.querySelector('div'), 2.5, {
-                        y: 0,
-                        opacity: 1,
-                        ease: Expo.easeOut,
-                    });
-                }
-            }
-
-            var bottom = window.innerHeight - document.body.querySelector('.single-awards').getBoundingClientRect().bottom;
-            if (bottom > -100) {
-                TweenMax.ticker.removeEventListener("tick", myFunction);
-                TweenMax.to(document.body.querySelector('.single'), 0.5, {
-                    opacity: 0,
-                    ease: Expo.easeInOut,
-                    onComplete: function () {
-                         App.singleScroll.removeEvents();
-                         window.location.hash = '#';
-                    }
-                });
-
-            }
-        }
-
-    }
 }
 
 const v = new View();

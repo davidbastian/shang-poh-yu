@@ -154,10 +154,14 @@ html,
 body {
   font-family: 'Aktiv Grotesk Corp';
   color: #0c1322;
+  overflow: hidden;
   overflow-x: hidden; }
 
 .dg {
   z-index: 99 !important; }
+
+body {
+  overflow: hidden; }
 
 header {
   position: fixed;
@@ -248,7 +252,8 @@ h5 {
     width: 45vw;
     height: 40vw;
     position: relative;
-    opacity: 0; }
+    opacity: 0;
+    overflow: hidden; }
     .slide .carousel .img {
       width: 100%;
       height: 100%;
@@ -274,7 +279,8 @@ h5 {
   .fake-hero .carousel {
     width: 45vw;
     height: 40vw;
-    position: absolute; }
+    position: absolute;
+    overflow: hidden; }
     .fake-hero .carousel .img {
       width: 100%;
       height: 100%;
@@ -286,10 +292,14 @@ h5 {
       background-size: cover; }
       .fake-hero .carousel .img.active {
         z-index: 1; }
+.home .split {
+  display: inline-block; }
+
 .home .slide:first-child .intro {
   -ms-flex-item-align: end;
   align-self: flex-end;
-  margin-bottom: 20vh; }
+  margin-bottom: 20vh;
+  opacity: 0; }
   .home .slide:first-child .intro nav {
     margin-top: 60px;
     display: -webkit-box;
@@ -315,7 +325,7 @@ h5 {
   z-index: -1; }
   .home #hello canvas {
     height: 100%;
-    left: 0;
+    right: 0;
     position: absolute;
     top: 0; }
 
@@ -487,7 +497,8 @@ h5 {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     border: 60px solid transparent;
-    position: relative; }
+    position: relative;
+    overflow: hidden; }
     .single .single-hero .single-hero-media {
       position: relative;
       widows: 100%;
@@ -599,7 +610,7 @@ h5 {
       border-right: 8vw solid transparent;
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
-      margin-bottom: 280px;
+      margin-bottom: 480px;
       width: 40vw;
       display: -webkit-box;
       display: -ms-flexbox;

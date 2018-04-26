@@ -20,6 +20,7 @@
         box-sizing: border-box;
         border: 60px solid transparent;
         position: relative;
+        overflow: hidden;
         .single-hero-media {
             position: relative;
             widows: 100%;
@@ -130,7 +131,7 @@
             border-left: 12px solid transparent;
             border-right: 8vw solid transparent;
             box-sizing: border-box;
-            margin-bottom: 280px;
+            margin-bottom: 480px;
             width: 40vw;
             display: flex;
             flex-wrap: wrap;

@@ -2,8 +2,8 @@
   "details": {
     "logo": "Shang-Poh Yu",
     "email": "shang.p.yu@gmail.com",
-    "phone": "+64 1155626",
-    "intro": "I’m Shang-Poh Yu.<br> Creative Problem Solver,<br> Interactive Designer.",
+    "phone": "+64 21 11 55 626",
+    "intro": "<div class='split'>I’m Shang-Poh Yu. </div><br><div class='split'>Creative Problem Solver,</div><br><div class='split'> Interactive Designer.</div>",
     "about": {
       "info": "A high priority of mine is to learn. I love to discover how things work and why they are created. I am confident in my ability to create high quality, effective outputs with attention to detail. My greatest assets are my ideas and my ability to think conceptually. My approach to creating innovative experiences is to always consider the end user. As a result, I produce targeted, effective and personable outcomes that resonate with audiences.",
       "intro": "As a designer, I like to push the boundaries of possibility and expectation when it comes to creating innovative interactive experiences.",
@@ -287,6 +287,10 @@
       ],
       "carousel": [{
         "src": "common/media/evinrude/001.jpg"
+      },{
+        "src": "common/media/evinrude/001a.jpg"
+      },{
+        "src": "common/media/evinrude/001b.jpg"
       }],
       "content": [{
           "type": "media",
@@ -357,6 +361,12 @@
       ],
       "carousel": [{
         "src": "common/media/archive/001.jpg"
+      },{
+        "src": "common/media/archive/001a.jpg"
+      },{
+        "src": "common/media/archive/001b.jpg"
+      },{
+        "src": "common/media/archive/001c.jpg"
       }],
       "content": [
         {

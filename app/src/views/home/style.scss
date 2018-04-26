@@ -1,9 +1,17 @@
 .home {
+    .split {
+        display: inline-block;
+
+        .char {
+        //    opacity: 0;
+        }
+    }
     .slide {
         &:first-child {
             .intro {
                 align-self: flex-end;
                 margin-bottom: 20vh;
+                opacity: 0;
                 nav {
                     margin-top: 60px;
                     display: flex;
@@ -14,12 +22,10 @@
                 }
             }
         }
-
         .img {
             &.active {
                 z-index: 1;
             }
-
         }
     }
     #hello {
@@ -29,10 +35,9 @@
         transform: translateX(-10vw);
         top: 0;
         z-index: -1;
-
         canvas {
             height: 100%;
-            left: 0;
+            right: 0;
             position: absolute;
             top: 0;
         }
@@ -112,7 +117,6 @@
             }
         }
     }
-
     .awards-content {
         display: flex;
         width: 100%;

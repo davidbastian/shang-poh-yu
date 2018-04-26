@@ -20,15 +20,95 @@ import {
 import * as PIXI from 'pixi.js';
 
 import {
-    TweenMax
+    TweenMax,
+    TimelineMax
 } from 'gsap';
-import dat from 'dat.gui';
+
+
+//import dat from 'dat.gui';
+
+import SplitText from '../../../common/plugins/SplitText.min';
 
 
 class View {
     init(params) {
+        const self = this;
         console.log('start HomeView', window, params);
-        this.setup();
+
+        let app = new PIXI.Application(window.innerWidth, window.innerHeight, {
+            transparent: true
+        });
+
+
+        const hello = [{
+                'char': 'H',
+                'x': 800,
+                'y': -20
+            },
+            {
+                'char': 'E',
+                'x': 1205,
+                'y': 97
+            },
+            {
+                'char': 'L',
+                'x': 820,
+                'y': 335,
+            },
+            {
+                'char': 'L',
+                'x': 1220,
+                'y': 450,
+            },
+            {
+                'char': 'O',
+                'x': 780,
+                'y': 695
+            }
+        ];
+
+        const loader = new PIXI.loaders.Loader();
+        for (let i = 0; i < hello.length; i++) {
+            const char = hello[i];
+            loader.add(char.char + i, 'common/media/chars/' + char.char + '.png');
+        }
+
+        loader.load(function (loader, r) {
+            var container = new PIXI.Container();
+            container.filters = null;
+            app.stage.addChild(container);
+
+            var graphics = new PIXI.Graphics();
+            graphics.beginFill(0xFFFFFF, 1);
+            graphics.drawRect(0, 0, window.innerWidth, window.innerHeight);
+
+            container.addChild(graphics);
+
+            for (let j = 0; j < hello.length; j++) {
+                const char = hello[j];
+                var containerChar = new PIXI.Container();
+                var texture = PIXI.Texture.fromImage('common/media/chars/' + char.char + '.png');
+                var letter = new PIXI.Sprite(texture);
+                letter.scale.x = letter.scale.y = 0.3;
+                letter.x = char.x;
+
+                letter.y = char.y;
+                containerChar.addChild(letter);
+
+                containerChar.alpha = 0;
+
+                container.addChild(containerChar);
+
+            }
+
+            self.container = container;
+
+            self.setup();
+        });
+
+        self.appPIXI = app;
+
+       
     }
 
     setup() {
@@ -45,8 +125,10 @@ class View {
         let contact = this.setContact(markup);
 
         this.render(markup);
-
-
+        if (App.singleScroll) {
+            App.singleScroll.removeEvents();
+            App.singleScroll = null;
+        }
     }
 
     render(markup) {
@@ -65,24 +147,44 @@ class View {
         for (let i = 0; i < document.body.querySelectorAll('.slide-project').length; i++) {
             const slide = document.body.querySelectorAll('.slide-project')[i];
 
-            slide.querySelector('.intro-p').addEventListener('mouseenter',function(){
-                TweenMax.to(slide.querySelector('.line'),0.5,{
-                    ease:'Expo.easeOut',
-                    width:40
+            slide.querySelector('.intro-p').addEventListener('mouseenter', function () {
+
+                TweenMax.to(slide.querySelector('.line'), 0.5, {
+                    ease: 'Expo.easeOut',
+                    width: 40
                 });
-            });
-    
-            slide.querySelector('.intro-p').addEventListener('mouseleave',function(){
-                TweenMax.to(slide.querySelector('.line'),0.5,{
-                    ease:'Expo.easeOut',
-                    width:20
+
+
+                TweenMax.to(slide.querySelector('.img'), 30, {
+                    ease: 'Expo.easeOut',
+                    scale: '1.2'
                 });
+
+                slide.querySelector('.intro-p').addEventListener('mouseleave', function () {
+                    TweenMax.to(slide.querySelector('.line'), 0.5, {
+                        ease: 'Expo.easeOut',
+                        width: 20
+                    });
+
+                    TweenMax.to(slide.querySelector('.img'), 1, {
+                        ease: 'Expo.easeOut',
+                        scale: '1'
+                    });
+                });
+
+
             });
 
-            
         }
 
-        
+        var slideFirst = document.body.querySelectorAll('.slide')[0].querySelector('.intro');
+
+        TweenMax.to(slideFirst, 2, {
+            opacity: 1,
+            delay: 0.8,
+            ease: 'Expo.easeInOut'
+        });
+
 
     }
 
@@ -100,7 +202,7 @@ class View {
                 slide.classList.remove('active');
             }
 
-            
+
 
         }
     }
@@ -128,8 +230,6 @@ class View {
                 fakeHero.appendChild(cln);
                 document.body.appendChild(fakeHero);
 
-                console.log(carousel, carouselBounds, cln);
-
                 TweenMax.to(cln, 1, {
                     top: '0%',
                     left: '0%',
@@ -140,12 +240,12 @@ class View {
                         if (App.handler) {
                             App.handler.off();
                         }
+                        App.heroImage = cln.querySelector('.active').style;
+
                         window.location.hash = href;
 
                     }
                 });
-
-
                 e.preventDefault();
             });
 
@@ -253,9 +353,9 @@ class View {
                 <div class="intro">
                     <h3>${Data.details.intro}</h3>
                     <nav>
-                        <a href="" id="see-projects" >see projects</a>
-                        <a href="" id="about" >about</a>
-                        <a href="" id="contact" >contact</a>
+                        <a href="#" id="see-projects" class="btn "><div class="line" style="width:0px"></div><div class="split">see projects</div></a>
+                        <a href="#" id="about" class="btn "><div class="line" style="width:0px"></div><div class="split">about</div></a>
+                        <a href="#" id="contact" class="btn "><div class="line" style="width:0px"></div><div class="split">contact</div></a>
                     </nav>
                 </div>
 
@@ -267,83 +367,52 @@ class View {
         `;
 
         intro = toHTML(intro);
+
+        /* for (let i = 0; i < intro.querySelectorAll('.split').length; i++) {
+             const split = intro.querySelectorAll('.split')[i];
+             var mySplitText = new SplitText(split, {
+                 type: "chars",
+                 charsClass: "char"
+             });
+         }*/
         markup.appendChild(intro);
 
     }
 
     setIntroHello() {
         const self = this;
-        console.log('intro hello');
-        let app = new PIXI.Application(window.innerWidth, window.innerHeight, {
-            transparent: true
-        });
-
-        //  let gui = new dat.GUI();
+        var app =  this.appPIXI;
+        var container = this.container;
         document.body.querySelector('#hello').appendChild(app.view);
 
-        const hello = [{
-                'char': 'H',
-                'x': 800,
-                'y': -20
-            },
-            {
-                'char': 'E',
-                'x': 1205,
-                'y': 97
-            },
-            {
-                'char': 'L',
-                'x': 820,
-                'y': 335,
-            },
-            {
-                'char': 'L',
-                'x': 1220,
-                'y': 450,
-            },
-            {
-                'char': 'O',
-                'x': 780,
-                'y': 695
-            }
-        ];
+        for (let h = 0; h < container.children.length; h++) {
+            const c = container.children[h];
 
-        const loader = new PIXI.loaders.Loader();
-        for (let i = 0; i < hello.length; i++) {
-            const char = hello[i];
-            loader.add(char.char + i, 'common/media/chars/' + char.char + '.png');
+            TweenMax.to(c, 2, {
+                alpha: 1,
+                ease: 'Expo.easeOut',
+                delay: (h) * 0.12
+            });
+
+            TweenMax.from(c, 2, {
+                x: -30,
+                ease: 'Expo.easeOut',
+                delay: (h) * 0.12,
+            });
+
         }
 
-        loader.load(function (loader, r) {
-            var container = new PIXI.Container();
-            console.log(container);
-            container.filters = null;
+        setTimeout(function () {
+            loadEffects();
+        }, 1200);
 
-            app.stage.addChild(container);
 
-            var graphics = new PIXI.Graphics();
-            graphics.beginFill(0xFFFFFF, 1);
-            graphics.drawRect(0, 0, window.innerWidth, window.innerHeight);
-
-            container.addChild(graphics);
-
-            for (let j = 0; j < hello.length; j++) {
-                const char = hello[j];
-                var containerChar = new PIXI.Container();
-                var texture = PIXI.Texture.fromImage('common/media/chars/' + char.char + '.png');
-                var letter = new PIXI.Sprite(texture);
-                letter.scale.x = letter.scale.y = 0.3;
-                letter.x = char.x;
-                letter.y = char.y;
-                containerChar.addChild(letter);
-                //  var folder = gui.addFolder(j + '.   ' + char.char);
-                //  folder.add(letter, "x").min(-window.innerWidth).max(window.innerWidth).step(0.001);
-                //  folder.add(letter, "y").min(-window.innerHeight).max(window.innerHeight).step(0.001);
-                container.addChild(containerChar);
-            }
+        function loadEffects() {
 
             var counter = 0;
             var noclick = true;
+
+
             window.addEventListener('mousemove', function (e) {
                 if (noclick) {
                     self.setBulgePinchFilter(container, e);
@@ -367,22 +436,27 @@ class View {
                 }
             });
 
-            document.body.querySelector('#about').addEventListener('mouseenter', function (e) {
-                noclick = false;
-                counter = 2;
-                self.setReflection(container);
+        }
 
+
+        for (let j = 0; j < document.body.querySelectorAll('.slide')[0].querySelectorAll('.btn').length; j++) {
+            const btn = document.body.querySelectorAll('.slide')[0].querySelectorAll('.btn')[j];
+
+            btn.addEventListener('mouseenter', function (e) {
+                TweenMax.to(btn.querySelector('.line'), 0.5, {
+                    ease: 'Expo.easeOut',
+                    width: 20
+                });
+
+                btn.addEventListener('mouseleave', function (e) {
+                    TweenMax.to(btn.querySelector('.line'), 0.5, {
+                        ease: 'Expo.easeOut',
+                        width: 0
+                    });
+                });
             });
+        }
 
-            document.body.querySelector('#contact').addEventListener('mouseenter', function (e) {
-                noclick = false;
-                self.setGlitch(container);
-            });
-
-
-
-
-        });
 
     }
 
@@ -485,7 +559,7 @@ class View {
 
             mainMarkup.appendChild(markup);
 
-            
+
 
         }
     }
@@ -497,26 +571,14 @@ class View {
         `;
         carouselHTML = toHTML(carouselHTML);
 
-        for (let i = 0; i < carousel.length; i++) {
-            const src = carousel[i].src;
+        const src = carousel[0].src;
 
-
-            var isActive;
-
-            if (i === 0) {
-                isActive = 'active';
-            } else {
-                isActive = '';
-            }
-
-            let markup = `       
-                 <div class="img ${isActive}" style="background-image:url(${src})"></div>
+        let markup = `       
+                 <div class="img active" style="background-image:url(${src})"></div>
             `;
 
-            markup = toHTML(markup);
-            carouselHTML.appendChild(markup);
-        }
-
+        markup = toHTML(markup);
+        carouselHTML.appendChild(markup);
         return carouselHTML;
     }
 

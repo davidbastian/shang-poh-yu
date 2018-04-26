@@ -4,6 +4,7 @@ html,
 body {
   font-family: 'Aktiv Grotesk Corp';
   color: $color01;
+  overflow:hidden;
   overflow-x: hidden;
 }
 
@@ -11,7 +12,10 @@ body {
   z-index: 99 !important;
 }
 
-body {}
+body {
+  overflow:hidden;
+  
+}
 
 header {
   position: fixed;
@@ -102,6 +106,7 @@ h5 {
     height: 40vw;
     position: relative;
     opacity: 0;
+    overflow: hidden;
     .img {
       width: 100%;
       height: 100%;
@@ -132,6 +137,7 @@ h5 {
     width: 45vw;
     height: 40vw;
     position: absolute;
+    overflow: hidden;
     .img {
       width: 100%;
       height: 100%;

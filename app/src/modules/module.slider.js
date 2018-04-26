@@ -26,43 +26,48 @@ class SliderModule {
         handler.on(self.checkDirection.bind(this));
 
         if (App.model.slideActive !== 0) {
-            this.goUp(2,1);
+            App.noSlide = true;
+            this.goUp(2, 1);
         }
 
-         var intro = document.body.querySelector('#see-projects');
-         var about = document.body.querySelector('#about');
-         var contact = document.body.querySelector('#contact');
+        var intro = document.body.querySelector('#see-projects');
+        var about = document.body.querySelector('#about');
+        var contact = document.body.querySelector('#contact');
 
-         intro.addEventListener('click',function(e){
-            self.goUp(0,1);
+        intro.addEventListener('click', function (e) {
+            self.goUp(0, 1);
             e.preventDefault();
 
-         });
+        });
 
-         about.addEventListener('click',function(e){
+        about.addEventListener('click', function (e) {
             self.goUp(0, 5);
             e.preventDefault();
 
-         });
+        });
 
-         contact.addEventListener('click',function(e){
+        contact.addEventListener('click', function (e) {
             self.goUp(0, 8);
             e.preventDefault();
 
-         });
-       
+        });
+
     }
 
     checkDirection(direction) {
 
         if (this.deltaReady === true) {
 
-            if (direction.deltaY > 0) {
-                this.goDown(0,1);
-            } else {
+            if (!App.noSlide) {
+                if (direction.deltaY > 0) {
+                    this.goDown(0, 1);
+                } else {
 
-                this.goUp(0,1);
+                    this.goUp(0, 1);
+                }
             }
+
+
 
             this.deltaReady = false;
 
@@ -70,7 +75,7 @@ class SliderModule {
 
     }
 
-    goUp(delay,c) {
+    goUp(delay, c) {
         const self = this;
         let slides = this.wrap.querySelectorAll('.slide');
 
@@ -78,7 +83,7 @@ class SliderModule {
 
         var d;
         if (delay) {
-            d = 0.5;
+            d = 0.8;
         } else {
             d = 0;
         }
@@ -108,7 +113,7 @@ class SliderModule {
                 }, {
                     opacity: 0,
                     ease: self.ease,
-                    delay:d
+                    delay: d
                 });
 
                 TweenMax.fromTo(fadeNext, self.time, {
@@ -116,7 +121,7 @@ class SliderModule {
                 }, {
                     opacity: 1,
                     ease: self.ease,
-                    delay:d
+                    delay: d
                 });
 
 
@@ -128,7 +133,7 @@ class SliderModule {
                     opacity: 0,
                     ease: self.ease,
                     y: -self.pos,
-                    delay:d
+                    delay: d
 
 
                 });
@@ -141,7 +146,7 @@ class SliderModule {
                     opacity: 0,
                     ease: self.ease,
                     y: -self.pos,
-                    delay:d
+                    delay: d
 
                 });
 
@@ -152,11 +157,12 @@ class SliderModule {
                     opacity: 1,
                     ease: self.ease,
                     y: 0,
-                    delay:d,
+                    delay: d,
                     onComplete: function () {
                         slide.classList.remove('active');
                         slideNext.classList.add('active');
                         self.deltaReady = true;
+                        App.noSlide = false;
                     }
                 });
             }
