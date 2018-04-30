@@ -1,8 +1,11 @@
 import App from '../../index.js';
 import VirtualScroll from 'virtual-scroll';
 import {
-    TweenMax
+    TweenMax,
+    TimelineMax
 } from 'gsap';
+
+
 
 class SliderModule {
     constructor(args) {
@@ -13,7 +16,7 @@ class SliderModule {
         this.deltaReady = true;
 
 
-        console.log(this.wrap, 'sliders');
+        //  console.log(this.wrap, 'sliders');
         this.setup();
 
     }
@@ -27,7 +30,6 @@ class SliderModule {
 
         if (App.model.slideActive !== 0) {
             App.noSlide = true;
-            this.goUp(2, 1);
         }
 
         var intro = document.body.querySelector('#see-projects');
@@ -52,6 +54,8 @@ class SliderModule {
 
         });
 
+        self.startAnimation(self.wrap.querySelectorAll('.slide')[7]);
+
     }
 
     checkDirection(direction) {
@@ -75,6 +79,28 @@ class SliderModule {
 
     }
 
+    startAnimation(slide) {
+        var rec = slide.querySelectorAll('.recognition-wrap_items');
+
+        // console.log(rec);
+
+        var tl = new TimelineMax({
+            repeat: -1,
+        });
+
+
+        tl.to(rec[1], 1, {
+            opacity: 1,
+            delay: 4
+        });
+
+
+        tl.to(rec[1], 1, {
+            opacity: 0,
+            delay: 4
+        });
+    }
+
     goUp(delay, c) {
         const self = this;
         let slides = this.wrap.querySelectorAll('.slide');
@@ -92,6 +118,11 @@ class SliderModule {
             const slide = slides[i];
 
             if (slide.classList.contains('active')) {
+                //   console.log(i);
+
+                if (i === 6) {
+                    //self.startAnimation(slides[i+1]);
+                }
                 if ((i + 1) >= slides.length) {
                     count = 0;
                 } else {
@@ -179,6 +210,9 @@ class SliderModule {
             const slide = slides[i];
 
             if (slide.classList.contains('active')) {
+                if (i === 6) {
+                    // self.startAnimation(slides[i-1]);
+                }
                 if ((i - 1) <= 0) {
                     count = 0;
                 } else {
@@ -199,8 +233,10 @@ class SliderModule {
 
                 TweenMax.fromTo(fade, self.time, {
                     opacity: 1,
+                    
                 }, {
                     opacity: 0,
+                    
                     ease: self.ease
                 });
 

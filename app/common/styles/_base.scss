@@ -14,7 +14,7 @@ body {
 
 body {
   overflow:hidden;
-  
+
 }
 
 header {
@@ -22,6 +22,25 @@ header {
   top: 0;
   left: 0;
   z-index: 11;
+  cursor: pointer;
+
+  .video-wrap {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    box-sizing: border-box;
+    border: 60px solid transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    video {
+      width: 100%;
+    }
+}
   .logo {
     width: 60px;
     height: 60px;
@@ -29,6 +48,16 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    position: relative;
+
+    img {
+      position: absolute;
+      width: 100%;
+      max-width: 60px;
+      top: 0;
+      left: 0;
+    }
   }
 }
 

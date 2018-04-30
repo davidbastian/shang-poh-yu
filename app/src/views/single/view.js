@@ -16,7 +16,7 @@ import VirtualScroll from 'virtual-scroll';
 class View {
 
     init(params) {
-        console.log('start SingleView', window, params);
+        // console.log('start SingleView', window, params);
         this.params = params;
 
 
@@ -31,9 +31,8 @@ class View {
 
     setup() {
         const project = this.checkProject();
-        console.log(project);
 
-        console.log(project, 'asdasd');
+        // console.log(project, 'asdasd');
 
         var archive;
 
@@ -62,8 +61,6 @@ class View {
 
         markup = toHTML(markup);
 
-
-
         let hero = this.setHero(project);
         let title = this.setTitle(project);
         let intro = this.setIntro(project);
@@ -78,11 +75,20 @@ class View {
 
         outer.appendChild(markup);
 
-        this.render(outer);
+        this.setVideo(project);
+
+        this.render(outer, project);
 
     }
 
-    render(markup) {
+    setVideo(project) {
+        var src = project.video;
+        var videoEl = document.body.querySelector('.video-bg >source').src = src;
+
+
+    }
+
+    render(markup, project) {
 
         document.body.getElementsByTagName('main')[0].innerHTML = markup.outerHTML;
         TweenMax.ticker.addEventListener("tick", myFunction);
@@ -92,54 +98,149 @@ class View {
         var pos = 0;
         var ease = 0.06;
         var el = document.body.querySelector('.single-wrap');
+        var scrollReady = true;
         var area = (el.offsetHeight - window.innerHeight) * 100 / el.offsetHeight;
 
-        console.log(el);
+        //  console.log(el);
 
         instance.on(function (e) {
+            scrollReady = true;
             targetY += e.deltaY * 0.01;
             area = (el.offsetHeight - window.innerHeight) * 100 / el.offsetHeight;
             targetY = constrain(targetY, -area, 0);
 
-            //   console.log(targetY,e.deltaY);
+            //  console.log(e,'asdasdasd isntance');
         });
 
-        function myFunction(event) {
-            pos += (targetY - pos) * ease;
-            //console.log(pos);
-            el.style.transform = "translateY(" + pos + "%)";
+        var src = project.video;
+        var videoEl = document.body.querySelector('.video-bg >source').src = src;
+        var videoEl = document.body.querySelector('.video-bg').src = src;
+        document.body.querySelector('.video-bg').load();
 
-            for (let index = 0; index < el.querySelectorAll('.single-content_block-media_item').length; index++) {
-                var element = el.querySelectorAll('.single-content_block-media_item')[index];
-                var top = window.innerHeight - element.getBoundingClientRect().top;
-                if (top > 100) {
-                    TweenMax.to(element.querySelector('div'), 2.5, {
-                        y: 0,
-                        opacity: 1,
-                        ease: Expo.easeOut,
-                    });
-                }
-            }
+        var video = document.body.querySelector('.logo');
+        var play = document.body.querySelector('.single-hero-media').querySelector('.play');
 
-            var bottom = window.innerHeight - el.querySelector('.single-awards').getBoundingClientRect().bottom;
-            if (bottom > -100) {
-                TweenMax.ticker.removeEventListener("tick", myFunction);
-                TweenMax.to(document.body.querySelector('.single'), 0.5, {
+        document.body.querySelector('.single-hero-media').addEventListener('click', function () {
+            TweenMax.to(video, 1, {
+                ease: 'Expo.easeInOut',
+                width: '100vw',
+                height: '100vh'
+            });
+        });
+
+        var mouse = {
+            x: 0,
+            y: 0
+        };
+
+        var ball = {
+            x: 0,
+            y: 0
+        }
+        var easing = 0.08;
+
+        document.body.querySelector('.single-hero-media').addEventListener('mousemove', function (e) {
+            mouse = {
+                x: e.clientX - document.body.querySelector('.single-hero-media').getBoundingClientRect().left,
+                y: e.clientY - document.body.querySelector('.single-hero-media').getBoundingClientRect().top
+            };
+
+        });
+
+        TweenMax.ticker.addEventListener("tick", posPlay);
+
+        function posPlay() {
+            var vx = (mouse.x - ball.x) * easing,
+                vy = (mouse.y - ball.y) * easing;
+
+            ball.x += vx;
+            ball.y += vy;
+            TweenMax.set(play, {
+                x: ball.x - 40,
+                y: ball.y - 40
+            });
+        }
+
+        document.body.querySelector('.single-hero-media').addEventListener('mouseenter', function (e) {
+            TweenMax.to(play, 0.6, {
+                ease: 'Back.easeInOut',
+                scale: 1,
+                opacity: 1,
+            });
+
+            document.body.querySelector('.single-hero-media').addEventListener('mouseleave', function (e) {
+                TweenMax.to(play, 0.6, {
+                    ease: 'Back.easeInOut',
+                    scale: 0.5,
                     opacity: 0,
-                    ease: Expo.easeInOut,
-                    onComplete: function () {
-                        instance.off();
-                        window.location.hash = '#';
-                    }
                 });
 
+            });
+        });
+
+        document.body.querySelector('.logo').addEventListener('click', function (e) {
+            TweenMax.to(video, 1, {
+                ease: 'Expo.easeInOut',
+                width: '60px',
+                height: '60px'
+            });
+
+            e.preventDefault();
+        });
+
+
+        function myFunction(event) {
+            if (pos.toFixed(5) === targetY.toFixed(5)) {
+                scrollReady = false;
+            } else {
+                scrollReady = true;
             }
+
+            if (scrollReady) {
+                pos += (targetY - pos) * ease;
+
+                TweenMax.set(el, {
+                    force3D: true,
+                    yPercent: pos
+                });
+                //  el.style.transform = "translateY(" + pos + "%)";
+
+
+                for (let index = 0; index < el.querySelectorAll('.single-content_block-media_item').length; index++) {
+                    var element = el.querySelectorAll('.single-content_block-media_item')[index];
+                    var top = window.innerHeight - element.getBoundingClientRect().top;
+                    if (top > 100) {
+                        TweenMax.to(element.querySelector('div'), 2.5, {
+                            y: 0,
+                            opacity: 1,
+                            ease: Expo.easeOut,
+                        });
+                    }
+                }
+
+                var bottom = window.innerHeight - el.querySelector('.single-awards').getBoundingClientRect().bottom;
+                if (bottom > -100) {
+                    TweenMax.ticker.removeEventListener("tick", myFunction);
+                    TweenMax.to(document.body.querySelector('.single'), 0.5, {
+                        opacity: 0,
+                        ease: Expo.easeInOut,
+                        onComplete: function () {
+                            instance.off();
+                            window.location.hash = '#';
+                        }
+                    });
+
+                }
+
+            }
+
+
         }
         window.addEventListener("hashchange", function () {
             TweenMax.ticker.removeEventListener("tick", myFunction);
+            TweenMax.ticker.removeEventListener("tick", posPlay);
             instance.off();
         });
-
     }
 
     checkProject() {
@@ -151,22 +252,16 @@ class View {
             if (slug === self.params) {
                 return project;
             }
-
         }
     }
 
     setHero(project) {
         var img;
         var t;
-
-
-        console.log(App.heroImage);
-
+        //console.log(App.heroImage);
         if (App.heroImage) {
-
             t = App.heroImage.transform;
             img = App.heroImage.backgroundImage;
-
         } else {
             img = `url(${project.carousel[0].src})`;
             t = ``;
@@ -175,15 +270,22 @@ class View {
         let markup = `
         <div class="single-hero">
             <div class="single-hero-media">
-
+                <div class="single-hero-media-layer"></div>
+                <div class="play">
+                <h4>PLAY</h4>
+                    <img src="common/media/images/play.png" />
+                </div>
+                <h3></h3>
             </div>
         </div>
         `;
 
         markup = toHTML(markup);
 
+
         markup.querySelector('.single-hero-media').style.backgroundImage = img;
         markup.querySelector('.single-hero-media').style.transform = t;
+
 
         return markup;
 
@@ -300,7 +402,7 @@ class View {
         markup = toHTML(markup);
 
         if (block.src.length > 1) {
-            console.log('half');
+            //  console.log('half');
             for (let i = 0; i < block.src.length; i++) {
                 let half = `
             <div class="single-content_block-media_half single-content_block-media_item">

@@ -1,16 +1,16 @@
+@import "../../../common/styles/variables";
 .single {
     position: fixed;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-
     &.archive {
-        .single-awards, .single-intro_info {
-            opacity: 0!important;
+        .single-awards,
+        .single-intro_info {
+            opacity: 0 !important;
             visibility: hidden;
         }
     }
-    
     h3 {
         margin-bottom: 30px;
     }
@@ -21,6 +21,38 @@
         border: 60px solid transparent;
         position: relative;
         overflow: hidden;
+        cursor: pointer;
+
+        .play {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background:$color01;
+            width: 80px;
+            border-radius: 1000px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: scale(0.5);
+            opacity:0;
+
+            h4 {
+                color:$color03;
+               // display: none;
+                font-weight: bolder;
+                user-select: none;
+
+
+            }
+
+            img {
+                display: none;
+                width: 20px;
+                position: relative;
+                left: 3px;
+            }
+        }
         .single-hero-media {
             position: relative;
             widows: 100%;
@@ -28,6 +60,12 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            h3 {
+                color: $color02;
+            }
         }
     }
     .single-title {
@@ -67,7 +105,6 @@
             box-sizing: border-box;
             .single-content_block-media_item {
                 position: relative;
-                
                 &:before {
                     padding-top: 56.25%;
                     content: "";
@@ -83,8 +120,7 @@
                     left: 0;
                     background-position: center;
                     background-size: cover;
-                    background-repeat: no-repeat; //  transform: translateY(40%);
-                    //  opacity: 0;
+                    background-repeat: no-repeat;
                 }
             }
             .single-content_block-media_full {

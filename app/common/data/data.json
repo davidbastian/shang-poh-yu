@@ -93,6 +93,34 @@
         },
         {
           "img": "common/media/brands/huawei.jpg"
+        },
+        {
+          "img": "common/media/brands/toyota.jpg"
+        },
+        {
+          "img": "common/media/brands/saatchi.jpg"
+        },
+        {
+          "img": "common/media/brands/mailchimp.jpg"
+        },
+        {
+          "img": "common/media/brands/dg.jpg"
+        },
+        {
+          "img": "common/media/brands/droga.jpg"
+        },
+        {
+          "img": "common/media/brands/leo.jpg"
+        },
+
+        {
+          "img": "common/media/brands/fwa.jpg"
+        },
+        {
+          "img": "common/media/brands/awwwards.jpg"
+        },
+        {
+          "img": "common/media/brands/google.jpg"
         }
       ]
 
@@ -108,6 +136,7 @@
       "description": "We Did Mean MailChimp. MailChimp is a creative company that gives their clients digital tools to help them grow in creative ways. We worked with Droga5 to help introduce MailChimp to brand new audiences, across the cultural spectrum. Our challenge was to create a web campaign that showed MailChimp practiced what it preached: that being creative and true to yourself is good for business. To do this, we set out to create memorable and playful experiences that would build love and drive awareness.",
       "link": "https://mailchimp.com/did-you-mean/",
       "agency": "Droga5 New York",
+      "video":"common/media/videos/001.mp4",
       "awards": [{
           "img": "common/media/brands/cannes.jpg",
           "text": "3x Cannes Lions"
@@ -188,6 +217,7 @@
       "description": "We worked with GBT Shanghai to give users the feeling of being a kid again, by using their phones like a toy Mustang.",
       "link": "http://pocketmustang.ford.co.nz/en/",
       "agency": "GTB Shangai",
+      "video":"common/media/videos/002.mp4",
       "awards": [{
           "img": "common/media/brands/fwa.jpg",
           "text": "1x FWA of the Day"
@@ -276,6 +306,7 @@
       "description": "Choose Your E-TEC makes the Evinrude E-TEC G2 come to life. Learn all about the engine and explore its breakthrough features. Then, design your own with the simple and intuitive Customizer.",
       "link": "http://www.chooseyouretec.com/en-us",
       "agency": "Cramer-Krasselt",
+      "video":"common/media/videos/003.mp4",
       "awards": [{
           "img": "common/media/brands/fwa.jpg",
           "text": "1x FWA of the Day"

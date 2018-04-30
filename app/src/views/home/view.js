@@ -24,16 +24,13 @@ import {
     TimelineMax
 } from 'gsap';
 
-
-//import dat from 'dat.gui';
-
 import SplitText from '../../../common/plugins/SplitText.min';
 
 
 class View {
     init(params) {
         const self = this;
-        console.log('start HomeView', window, params);
+        //  console.log('start HomeView', window, params);
 
         let app = new PIXI.Application(window.innerWidth, window.innerHeight, {
             transparent: true
@@ -68,10 +65,16 @@ class View {
         ];
 
         const loader = new PIXI.loaders.Loader();
+
         for (let i = 0; i < hello.length; i++) {
             const char = hello[i];
             loader.add(char.char + i, 'common/media/chars/' + char.char + '.png');
         }
+        loader.add('common/media/archive/001.jpg');
+        loader.add('common/media/evinrude/001.jpg');
+        loader.add('common/media/mailchimp/001.jpg');
+        loader.add('common/media/mustang/001.jpg');
+
 
         loader.load(function (loader, r) {
             var container = new PIXI.Container();
@@ -104,11 +107,23 @@ class View {
             self.container = container;
 
             self.setup();
+
+
+        });
+        var video = document.body.querySelector('.logo');
+        document.body.querySelector('.logo').addEventListener('click', function () {
+            TweenMax.to(video, 1, {
+                ease: 'Expo.easeInOut',
+                width: '60px',
+                height: '60px'
+            });
         });
 
         self.appPIXI = app;
 
-       
+
+
+
     }
 
     setup() {
@@ -133,6 +148,10 @@ class View {
 
     render(markup) {
         document.body.getElementsByTagName('main')[0].innerHTML = markup.outerHTML;
+
+
+
+
         this.setSlideActive();
         const HomeSlider = new SliderModule({
             wrap: document.body.querySelector('.home'),
@@ -140,6 +159,29 @@ class View {
             pos: 100,
             ease: 'Expo.easeInOut'
         });
+
+
+        if (App.model.slideActive !== 0) {
+
+            TweenMax.fromTo(document.body.querySelectorAll('.slide')[App.model.slideActive].querySelector('.fade-anima'), 1.2, {
+                opacity: 0,
+
+            }, {
+                opacity: 1,
+                ease: Expo.easeInOut,
+            });
+
+            TweenMax.fromTo(document.body.querySelectorAll('.slide')[App.model.slideActive].querySelector('.slide-anima'), 1.2, {
+                opacity: 0,
+            }, {
+                opacity: 1,
+                ease: Expo.easeInOut,
+                onComplete: function () {
+                    HomeSlider.goUp(0.5, 1);
+                }
+            });
+        }
+
 
         this.setIntroHello();
         this.setTransition();
@@ -186,6 +228,10 @@ class View {
         });
 
 
+
+
+
+
     }
 
     setSlideActive() {
@@ -194,7 +240,7 @@ class View {
         for (let i = 0; i < slides.length; i++) {
             const slide = slides[i];
 
-            console.log(App.model.slideActive, i, slide);
+            //    console.log(App.model.slideActive, i, slide);
 
             if (App.model.slideActive === i) {
                 slide.classList.add('active');
@@ -327,16 +373,59 @@ class View {
             `
             m = toHTML(m);
 
-            for (let j = 0; j < recognition.logos.length; j++) {
-                const logo = recognition.logos[j];
-                let item = `
+            if (recognition.logos.length < 9) {
+
+                for (let j = 0; j < recognition.logos.length; j++) {
+                    const logo = recognition.logos[j];
+                    let item = `
                 <div class="recognition-item">
                     <img src="${logo.img}"></img>
                     ${checkText(logo)}
                 </div>
                 `;
-                item = toHTML(item);
-                m.querySelector('.fade-anima').appendChild(item);
+                    item = toHTML(item);
+                    m.querySelector('.fade-anima').appendChild(item);
+                }
+
+            } else {
+                var recWrapA = `<div class= "recognition-wrap_items active">
+                </div>`;
+
+                var recWrapB = `<div class= "recognition-wrap_items">
+
+                </div>`;
+
+                recWrapA = toHTML(recWrapA);
+                recWrapB = toHTML(recWrapB);
+
+                for (let j = 0; j < 9; j++) {
+                    const logo = recognition.logos[j];
+                    let item = `
+                <div class="recognition-item">
+                    <img src="${logo.img}"></img>
+                    ${checkText(logo)}
+                </div>
+                `;
+                    item = toHTML(item);
+                    recWrapA.appendChild(item)
+
+                }
+
+                for (let j = 9; j < recognition.logos.length; j++) {
+                    const logo = recognition.logos[j];
+                    let item = `
+                <div class="recognition-item">
+                    <img src="${logo.img}"></img>
+                    ${checkText(logo)}
+                </div>
+                `;
+                    item = toHTML(item);
+                    recWrapB.appendChild(item)
+
+                }
+
+                m.querySelector('.fade-anima').appendChild(recWrapA);
+                m.querySelector('.fade-anima').appendChild(recWrapB);
             }
 
             markup.appendChild(m);
@@ -368,20 +457,14 @@ class View {
 
         intro = toHTML(intro);
 
-        /* for (let i = 0; i < intro.querySelectorAll('.split').length; i++) {
-             const split = intro.querySelectorAll('.split')[i];
-             var mySplitText = new SplitText(split, {
-                 type: "chars",
-                 charsClass: "char"
-             });
-         }*/
+
         markup.appendChild(intro);
 
     }
 
     setIntroHello() {
         const self = this;
-        var app =  this.appPIXI;
+        var app = this.appPIXI;
         var container = this.container;
         document.body.querySelector('#hello').appendChild(app.view);
 
@@ -399,19 +482,15 @@ class View {
                 ease: 'Expo.easeOut',
                 delay: (h) * 0.12,
             });
-
         }
 
         setTimeout(function () {
             loadEffects();
         }, 1200);
 
-
         function loadEffects() {
-
             var counter = 0;
             var noclick = true;
-
 
             window.addEventListener('mousemove', function (e) {
                 if (noclick) {
@@ -435,7 +514,6 @@ class View {
                     counter = 0;
                 }
             });
-
         }
 
 

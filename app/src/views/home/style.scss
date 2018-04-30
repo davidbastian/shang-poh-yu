@@ -1,13 +1,15 @@
 .home {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
     .split {
         display: inline-block;
 
-        .char {
-        //    opacity: 0;
-        }
     }
     .slide {
         &:first-child {
+            cursor: pointer;
             .intro {
                 align-self: flex-end;
                 margin-bottom: 20vh;
@@ -94,6 +96,22 @@
             width: 80%;
             flex-wrap: wrap;
             flex-direction: row;
+            position: relative;
+            .recognition-wrap_items {
+                display: flex;
+                width: 100%;
+                flex-wrap: wrap;
+                flex-direction: row;
+                position: absolute;
+                opacity: 0;
+                div {
+                    opacity: 1;
+                }
+                &:first-child{
+                    position: relative;
+                    opacity: 1;
+                }
+            }
         }
         h3 {
             border-right: 13vw solid transparent;
@@ -103,6 +121,7 @@
         h6 {
             font-size: 0.7vw;
             line-height: 0.9vw;
+            opacity: 0.5;
         }
         .recognition-item {
             width: 33.333%;

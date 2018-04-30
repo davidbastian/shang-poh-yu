@@ -27,5 +27,4 @@ export function getRandomIntInclusive(min, max) {
 export function toHTML(string){
   let d = new DOMParser().parseFromString(string, "text/html");
   return d.body.firstChild;
-
 }
