@@ -91,26 +91,88 @@ class View {
     render(markup, project) {
 
         document.body.getElementsByTagName('main')[0].innerHTML = markup.outerHTML;
-        TweenMax.ticker.addEventListener("tick", myFunction);
+
 
         var instance = new VirtualScroll();
-        var targetY = 0;
-        var pos = 0;
+        var start = -3.5;
+        var targetY = start;
+        var pos = start;
         var ease = 0.06;
         var el = document.body.querySelector('.single-wrap');
-        var scrollReady = true;
         var area = (el.offsetHeight - window.innerHeight) * 100 / el.offsetHeight;
 
-        //  console.log(el);
+        var scrollReady;
 
-        instance.on(function (e) {
-            scrollReady = true;
-            targetY += e.deltaY * 0.01;
-            area = (el.offsetHeight - window.innerHeight) * 100 / el.offsetHeight;
-            targetY = constrain(targetY, -area, 0);
+        TweenMax.to(el, 2, {
+            ease: 'Expo.easeInOut',
+            yPercent: start,
+            delay: 1,
+            onComplete: function () {
 
-            //  console.log(e,'asdasdasd isntance');
+                TweenMax.ticker.addEventListener("tick", myFunction);
+
+                scrollReady = true;
+
+                instance.on(function (e) {
+                    scrollReady = true;
+                    targetY += e.deltaY * 0.01;
+                    area = (el.offsetHeight - window.innerHeight) * 100 / el.offsetHeight;
+                    targetY = constrain(targetY, -area, 0);
+
+                });
+
+            }
+
         });
+
+        function myFunction(event) {
+            if (pos.toFixed(5) === targetY.toFixed(5)) {
+                scrollReady = false;
+            } else {
+                scrollReady = true;
+            }
+
+            if (scrollReady) {
+                pos += (targetY - pos) * ease;
+
+                TweenMax.set(el, {
+                    force3D: true,
+                    yPercent: pos
+                });
+
+                for (let index = 0; index < el.querySelectorAll('.single-content_block-media_item').length; index++) {
+                    var element = el.querySelectorAll('.single-content_block-media_item')[index];
+                    var top = window.innerHeight - element.getBoundingClientRect().top;
+                    if (top > 100) {
+                        TweenMax.to(element.querySelector('div'), 2.5, {
+                            y: 0,
+                            opacity: 1,
+                            ease: Expo.easeOut,
+                        });
+                    }
+                }
+
+                var bottom = window.innerHeight - el.querySelector('.single-awards').getBoundingClientRect().bottom;
+                if (bottom > -100) {
+                    TweenMax.ticker.removeEventListener("tick", myFunction);
+                    TweenMax.to(document.body.querySelector('.single'), 0.5, {
+                        opacity: 0,
+                        ease: Expo.easeInOut,
+                        onComplete: function () {
+                            instance.off();
+                            window.location.hash = '#';
+                        }
+                    });
+
+                }
+
+            }
+
+
+        }
+
+
+
 
         var src = project.video;
         var videoEl = document.body.querySelector('.video-bg >source').src = src;
@@ -138,6 +200,13 @@ class View {
             y: 0
         }
         var easing = 0.08;
+
+        document.body.querySelector('.single-hero-media').addEventListener('mouseenter', function (e) {
+            mouse = {
+                x: e.clientX - document.body.querySelector('.single-hero-media').getBoundingClientRect().left,
+                y: e.clientY - document.body.querySelector('.single-hero-media').getBoundingClientRect().top
+            };
+        });
 
         document.body.querySelector('.single-hero-media').addEventListener('mousemove', function (e) {
             mouse = {
@@ -188,54 +257,6 @@ class View {
             e.preventDefault();
         });
 
-
-        function myFunction(event) {
-            if (pos.toFixed(5) === targetY.toFixed(5)) {
-                scrollReady = false;
-            } else {
-                scrollReady = true;
-            }
-
-            if (scrollReady) {
-                pos += (targetY - pos) * ease;
-
-                TweenMax.set(el, {
-                    force3D: true,
-                    yPercent: pos
-                });
-                //  el.style.transform = "translateY(" + pos + "%)";
-
-
-                for (let index = 0; index < el.querySelectorAll('.single-content_block-media_item').length; index++) {
-                    var element = el.querySelectorAll('.single-content_block-media_item')[index];
-                    var top = window.innerHeight - element.getBoundingClientRect().top;
-                    if (top > 100) {
-                        TweenMax.to(element.querySelector('div'), 2.5, {
-                            y: 0,
-                            opacity: 1,
-                            ease: Expo.easeOut,
-                        });
-                    }
-                }
-
-                var bottom = window.innerHeight - el.querySelector('.single-awards').getBoundingClientRect().bottom;
-                if (bottom > -100) {
-                    TweenMax.ticker.removeEventListener("tick", myFunction);
-                    TweenMax.to(document.body.querySelector('.single'), 0.5, {
-                        opacity: 0,
-                        ease: Expo.easeInOut,
-                        onComplete: function () {
-                            instance.off();
-                            window.location.hash = '#';
-                        }
-                    });
-
-                }
-
-            }
-
-
-        }
         window.addEventListener("hashchange", function () {
             TweenMax.ticker.removeEventListener("tick", myFunction);
             TweenMax.ticker.removeEventListener("tick", posPlay);
