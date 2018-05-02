@@ -19,22 +19,30 @@ class View {
 
     init(params) {
         // console.log('start SingleView', window, params);
+        const self = this;
         this.params = params;
 
+            self.setup();
+            if (document.querySelector('.fake-hero')) {
+                document.querySelector('.fake-hero').outerHTML = '';
+            }
+            if (App.handler) {
+                App.handler.off();
+            }
+        
 
-        this.setup();
-        if (document.querySelector('.fake-hero')) {
-            document.querySelector('.fake-hero').outerHTML = '';
-        }
-        if (App.handler) {
-            App.handler.off();
-        }
+
+
+
+
     }
 
     setup() {
         const project = this.checkProject();
 
         // console.log(project, 'asdasd');
+
+    
 
         var archive;
 
@@ -63,6 +71,7 @@ class View {
 
         markup = toHTML(markup);
 
+
         let hero = this.setHero(project);
         let title = this.setTitle(project);
         let intro = this.setIntro(project);
@@ -80,6 +89,7 @@ class View {
         this.setVideo(project);
 
         this.render(outer, project);
+        
 
     }
 
@@ -91,7 +101,7 @@ class View {
     render(markup, project) {
         document.body.getElementsByTagName('main')[0].innerHTML = markup.outerHTML;
         var instance = new VirtualScroll({
-            touchMultiplier:6
+            touchMultiplier: 6
         });
         var start;
 
@@ -249,7 +259,7 @@ class View {
         TweenMax.ticker.addEventListener("tick", posPlay);
 
         document.body.querySelector('.single-hero-media').addEventListener('mouseenter', checkMouse.bind(this));
-        document.body.querySelector('.single-hero-media').addEventListener('mousemove', checkMouse.bind(this));
+         document.body.querySelector('.single-hero-media').addEventListener('mousemove', checkMouse.bind(this));
 
         document.body.querySelector('.single-hero-media').addEventListener('mouseenter', function (e) {
             TweenMax.to(play, 0.6, {

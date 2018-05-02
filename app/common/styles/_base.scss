@@ -21,10 +21,10 @@ body {
   overflow-y: hidden;
   width: 100vw;
   height: 100vh;
- 
 }
 
-main,.root-wrap {
+main,
+.root-wrap {
   position: fixed;
   top: 0;
   left: 0;
@@ -316,8 +316,10 @@ h5 {
     display: none !important;
   }
   .recognition-content {
-    br {
-      display: none !important;
+    h3 {
+      br {
+        display: none !important;
+      }
     }
     flex-direction: column !important;
     align-items: flex-start !important;

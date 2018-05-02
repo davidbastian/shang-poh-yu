@@ -31,41 +31,75 @@ import Config from '../../../config';
 class View {
     init(params) {
         const self = this;
-        //  console.log('start HomeView', window, params);
-        // getEventListeners(document).pointermove.forEach((e)=>{e.remove()});
-        //  getEventListeners(window).mousemove.forEach((e)=>{e.remove()});
+
 
         let app = new PIXI.Application(window.innerWidth, window.innerHeight, {
             transparent: true
         });
 
+        let hello;
 
-        const hello = [{
-                'char': 'H',
-                'x': 800,
-                'y': -20
-            },
-            {
-                'char': 'E',
-                'x': 1205,
-                'y': 97
-            },
-            {
-                'char': 'L',
-                'x': 820,
-                'y': 335,
-            },
-            {
-                'char': 'L',
-                'x': 1220,
-                'y': 450,
-            },
-            {
-                'char': 'O',
-                'x': 780,
-                'y': 695
-            }
-        ];
+
+        if (Config.checkDevice() === 'mobile') {
+            hello = [{
+                    'char': 'H',
+                    'x': 90,
+                    'y': -20
+                },
+                {
+                    'char': 'E',
+                    'x': 320,
+                    'y': 97
+                },
+                {
+                    'char': 'L',
+                    'x': 20,
+                    'y': 290,
+                },
+                {
+                    'char': 'L',
+                    'x': 320,
+                    'y': 450,
+                },
+                {
+                    'char': 'O',
+                    'x': 65,
+                    'y': 570
+                }
+            ];
+
+        } else {
+            hello = [{
+                    'char': 'H',
+                    'x': 800,
+                    'y': -20
+                },
+                {
+                    'char': 'E',
+                    'x': 1205,
+                    'y': 97
+                },
+                {
+                    'char': 'L',
+                    'x': 820,
+                    'y': 335,
+                },
+                {
+                    'char': 'L',
+                    'x': 1220,
+                    'y': 450,
+                },
+                {
+                    'char': 'O',
+                    'x': 780,
+                    'y': 695
+                }
+            ];
+
+        }
+
+
+
 
         const loader = new PIXI.loaders.Loader();
 
@@ -89,23 +123,34 @@ class View {
             graphics.drawRect(0, 0, window.innerWidth, window.innerHeight);
 
             container.addChild(graphics);
+            var w = window.innerWidth;
+
 
             for (let j = 0; j < hello.length; j++) {
                 const char = hello[j];
                 var containerChar = new PIXI.Container();
                 var texture = PIXI.Texture.fromImage('common/media/chars/' + char.char + '.png');
                 var letter = new PIXI.Sprite(texture);
-                letter.scale.x = letter.scale.y = 0.3;
-                letter.x = char.x;
 
+                if (w <= 500) {
+                    letter.scale.x = letter.scale.y = 0.25;
+                } else {
+                    letter.scale.x = letter.scale.y = 0.3;
+                }
+                
+                letter.x = char.x;
                 letter.y = char.y;
                 containerChar.addChild(letter);
-
                 containerChar.alpha = 0;
-
                 container.addChild(containerChar);
 
             }
+
+            if (w <= 400) {
+                container.scale.x = container.scale.y = 0.8;
+            }
+
+            console.log(w);
 
             self.container = container;
 
@@ -164,14 +209,14 @@ class View {
         document.body.getElementsByTagName('main')[0].innerHTML = markup.outerHTML;
         var posY;
 
-        if(Config.checkDevice() === 'mobile') {
+        if (Config.checkDevice() === 'mobile') {
             posY = 0;
 
         } else {
             posY = 100;
 
         }
-        
+
 
 
         this.setSlideActive();
@@ -213,34 +258,34 @@ class View {
 
 
 
-          /*  slide.querySelector('.intro-p').addEventListener('mouseenter', function () {
+            /*  slide.querySelector('.intro-p').addEventListener('mouseenter', function () {
 
-                TweenMax.to(slide.querySelector('.line'), 0.5, {
-                    ease: 'Expo.easeOut',
-                    width: 40
-                });
+                  TweenMax.to(slide.querySelector('.line'), 0.5, {
+                      ease: 'Expo.easeOut',
+                      width: 40
+                  });
 
-            
+              
 
-                TweenMax.to(slide.querySelector('.img'), 30, {
-                    ease: 'Expo.easeOut',
-                    scale: '1.2'
-                });
+                  TweenMax.to(slide.querySelector('.img'), 30, {
+                      ease: 'Expo.easeOut',
+                      scale: '1.2'
+                  });
 
-                slide.querySelector('.intro-p').addEventListener('mouseleave', function () {
-                    TweenMax.to(slide.querySelector('.line'), 0.5, {
-                        ease: 'Expo.easeOut',
-                        width: 20
-                    });
+                  slide.querySelector('.intro-p').addEventListener('mouseleave', function () {
+                      TweenMax.to(slide.querySelector('.line'), 0.5, {
+                          ease: 'Expo.easeOut',
+                          width: 20
+                      });
 
-                    TweenMax.to(slide.querySelector('.img'), 1, {
-                        ease: 'Expo.easeOut',
-                        scale: '1'
-                    });
-                });
+                      TweenMax.to(slide.querySelector('.img'), 1, {
+                          ease: 'Expo.easeOut',
+                          scale: '1'
+                      });
+                  });
 
 
-            });*/
+              });*/
 
             slide.querySelector('.content').addEventListener('mouseenter', function () {
 
@@ -271,18 +316,6 @@ class View {
             });
 
         }
-
-        var slideFirst = document.body.querySelectorAll('.slide')[0].querySelector('.intro');
-
-        TweenMax.to(slideFirst, 2, {
-            opacity: 1,
-            delay: 0.8,
-            ease: 'Expo.easeInOut'
-        });
-
-
-
-
 
 
     }
@@ -345,11 +378,15 @@ class View {
                         height: '100%',
                         ease: 'Expo.easeInOut',
                         onComplete: function () {
+                            
+
                             if (App.handler) {
                                 App.handler.off();
                             }
                             App.heroImage = cln.querySelector('.active').style;
                             window.location.hash = href;
+                            
+
 
                         }
                     });
@@ -358,7 +395,7 @@ class View {
                 } else {
                     TweenMax.to(slide, 1, {
                         ease: 'Expo.easeInOut',
-                        opacity:0,
+                        opacity: 0,
                         onComplete: function () {
                             if (App.handler) {
                                 App.handler.off();
@@ -549,6 +586,17 @@ class View {
         var container = this.container;
         document.body.querySelector('#hello').appendChild(app.view);
 
+
+        var slideFirst = document.body.querySelectorAll('.slide')[0].querySelector('.intro');
+
+        if (Config.checkDevice() != 'mobile') {
+            TweenMax.to(slideFirst, 2, {
+                opacity: 1,
+                delay: 0.8,
+                ease: 'Expo.easeInOut'
+            });
+
+        }
         for (let h = 0; h < container.children.length; h++) {
             const c = container.children[h];
 
@@ -562,6 +610,24 @@ class View {
                 x: -30,
                 ease: 'Expo.easeOut',
                 delay: (h) * 0.12,
+                onComplete: function () {
+                    if (Config.checkDevice() === 'mobile') {
+                        setTimeout(function () {
+                            TweenMax.to(c, 2, {
+                                alpha: 0,
+                                ease: 'Expo.easeOut',
+                                delay: (h) * 0.01
+                            });
+
+                            TweenMax.to(slideFirst, 2, {
+                                opacity: 1,
+                                delay: 0.8,
+                                ease: 'Expo.easeInOut'
+                            });
+
+                        }, 1200);
+                    }
+                }
             });
         }
 
@@ -573,7 +639,7 @@ class View {
             var counter = 0;
             var noclick = true;
 
-            window.addEventListener('mousemove', function (e) {
+            document.body.querySelectorAll('.slide')[0].addEventListener('mousemove', function (e) {
                 if (noclick) {
                     self.setBulgePinchFilter(container, e);
                 }
@@ -644,7 +710,7 @@ class View {
         container.filters = [bulge];
 
 
-        window.addEventListener('mousemove', function (e) {
+        document.body.querySelectorAll('.slide')[0].addEventListener('mousemove', function (e) {
             var x = e.clientX;
             var y = e.clientY;
             var pX = (x * 1) / window.innerWidth;

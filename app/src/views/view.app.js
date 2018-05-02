@@ -39,16 +39,14 @@ class View {
             window.location.hash = '#';
         });
 
-
         window.addEventListener('load', function () {
-
-            var maybePreventPullToRefresh = true;
             var lastTouchY = 0;
             var touchstartHandler = function (e) {
-                if (e.touches.length != 1) return;
+                if (e.touches.length != 1) {
+                    return;
+                };
                 lastTouchY = e.touches[0].clientY;
             }
-
             var touchmoveHandler = function (e) {
                 var touchY = e.touches[0].clientY;
                 var touchYDelta = touchY - lastTouchY;
@@ -56,17 +54,6 @@ class View {
 
                 e.preventDefault();
                 return;
-
-                if (touchYDelta > 0) {
-                    e.preventDefault();
-                    return;
-                }
-
-                if (window.pageYOffset == 0 && touchYDelta > 0) {
-                    e.preventDefault();
-                    return;
-                }
-
             }
 
             document.addEventListener('touchstart', touchstartHandler, {
