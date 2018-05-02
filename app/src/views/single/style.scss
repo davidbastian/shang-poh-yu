@@ -27,7 +27,7 @@
         border: 60px solid transparent;
         position: relative;
         overflow: hidden;
-        cursor: pointer;
+        
         .play {
             position: absolute;
             left: 0;
@@ -56,6 +56,7 @@
             }
         }
         .single-hero-media {
+            cursor: none;
             position: relative;
             widows: 100%;
             height: 100%;

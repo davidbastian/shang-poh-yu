@@ -26,11 +26,14 @@ import {
 
 import SplitText from '../../../common/plugins/SplitText.min';
 
+import Config from '../../../config';
 
 class View {
     init(params) {
         const self = this;
         //  console.log('start HomeView', window, params);
+        // getEventListeners(document).pointermove.forEach((e)=>{e.remove()});
+        //  getEventListeners(window).mousemove.forEach((e)=>{e.remove()});
 
         let app = new PIXI.Application(window.innerWidth, window.innerHeight, {
             transparent: true
@@ -126,6 +129,17 @@ class View {
 
     }
 
+    removeEvents(element) {
+        let clone = element.cloneNode();
+        // move all child elements from the original to the clone
+        while (element.firstChild) {
+            clone.appendChild(element.lastChild);
+        }
+
+        element.parentNode.replaceChild(clone, element);
+    }
+
+
     setup() {
         let markup = `
             <section class="home">
@@ -148,15 +162,23 @@ class View {
 
     render(markup) {
         document.body.getElementsByTagName('main')[0].innerHTML = markup.outerHTML;
+        var posY;
 
+        if(Config.checkDevice() === 'mobile') {
+            posY = 0;
 
+        } else {
+            posY = 100;
+
+        }
+        
 
 
         this.setSlideActive();
         const HomeSlider = new SliderModule({
             wrap: document.body.querySelector('.home'),
             time: 1,
-            pos: 100,
+            pos: posY,
             ease: 'Expo.easeInOut'
         });
 
@@ -189,7 +211,38 @@ class View {
         for (let i = 0; i < document.body.querySelectorAll('.slide-project').length; i++) {
             const slide = document.body.querySelectorAll('.slide-project')[i];
 
-            slide.querySelector('.intro-p').addEventListener('mouseenter', function () {
+
+
+          /*  slide.querySelector('.intro-p').addEventListener('mouseenter', function () {
+
+                TweenMax.to(slide.querySelector('.line'), 0.5, {
+                    ease: 'Expo.easeOut',
+                    width: 40
+                });
+
+            
+
+                TweenMax.to(slide.querySelector('.img'), 30, {
+                    ease: 'Expo.easeOut',
+                    scale: '1.2'
+                });
+
+                slide.querySelector('.intro-p').addEventListener('mouseleave', function () {
+                    TweenMax.to(slide.querySelector('.line'), 0.5, {
+                        ease: 'Expo.easeOut',
+                        width: 20
+                    });
+
+                    TweenMax.to(slide.querySelector('.img'), 1, {
+                        ease: 'Expo.easeOut',
+                        scale: '1'
+                    });
+                });
+
+
+            });*/
+
+            slide.querySelector('.content').addEventListener('mouseenter', function () {
 
                 TweenMax.to(slide.querySelector('.line'), 0.5, {
                     ease: 'Expo.easeOut',
@@ -202,7 +255,7 @@ class View {
                     scale: '1.2'
                 });
 
-                slide.querySelector('.intro-p').addEventListener('mouseleave', function () {
+                slide.querySelector('.content').addEventListener('mouseleave', function () {
                     TweenMax.to(slide.querySelector('.line'), 0.5, {
                         ease: 'Expo.easeOut',
                         width: 20
@@ -255,43 +308,71 @@ class View {
 
     setTransition() {
         var slidesProject = document.body.querySelectorAll('.slide-project');
+        var percent;
+
+        if (Config.checkDevice() === 'mobile') {
+            percent = (window.innerWidth * 10) / 100;
+        } else {
+            percent = 60;
+        }
+
+
 
         for (let i = 0; i < slidesProject.length; i++) {
             const slide = slidesProject[i];
 
             slide.addEventListener('click', function (e) {
-
                 var carousel = slide.querySelector('.carousel');
                 var href = slide.getAttribute('href');
                 var carouselBounds = carousel.getBoundingClientRect();
                 var cln = carousel.cloneNode(true);
-                cln.setAttribute('style', 'width:' + carouselBounds.width + 'px; height:' + carouselBounds.height + 'px; left:' + (carouselBounds.left - 60) + 'px;  top:' + (carouselBounds.top - 60) + 'px;');
+                cln.setAttribute('style', 'width:' + carouselBounds.width + 'px; height:' + carouselBounds.height + 'px; left:' + (carouselBounds.left - percent) + 'px;  top:' + (carouselBounds.top - percent) + 'px;');
                 var fakeHero = `
                     <div class= 'fake-hero'>
 
                     </div>
                 `;
 
-                fakeHero = toHTML(fakeHero);
-                fakeHero.appendChild(cln);
-                document.body.appendChild(fakeHero);
+                if (Config.checkDevice() != 'mobile') {
+                    fakeHero = toHTML(fakeHero);
+                    fakeHero.appendChild(cln);
+                    document.body.appendChild(fakeHero);
 
-                TweenMax.to(cln, 1, {
-                    top: '0%',
-                    left: '0%',
-                    width: '100%',
-                    height: '100%',
-                    ease: 'Expo.easeInOut',
-                    onComplete: function () {
-                        if (App.handler) {
-                            App.handler.off();
+                    TweenMax.to(cln, 1, {
+                        top: '0%',
+                        left: '0%',
+                        width: '100%',
+                        height: '100%',
+                        ease: 'Expo.easeInOut',
+                        onComplete: function () {
+                            if (App.handler) {
+                                App.handler.off();
+                            }
+                            App.heroImage = cln.querySelector('.active').style;
+                            window.location.hash = href;
+
                         }
-                        App.heroImage = cln.querySelector('.active').style;
+                    });
 
-                        window.location.hash = href;
 
-                    }
-                });
+                } else {
+                    TweenMax.to(slide, 1, {
+                        ease: 'Expo.easeInOut',
+                        opacity:0,
+                        onComplete: function () {
+                            if (App.handler) {
+                                App.handler.off();
+                            }
+                            App.heroImage = cln.querySelector('.active').style;
+                            window.location.hash = href;
+
+                        }
+                    });
+
+                }
+
+
+
                 e.preventDefault();
             });
 

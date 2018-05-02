@@ -11,6 +11,8 @@ import {
 
 import VirtualScroll from 'virtual-scroll';
 
+import Config from '../../../config';
+
 
 
 class View {
@@ -84,29 +86,58 @@ class View {
     setVideo(project) {
         var src = project.video;
         var videoEl = document.body.querySelector('.video-bg >source').src = src;
-
-
     }
 
     render(markup, project) {
-
         document.body.getElementsByTagName('main')[0].innerHTML = markup.outerHTML;
+        var instance = new VirtualScroll({
+            touchMultiplier:6
+        });
+        var start;
+
+        if (Config.checkDevice() === 'mobile') {
+            start = 0;
+        } else {
+            start = -5.5;
 
 
-        var instance = new VirtualScroll();
-        var start = -3.5;
+        }
+
         var targetY = start;
         var pos = start;
         var ease = 0.06;
         var el = document.body.querySelector('.single-wrap');
+        var s = document.body.querySelector('.single');
         var area = (el.offsetHeight - window.innerHeight) * 100 / el.offsetHeight;
-
+        var src = project.video;
+        var videoEl = document.body.querySelector('.video-bg >source').src = src;
+        var videoEl = document.body.querySelector('.video-bg').src = src;
+        document.body.querySelector('.video-bg').load();
+        var video = document.body.querySelector('.logo');
+        var play = document.body.querySelector('.single-hero-media').querySelector('.play');
         var scrollReady;
+        var delay;
+
+        if (Config.checkDevice() === 'mobile') {
+            delay = 0;
+
+            TweenMax.fromTo(s, 1.5, {
+                opacity: 0,
+                y: 40,
+            }, {
+                y: 0,
+                opacity: 1,
+                ease: 'Expo.easeInOut'
+
+            });
+        } else {
+            delay = 2;
+        };
 
         TweenMax.to(el, 2, {
             ease: 'Expo.easeInOut',
             yPercent: start,
-            delay: 1,
+            delay: delay,
             onComplete: function () {
 
                 TweenMax.ticker.addEventListener("tick", myFunction);
@@ -157,10 +188,14 @@ class View {
                     TweenMax.ticker.removeEventListener("tick", myFunction);
                     TweenMax.to(document.body.querySelector('.single'), 0.5, {
                         opacity: 0,
-                        ease: Expo.easeInOut,
+                        ease: 'Expo.easeInOut',
                         onComplete: function () {
                             instance.off();
                             window.location.hash = '#';
+                            TweenMax.ticker.removeEventListener("tick", myFunction);
+                            TweenMax.ticker.removeEventListener("tick", posPlay);
+                            document.body.querySelector('.single-hero-media').removeEventListener('mouseenter', checkMouse);
+                            document.body.querySelector('.single-hero-media').removeEventListener('mousemove', checkMouse);
                         }
                     });
 
@@ -170,25 +205,6 @@ class View {
 
 
         }
-
-
-
-
-        var src = project.video;
-        var videoEl = document.body.querySelector('.video-bg >source').src = src;
-        var videoEl = document.body.querySelector('.video-bg').src = src;
-        document.body.querySelector('.video-bg').load();
-
-        var video = document.body.querySelector('.logo');
-        var play = document.body.querySelector('.single-hero-media').querySelector('.play');
-
-        document.body.querySelector('.single-hero-media').addEventListener('click', function () {
-            TweenMax.to(video, 1, {
-                ease: 'Expo.easeInOut',
-                width: '100vw',
-                height: '100vh'
-            });
-        });
 
         var mouse = {
             x: 0,
@@ -201,22 +217,12 @@ class View {
         }
         var easing = 0.08;
 
-        document.body.querySelector('.single-hero-media').addEventListener('mouseenter', function (e) {
+        function checkMouse(e) {
             mouse = {
                 x: e.clientX - document.body.querySelector('.single-hero-media').getBoundingClientRect().left,
                 y: e.clientY - document.body.querySelector('.single-hero-media').getBoundingClientRect().top
             };
-        });
-
-        document.body.querySelector('.single-hero-media').addEventListener('mousemove', function (e) {
-            mouse = {
-                x: e.clientX - document.body.querySelector('.single-hero-media').getBoundingClientRect().left,
-                y: e.clientY - document.body.querySelector('.single-hero-media').getBoundingClientRect().top
-            };
-
-        });
-
-        TweenMax.ticker.addEventListener("tick", posPlay);
+        }
 
         function posPlay() {
             var vx = (mouse.x - ball.x) * easing,
@@ -229,6 +235,21 @@ class View {
                 y: ball.y - 40
             });
         }
+
+
+        document.body.querySelector('.single-hero-media').addEventListener('click', function () {
+            TweenMax.to(video, 1, {
+                ease: 'Expo.easeInOut',
+                width: '100vw',
+                height: '100vh'
+            });
+        });
+
+
+        TweenMax.ticker.addEventListener("tick", posPlay);
+
+        document.body.querySelector('.single-hero-media').addEventListener('mouseenter', checkMouse.bind(this));
+        document.body.querySelector('.single-hero-media').addEventListener('mousemove', checkMouse.bind(this));
 
         document.body.querySelector('.single-hero-media').addEventListener('mouseenter', function (e) {
             TweenMax.to(play, 0.6, {
@@ -260,8 +281,12 @@ class View {
         window.addEventListener("hashchange", function () {
             TweenMax.ticker.removeEventListener("tick", myFunction);
             TweenMax.ticker.removeEventListener("tick", posPlay);
+            document.body.querySelector('.single-hero-media').removeEventListener('mouseenter', checkMouse);
+            document.body.querySelector('.single-hero-media').removeEventListener('mousemove', checkMouse);
             instance.off();
         });
+
+
     }
 
     checkProject() {

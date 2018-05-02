@@ -161,7 +161,11 @@ body {
   z-index: 99 !important; }
 
 body {
-  overflow: hidden; }
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  overscroll-behavior-y: contain;
+  overflow-y: hidden; }
 
 header {
   position: fixed;
@@ -322,6 +326,151 @@ h5 {
       background-size: cover; }
       .fake-hero .carousel .img.active {
         z-index: 1; }
+
+.mobile .fake-hero {
+  border: 10vw solid transparent !important;
+  height: 60vh !important;
+  border-top: 20vh solid transparent !important; }
+
+.mobile h3 {
+  font-size: 6vw;
+  line-height: 8vw; }
+
+.mobile h2 {
+  font-size: 7vw;
+  line-height: 10vw; }
+
+.mobile p,
+.mobile a {
+  font-size: 3.5vw;
+  line-height: 6vw; }
+
+.mobile h5 {
+  font-size: 3vw; }
+
+.mobile .slide-project .content {
+  -webkit-box-orient: vertical !important;
+  -webkit-box-direction: reverse !important;
+  -ms-flex-direction: column-reverse !important;
+  flex-direction: column-reverse !important;
+  -webkit-box-pack: center !important;
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+  -webkit-box-align: start !important;
+  -ms-flex-align: start !important;
+  align-items: flex-start !important; }
+  .mobile .slide-project .content h5 {
+    margin-bottom: 2vh !important;
+    margin-top: 6vh !important; }
+  .mobile .slide-project .content .carousel {
+    width: 100% !important; }
+
+.mobile .home nav {
+  margin-top: 5vh !important; }
+  .mobile .home nav .line {
+    display: none !important; }
+
+.mobile .single.archive .single-intro_info {
+  opacity: 0 !important;
+  visibility: hidden;
+  display: none !important; }
+
+.mobile .single .single-intro_info {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-pack: justify !important;
+  -ms-flex-pack: justify !important;
+  justify-content: space-between !important; }
+  .mobile .single .single-intro_info p {
+    font-size: 3vw !important; }
+
+.mobile .single .single-hero {
+  border: 10vw solid transparent !important;
+  height: 60vh !important;
+  border-top: 20vh solid transparent !important; }
+
+.mobile .single h3 {
+  font-size: 5vw;
+  line-height: 7vw;
+  margin-bottom: 12px;
+  margin-top: 20px; }
+
+.mobile .single .single-awards-inner {
+  width: 100% !important;
+  border: 0 !important; }
+  .mobile .single .single-awards-inner > div {
+    min-width: 100px !important; }
+    .mobile .single .single-awards-inner > div p {
+      font-size: 2.5vw !important; }
+
+.mobile .single .single-intro {
+  -webkit-box-orient: vertical !important;
+  -webkit-box-direction: normal !important;
+  -ms-flex-direction: column !important;
+  flex-direction: column !important; }
+
+.mobile .single .single-content_block-info {
+  margin-bottom: 30px !important;
+  margin-top: 30px !important; }
+
+.mobile .single .single-intro_desc {
+  margin-bottom: 30px !important; }
+
+.mobile .single .single-intro_desc,
+.mobile .single .single-content_block-inner,
+.mobile .single .single-title {
+  width: 100% !important;
+  border: 0 !important;
+  -webkit-box-pack: start !important;
+  -ms-flex-pack: start !important;
+  justify-content: flex-start !important; }
+
+.mobile .single .single-title {
+  width: 80vw !important;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  border: 0; }
+  .mobile .single .single-title h2 {
+    border: 0 !important;
+    width: 100% !important; }
+
+.mobile .single .single-awards-inner {
+  margin-bottom: 350px !important; }
+
+.mobile .about-content h3 {
+  margin-bottom: 30px !important;
+  font-size: 4vw !important;
+  line-height: 7vw !important; }
+
+.mobile .about-info {
+  width: 100% !important; }
+
+.mobile .about-media {
+  display: none !important; }
+
+.mobile .recognition-content {
+  -webkit-box-orient: vertical !important;
+  -webkit-box-direction: normal !important;
+  -ms-flex-direction: column !important;
+  flex-direction: column !important;
+  -webkit-box-align: start !important;
+  -ms-flex-align: start !important;
+  align-items: flex-start !important; }
+  .mobile .recognition-content br {
+    display: none !important; }
+  .mobile .recognition-content h6 {
+    font-size: 1.7vw !important;
+    line-height: 2vw !important;
+    opacity: 0.5 !important; }
+  .mobile .recognition-content h3 {
+    border-right: 0 !important;
+    margin-bottom: 20px !important;
+    font-size: 5vw !important;
+    width: 95% !important;
+    line-height: 7vw !important; }
+  .mobile .recognition-content .fade-anima {
+    width: 100% !important; }
 .home {
   position: fixed;
   width: 100vw;
@@ -537,6 +686,10 @@ h5 {
   .single.archive .single-intro_info {
     opacity: 0 !important;
     visibility: hidden; }
+  .single.archive .play {
+    display: none; }
+  .single.archive .single-hero {
+    pointer-events: none; }
   .single h3 {
     margin-bottom: 30px; }
   .single .single-hero {
@@ -546,9 +699,42 @@ h5 {
     box-sizing: border-box;
     border: 60px solid transparent;
     position: relative;
-    overflow: hidden;
-    cursor: pointer; }
+    overflow: hidden; }
+    .single .single-hero .play {
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: #0c1322;
+      width: 80px;
+      border-radius: 1000px;
+      height: 80px;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-transform: scale(0.5);
+      transform: scale(0.5);
+      opacity: 0; }
+      .single .single-hero .play h4 {
+        color: #afafaf;
+        font-weight: bolder;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        font-size: 13px; }
+      .single .single-hero .play img {
+        display: none;
+        width: 20px;
+        position: relative;
+        left: 3px; }
     .single .single-hero .single-hero-media {
+      cursor: none;
       position: relative;
       widows: 100%;
       height: 100%;

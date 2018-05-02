@@ -4,6 +4,7 @@ import {
     TweenMax,
     TimelineMax
 } from 'gsap';
+import Config from '../../config';
 
 
 
@@ -64,10 +65,14 @@ class SliderModule {
 
             if (!App.noSlide) {
                 if (direction.deltaY > 0) {
-                    this.goDown(0, 1);
+                    
+                   // if (Config.checkDevice() !== 'mobile') {
+                        this.goDown(0, 1);   
+                   // }
                 } else {
-
                     this.goUp(0, 1);
+
+                    
                 }
             }
 
@@ -106,6 +111,13 @@ class SliderModule {
         let slides = this.wrap.querySelectorAll('.slide');
 
         var count = 0;
+        var y;
+
+        if (Config.checkDevice() === 'mobile') {
+            y = self.pos
+        } else {
+            y = 0;
+        }
 
         var d;
         if (delay) {
@@ -141,32 +153,22 @@ class SliderModule {
 
                 TweenMax.fromTo(fade, self.time, {
                     opacity: 1,
+                    y: 0,
                 }, {
                     opacity: 0,
                     ease: self.ease,
+                    y: -y,
                     delay: d
                 });
 
                 TweenMax.fromTo(fadeNext, self.time, {
                     opacity: 0,
+                    y: y,
                 }, {
                     opacity: 1,
                     ease: self.ease,
-                    delay: d
-                });
-
-
-
-                TweenMax.fromTo(anima, self.time, {
-                    opacity: 1,
                     y: 0,
-                }, {
-                    opacity: 0,
-                    ease: self.ease,
-                    y: -self.pos,
                     delay: d
-
-
                 });
 
 
@@ -206,6 +208,14 @@ class SliderModule {
         let slides = this.wrap.querySelectorAll('.slide');
         let count = 0;
 
+        var y;
+
+        if (Config.checkDevice() === 'mobile') {
+            y = self.pos
+        } else {
+            y = 0;
+        }
+
         for (let i = 0; i < slides.length; i++) {
             const slide = slides[i];
 
@@ -233,17 +243,20 @@ class SliderModule {
 
                 TweenMax.fromTo(fade, self.time, {
                     opacity: 1,
-                    
+                    y: 0
+
                 }, {
                     opacity: 0,
-                    
+                    y: y,
                     ease: self.ease
                 });
 
                 TweenMax.fromTo(fadePrev, self.time, {
                     opacity: 0,
+                    y: -y,
                 }, {
                     opacity: 1,
+                    y: 0,
                     ease: self.ease
                 });
 
